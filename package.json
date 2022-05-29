@@ -49,5 +49,10 @@
       "json",
       "node"
     ]
+  },
+  "rnpm": {
+    "assets": [
+      "app/assets/fonts"
+    ]
   }
 }
