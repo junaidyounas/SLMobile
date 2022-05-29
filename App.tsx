@@ -1,6 +1,6 @@
 import React from 'react';
 import { extendTheme, NativeBaseProvider } from 'native-base';
-import MainContainer from './app/navigation/mainContainer';
+import MainContainer from './app/navigations/mainContainer';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from './app/theme/colors';
