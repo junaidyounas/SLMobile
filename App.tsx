@@ -1,15 +1,20 @@
-import React from 'react';
 import { extendTheme, NativeBaseProvider } from 'native-base';
-import MainContainer from './app/navigations/mainContainer';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors } from './app/theme/colors';
+import { nativeComponentsTheme } from './app/theme/components';
+import MainContainer from './app/navigations/mainContainer';
+import { colors, nativeBaseColors } from './app/theme/colors';
+import { nativeBaseFonts, nativeBaseFontsConfig } from './app/theme/fonts';
 
 type Props = {};
 
 const App = (props: Props) => {
   const theme = extendTheme({
-    colors: colors,
+    colors: nativeBaseColors,
+    fontConfig: nativeBaseFontsConfig,
+    fonts: nativeBaseFonts,
+    components: nativeComponentsTheme,
   });
   return (
     <NativeBaseProvider theme={theme}>
