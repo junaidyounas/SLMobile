@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { nativeComponentsTheme } from './app/theme/components';
 import MainContainer from './app/navigations/mainContainer';
 import { colors, nativeBaseColors } from './app/theme/colors';
-import { nativeBaseFonts, nativeBaseFontsConfig } from './app/theme/fonts';
+import { nativeBaseFonts, nativeBaseFontsConfig, nativeBaseFontsSizes } from './app/theme/fonts';
 
 type Props = {};
 
@@ -15,6 +15,7 @@ const App = (props: Props) => {
     fontConfig: nativeBaseFontsConfig,
     fonts: nativeBaseFonts,
     components: nativeComponentsTheme,
+    fontSizes: nativeBaseFontsSizes
   });
   return (
     <NativeBaseProvider theme={theme}>

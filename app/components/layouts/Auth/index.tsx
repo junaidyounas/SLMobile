@@ -4,6 +4,7 @@ import { Text, View } from 'native-base'
 import { AppConstants } from 'constants/appConstants'
 import { fonts } from 'theme/fonts'
 import { colors } from 'theme/colors'
+import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
 
 type Props = {
           children?: any
@@ -12,8 +13,8 @@ type Props = {
 const AuthLayout = (props: Props) => {
   const {children} = props;
   return (
-    <View bg="primary.900" style={styles.container}>
-      <Text style={styles.headerText}>{`Hello, ${'\n'}Welcome back to the ${AppConstants.app_name}`}</Text>
+    <View bg="base.900" style={styles.container}>
+      <Text fontSize="4xl" style={styles.headerText}>{`Hello, ${'\n'}Welcome back to the ${AppConstants.app_name}`}</Text>
       {children}
     </View>
   );
@@ -26,7 +27,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-            fontFamily: fonts.poppins_extra_bold_italic,
-            color: colors.white
+            fontFamily: fonts.poppins_semi_bold,
+            color: colors.white,
+            paddingHorizontal: widthRatio(6),
+            paddingTop: heightRatio(6)
   }
 });

@@ -1,3 +1,5 @@
+import { textRatio } from "utils/functions/textRatio";
+
 export const fonts = {
   poppins_black: 'Poppins-Black',
   poppins_black_italic: 'Poppins-BlackItalic',
@@ -67,5 +69,25 @@ export const nativeBaseFonts = {
     medium: fonts.poppins_medium,
     light: fonts.poppins_light,
     extralight: fonts.poppins_extra_light
+  },
+};
+
+export const nativeBaseFontsSizes = {
+  fontSizes: {
+    '1x': textRatio(16),
+    '2x': textRatio(18),
+    '3x': textRatio(20),
+    '4x': textRatio(22),
+    '5x': textRatio(24),
+    '6x': textRatio(26),
+    '7x': textRatio(28),
+    '8x': textRatio(30),
+    '9x': textRatio(32),
+    '1xl': textRatio(34),
+    '2xl': textRatio(36),
+    '3xl': textRatio(38),
+    '4xl': textRatio(40),
+    '5xl': textRatio(42),
+    '6xl': textRatio(44)
   },
 };
