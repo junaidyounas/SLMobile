@@ -1,17 +1,11 @@
-import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from 'screens/auth/login';
-import { screens } from './screens.constants';
-
-const Stack = createNativeStackNavigator();
+import * as React from 'react';
+import AuthNavigator from './navigators/authNavigator';
 
 function MainContainer() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name={screens.LOGIN} component={LoginScreen} />
-      </Stack.Navigator>
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
