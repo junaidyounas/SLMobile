@@ -24,7 +24,9 @@ const LoginScreen = (props: Props) => {
         <Text style={styles.line1}>Please sign in to proceed</Text>
         <InputWithRightIcon placeholder="Enter your email address" label="Email or Phone Number" marginTop={6} rightIcon={<Ionicons color={colors.darkblue[300]} name="mail" size={textRatio(26)} />} />
         <InputWithRightIcon placeholder="Enter your password" label="Password" marginTop={2} rightIcon={<Pressable onPress={() => setIsEyeOff(!isEyeOff)}><Ionicons color={colors.darkblue[300]} name={isEyeOff ? 'eye-off' : 'eye'} size={textRatio(26)} /></Pressable>} />
-        <Text style={styles.forgotText}>Forgot Password? <Text style={styles.forgotText2}>Click here</Text></Text>
+        <Text style={styles.forgotText}>Forgot Password? <Text onPress={() => {
+          navigate(screens.EMAILASK)
+        }} style={styles.forgotText2}>Click here</Text></Text>
 
         {/* <TextWithBothSideLines marginTop={4} /> */}
         <View />
