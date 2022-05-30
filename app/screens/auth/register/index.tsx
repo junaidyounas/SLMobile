@@ -11,36 +11,35 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import TextWithBothSideLines from 'components/atoms/textWithBothSideLines'
 import { navigate } from 'navigations/navRef'
 import { screens } from 'navigations/screens.constants'
-import { AppConstants } from 'constants/appConstants'
 type Props = {}
 
-const LoginScreen = (props: Props) => {
+const RegisterScreen = (props: Props) => {
 
   const [isEyeOff, setIsEyeOff] = useState(false);
 
   return (
-    <AuthLayout header={`Hello, ${'\n'}Welcome back to the ${AppConstants.app_name}`}>
+    <AuthLayout header={`Don't havean account?\nSign up here`}>
       <View style={styles.container}>
         <Text style={styles.line1}>Please sign in to proceed</Text>
-        <InputWithRightIcon placeholder="Enter your email address" label="Email or Phone Number" marginTop={6} rightIcon={<Ionicons color={colors.darkblue[300]} name="mail" size={textRatio(26)} />} />
+        <InputWithRightIcon placeholder="Enter your full name" label="Name" marginTop={6} rightIcon={<Ionicons color={colors.darkblue[300]} name="person" size={textRatio(26)} />} />
+        <InputWithRightIcon placeholder="Enter your email address" label="Email" marginTop={2} rightIcon={<Ionicons color={colors.darkblue[300]} name="mail" size={textRatio(26)} />} />
+        <InputWithRightIcon placeholder="Enter your phone number" label="Phone Number" marginTop={2} rightIcon={<Ionicons color={colors.darkblue[300]} name="phone-portrait" size={textRatio(26)} />} />
         <InputWithRightIcon placeholder="Enter your password" label="Password" marginTop={2} rightIcon={<Pressable onPress={() => setIsEyeOff(!isEyeOff)}><Ionicons color={colors.darkblue[300]} name={isEyeOff ? 'eye-off' : 'eye'} size={textRatio(26)} /></Pressable>} />
-        <Text style={styles.forgotText}>Forgot Password? <Text style={styles.forgotText2}>Click here</Text></Text>
 
-        {/* <TextWithBothSideLines marginTop={4} /> */}
         <View />
         <Center w={'100%'} justifyContent="center" >
-          <TouchableOpacity><Text style={styles.loginText}>Login</Text></TouchableOpacity>
-          <Text style={styles.forgotText}>Or dont't have an account?</Text>
+          <TouchableOpacity><Text style={styles.loginText}>Register</Text></TouchableOpacity>
+          <Text style={styles.forgotText}>Or have an account?</Text>
           <TouchableOpacity onPress={() => {
-            navigate(screens.REGISTER)
-          }}><Text style={styles.forgotText2}>Register now</Text></TouchableOpacity>
+            navigate(screens.LOGIN)
+          }}><Text style={styles.forgotText2}>Login now</Text></TouchableOpacity>
         </Center>
       </View>
     </AuthLayout>
   );
 }
 
-export default LoginScreen
+export default RegisterScreen
 
 const styles = StyleSheet.create({
   container: {

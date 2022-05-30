@@ -1,22 +1,23 @@
 import { StyleSheet } from 'react-native'
 import React, { ReactNode } from 'react'
-import { Text, View } from 'native-base'
+import { ScrollView, Text, View } from 'native-base'
 import { AppConstants } from 'constants/appConstants'
 import { fonts } from 'theme/fonts'
 import { colors } from 'theme/colors'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
 
 type Props = {
-          children?: any
+  children?: any,
+  header?: string
 }
 
 const AuthLayout = (props: Props) => {
-  const {children} = props;
+  const { children, header } = props;
   return (
-    <View bg="base.900" style={styles.container}>
-      <Text fontSize="4xl" style={styles.headerText}>{`Hello, ${'\n'}Welcome back to the ${AppConstants.app_name}`}</Text>
+    <ScrollView bg="base.900" style={styles.container}>
+      {header ? <Text fontSize="4xl" style={styles.headerText}>{header}</Text> : null}
       {children}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -27,9 +28,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-            fontFamily: fonts.poppins_semi_bold,
-            color: colors.white,
-            paddingHorizontal: widthRatio(6),
-            paddingTop: heightRatio(6)
+    fontFamily: fonts.poppins_semi_bold,
+    color: colors.white,
+    paddingHorizontal: widthRatio(6),
+    paddingTop: heightRatio(6)
   }
 });

@@ -1,3 +1,4 @@
 export const screens = {
-          LOGIN: 'LoginScreen'
-}
+  LOGIN: 'LoginScreen',
+  REGISTER: 'RegisterScreen',
+};
