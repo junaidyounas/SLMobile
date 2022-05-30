@@ -26,7 +26,6 @@ const EmailAskScreen = (props: Props) => {
                 {/* <Text style={styles.forgotText}>Forgot Password? <Text style={styles.forgotText2}>Click here</Text></Text> */}
 
                 {/* <TextWithBothSideLines marginTop={4} /> */}
-                <View />
                 <Center w={'100%'} justifyContent="center" >
                     <TouchableOpacity onPress={() => {
                         navigate(screens.REGISTER)

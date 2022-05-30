@@ -1,12 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
-import AuthNavigator from './navigators/authNavigator';
+import MainNavigator from './navigators/mainNavigator';
 import { navigationRef } from './navRef';
 
 function MainContainer() {
   return (
     <NavigationContainer ref={navigationRef}>
-      <AuthNavigator />
+      <MainNavigator />
     </NavigationContainer>
   );
 }

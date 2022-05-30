@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = {}
 
-const BuyScreen = (props: Props) => {
+const HomeScreen = (props: Props) => {
     return (
         <View>
             <Text>index</Text>
@@ -11,6 +11,6 @@ const BuyScreen = (props: Props) => {
     )
 }
 
-export default BuyScreen
+export default HomeScreen
 
 const styles = StyleSheet.create({})
