@@ -24,6 +24,7 @@ const BottomNavigator = (props: Props) => {
     return (
         <Tab.Navigator
             screenOptions={({ route }: { route: { name: string } }) => ({
+                tabBarHideOnKeyboard: true,
                 tabBarIcon: ({ focused }: { focused: boolean }) => {
                     const isFocusedColor = focused ? colors.gray[100] : colors.darkblue[300];
                     switch (route.name) {
@@ -96,10 +97,9 @@ export default BottomNavigator
 const styles = StyleSheet.create({
     circle: {
 
-        width: widthRatio(16),
-        height: widthRatio(16),
-        borderRadius: widthRatio(8),
-        marginTop: -heightRatio(4),
+        width: widthRatio(14),
+        height: widthRatio(14),
+        borderRadius: widthRatio(7),
         backgroundColor: colors.pink[600],
         alignItems: 'center',
         justifyContent: 'center'
