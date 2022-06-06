@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Box, Input, View } from 'native-base'
 import { colors } from 'theme/colors'
@@ -25,7 +25,8 @@ const SearchBar = (props: Props) => {
                 placeholderTextColor={colors.gray[400]}
                 borderWidth={0}
                 bgColor={'transparent'}
-                textDecorationLine={'none'} />
+                textDecorationLine={'none'}
+                InputRightElement={<TouchableOpacity style={{ paddingRight: widthRatio(2) }}><Ionicons name="search" color={colors.white} size={textRatio(25)} /></TouchableOpacity>} />
             {/* <Ionicons name="menu" color={colors.white} /> */}
         </Box>
     )

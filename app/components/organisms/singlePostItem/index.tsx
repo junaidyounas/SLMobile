@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
 import { colors } from 'theme/colors'
@@ -12,15 +12,17 @@ type Props = {}
 
 const SinglePostItem = (props: Props) => {
     return (
-        <Box borderRadius={widthRatio(4)} style={styles.container}>
-            <Image alt=" " style={styles.image} source={images.dummy.image} />
-            <Text noOfLines={1} style={styles.titleText}>Naran Kaqan Tour</Text>
-            <Text noOfLines={1} style={styles.priceText}>Rs. 15000</Text>
-            <View style={styles.locationContainer}>
-                <LocationWithIcon />
-            </View>
-            <View pb={2} />
-        </Box>
+        <TouchableOpacity style={styles.container}>
+            <Box shadow={1} borderRadius={widthRatio(4)}>
+                <Image alt=" " style={styles.image} source={images.dummy.image} />
+                <Text noOfLines={1} style={styles.titleText}>Naran Kaqan Tour</Text>
+                <Text noOfLines={1} style={styles.priceText}>Rs. 15000</Text>
+                <View style={styles.locationContainer}>
+                    <LocationWithIcon />
+                </View>
+                <View pb={2} />
+            </Box>
+        </TouchableOpacity>
     )
 }
 
@@ -29,8 +31,6 @@ export default SinglePostItem
 const styles = StyleSheet.create({
     container: {
         flex: 0.48,
-        borderWidth: 1,
-        borderColor: colors.gray[300],
         width: '48%',
     },
     image: {
