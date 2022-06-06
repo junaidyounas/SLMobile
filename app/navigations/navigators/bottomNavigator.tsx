@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View } from 'native-base';
+import { Box, Text, View } from 'native-base';
 import { screens } from 'navigations/screens.constants';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -52,10 +52,18 @@ const BottomNavigator = (props: Props) => {
                             )
                         case screens.SELL:
                             return (
-                                <View style={[styles.circle]} ml={2}>
+                                <Box bg={{
+                                    linearGradient: {
+                                        colors: [colors.darkblue[900], colors.darkblue[300]],
+                                        start: [0, 0],
+                                        end: [1, 0],
+                                    },
+                                }}
+                                    p="6"
+                                    ml={2}>
                                     <Fontisto color={colors.white} name="shopping-basket-remove" size={textRatio(23)} />
                                     <Text style={[styles.text, { color: colors.white }]}>Sell</Text>
-                                </View>
+                                </Box>
                             )
                         case screens.MYADS:
                             return (
@@ -78,15 +86,16 @@ const BottomNavigator = (props: Props) => {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    backgroundColor: colors.darkblue[700],
-                    height: heightRatio(8)
+                    backgroundColor: colors.darkblue[900],
+                    height: heightRatio(10),
+                    borderTopLeftRadius: widthRatio(4),
+                    borderTopRightRadius: widthRatio(4)
                 }
             })}>
             <Tab.Screen name={screens.HOME} component={HomeScreen} />
             <Tab.Screen name={screens.MYADS} component={MyAdsScreen} />
-            <Tab.Screen name={screens.CHAT} component={ChatScreen} />
             <Tab.Screen name={screens.SELL} component={SellScreen} />
-            <Tab.Screen name={screens.ALERT} component={AlertScreen} />
+            <Tab.Screen name={screens.CHAT} component={ChatScreen} />
             <Tab.Screen name={screens.ACCOUNT} component={AccountScreen} />
         </Tab.Navigator>
     )
