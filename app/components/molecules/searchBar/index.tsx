@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.poppins_regular,
         alignItems: 'center',
         height: heightRatio(5),
-
+        color: colors.white
     }
 })

@@ -11,6 +11,7 @@ export const nativeComponentsTheme = {
   Input: {
     baseStyle: {
       fontSize: textRatio(25),
+      fontFamily: fonts.poppins_regular,
     },
   },
 };
