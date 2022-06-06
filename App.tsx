@@ -6,6 +6,7 @@ import { nativeComponentsTheme } from './app/theme/components';
 import MainContainer from './app/navigations/mainContainer';
 import { colors, nativeBaseColors } from './app/theme/colors';
 import { nativeBaseFonts, nativeBaseFontsConfig, nativeBaseFontsSizes } from './app/theme/fonts';
+import { nativeBaseConfig } from 'theme/config';
 
 type Props = {};
 
@@ -18,7 +19,7 @@ const App = (props: Props) => {
     fontSizes: nativeBaseFontsSizes
   });
   return (
-    <NativeBaseProvider theme={theme}>
+    <NativeBaseProvider theme={theme} config={nativeBaseConfig}>
       <SafeAreaView style={styles.container}>
         <MainContainer />
       </SafeAreaView>

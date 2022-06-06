@@ -54,11 +54,12 @@ const BottomNavigator = (props: Props) => {
                             return (
                                 <Box bg={{
                                     linearGradient: {
-                                        colors: [colors.darkblue[900], colors.darkblue[300]],
+                                        colors: [colors.darkblue[600], colors.darkblue[400]],
                                         start: [0, 0],
                                         end: [1, 0],
                                     },
                                 }}
+                                    borderRadius={12}
                                     p="6"
                                     ml={2}>
                                     <Fontisto color={colors.white} name="shopping-basket-remove" size={textRatio(23)} />
