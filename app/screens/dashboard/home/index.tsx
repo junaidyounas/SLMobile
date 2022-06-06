@@ -1,12 +1,14 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { colors } from 'theme/colors'
 import SearchBarWithLocationBar from 'components/organisms/searchBarWithLocationBar'
 import SearchBarWithMenuIcon from 'components/organisms/searchBarWithMenuIcon'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
-import { FlatList, View } from 'native-base'
+import { FlatList, Text, View } from 'native-base'
 import SinglePostItem from 'components/organisms/singlePostItem'
 import LocationWithIcon from 'components/atoms/locationWithIcon'
+import { textRatio } from 'utils/functions/textRatio'
+import { fonts } from 'theme/fonts'
 
 type Props = {}
 
@@ -14,7 +16,10 @@ const HomeScreen = (props: Props) => {
     return (
         <>
             <View style={styles.locAndsearchContainer}>
-                <LocationWithIcon fontSize={16} />
+                <TouchableOpacity>
+                    <Text style={styles.yourLocText}>Your Location</Text>
+                    <LocationWithIcon fontSize={16} />
+                </TouchableOpacity>
                 <SearchBarWithMenuIcon />
             </View>
             <View style={styles.container}>
@@ -37,6 +42,10 @@ const styles = StyleSheet.create({
         paddingTop: heightRatio(1),
         paddingBottom: heightRatio(0.5),
         paddingHorizontal: widthRatio(3)
+    },
+    yourLocText: {
+        fontSize: textRatio(15),
+        fontFamily: fonts.poppins_semi_bold
     },
     container: {
         flex: 1,
