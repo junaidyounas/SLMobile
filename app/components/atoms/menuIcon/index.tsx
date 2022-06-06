@@ -11,9 +11,9 @@ type Props = {}
 const MenuIcon = (props: Props) => {
     const gradientBg = {
         linearGradient: {
-            colors: [colors.purple[800], colors.purple[500]],
-            start: [0, 1],
-            end: [1, 1],
+            colors: [colors.darkblue[600], colors.darkblue[400]],
+            start: [0, 0],
+            end: [1, 0],
         },
     }
     return (

@@ -11,7 +11,8 @@ module.exports = {
           navigations: './app/navigations',
           constants: './app/constants',
           utils: './app/utils',
-          theme: './app/theme'
+          theme: './app/theme',
+          assets: './app/assets'
         },
       },
     ],
