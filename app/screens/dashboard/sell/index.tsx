@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native'
-import React from 'react'
+import InputTextView from 'components/molecules/inputText'
+import GeneralPicker from 'components/organisms/generalPicker'
 import GradientTopBarWithBackBtn from 'components/organisms/gradientTopBarWithTitleAndBack'
 import ImageSelector from 'components/organisms/imageSelector'
-import { ScrollView, Text, View } from 'native-base'
-import InputTextView from 'components/molecules/inputText'
+import { ScrollView, View } from 'native-base'
+import React from 'react'
+import { StyleSheet } from 'react-native'
 import { heightRatio } from 'utils/functions/pixelRatio'
 
 type Props = {}
@@ -21,7 +22,7 @@ const SellScreen = (props: Props) => {
         placeholder="Please write description"
         label={"Post Description"} />
       <InputTextView marginTop={2} placeholder="Price" label={"Price"} />
-
+      <GeneralPicker marginTop={2} label="Select Category" />
     </ScrollView>
   )
 }

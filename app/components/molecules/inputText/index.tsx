@@ -5,6 +5,7 @@ import { colors } from 'theme/colors'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
 import { textRatio } from 'utils/functions/textRatio'
 import { fonts } from 'theme/fonts'
+import LabelText from 'components/atoms/labelText'
 
 type Props = {
     marginTop?: number,
@@ -21,7 +22,7 @@ const InputTextView = (props: Props) => {
     }
     return (
         <View style={[styles.parent, otherStyles]}>
-            {label ? <Text style={styles.header}>{label}</Text> : null}
+            {label ? <LabelText label={label} /> : null}
             <View style={[styles.container]}>
                 {
                     isTextView ?
@@ -40,9 +41,7 @@ const styles = StyleSheet.create({
     parent: {
         paddingHorizontal: widthRatio(3)
     },
-    header: {
-        fontFamily: fonts.poppins_semi_bold
-    },
+
     container: {
         backgroundColor: colors.gray[100],
 
