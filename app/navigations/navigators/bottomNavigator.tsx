@@ -95,7 +95,15 @@ const BottomNavigator = (props: Props) => {
             })}>
             <Tab.Screen name={screens.HOME} component={HomeScreen} />
             <Tab.Screen name={screens.MYADS} component={MyAdsScreen} />
-            <Tab.Screen name={screens.SELL} component={SellScreen} />
+            <Tab.Screen options={{
+                headerShown: false,
+                tabBarLabel: '',
+                tabBarStyle: {
+                    display: "none",
+                },
+                tabBarHideOnKeyboard: true,
+            }}
+                name={screens.SELL} component={SellScreen} />
             <Tab.Screen name={screens.CHAT} component={ChatScreen} />
             <Tab.Screen name={screens.ACCOUNT} component={AccountScreen} />
         </Tab.Navigator>

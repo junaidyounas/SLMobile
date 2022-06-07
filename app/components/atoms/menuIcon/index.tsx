@@ -5,19 +5,13 @@ import { colors } from 'theme/colors'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
 import { Box } from 'native-base'
 import { textRatio } from 'utils/functions/textRatio'
+import { globalstyles } from 'theme/globalStyles'
 
 type Props = {}
 
 const MenuIcon = (props: Props) => {
-    const gradientBg = {
-        linearGradient: {
-            colors: [colors.darkblue[600], colors.darkblue[400]],
-            start: [0, 0],
-            end: [1, 0],
-        },
-    }
     return (
-        <Box borderRadius={8} bg={gradientBg} style={styles.container}>
+        <Box borderRadius={8} bg={globalstyles.btnGradient} style={styles.container}>
             <Ionicons name="menu" size={textRatio(40)} color={colors.white} />
         </Box>
     )
