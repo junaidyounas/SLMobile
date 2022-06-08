@@ -4,11 +4,14 @@ import { Box, Text } from 'native-base'
 import { globalstyles } from 'theme/globalStyles'
 import { colors } from 'theme/colors'
 
-type Props = {}
+type Props = {
+    onPress: any
+}
 
 const MiniButton = (props: Props) => {
+    const { onPress } = props;
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <Box borderRadius={6} bg={globalstyles.btnGradient}>
                 <Text p={1} color={colors.white}>Select Images</Text>
             </Box>

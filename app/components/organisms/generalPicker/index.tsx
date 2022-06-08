@@ -1,16 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { colors } from 'theme/colors'
 import LabelText from 'components/atoms/labelText'
 import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
+import { Pressable } from 'native-base'
+import { Picker, onOpen, onClose } from 'react-native-actions-sheet-picker';
 
 type Props = {
     label: string;
-    marginTop?: number
+    marginTop?: number,
+    placeholder?: string,
+    id: string
 }
 
 const GeneralPicker = (props: Props) => {
-    const { label, marginTop } = props;
+    const { label, marginTop, placeholder, id } = props;
+    const [s, setSelected] = useState('');
 
     let otherStyles = [];
     if (marginTop) {
@@ -19,9 +24,21 @@ const GeneralPicker = (props: Props) => {
     return (
         <View style={[styles.parent, otherStyles]}>
             <LabelText label={label} />
-            <View style={[styles.container]}>
-                <Text style={styles.selectedText}>Category Picker</Text>
-            </View>
+            <Pressable onPress={() => onOpen(id)} style={[styles.container]}>
+                <Text style={styles.selectedText}>{placeholder}</Text>
+            </Pressable>
+            <Picker
+                id={id}
+                data={[{ title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }, { title: 'data' }]}
+                label="Select Country"
+                setSelected={() => { }}
+                renderListItem={(item: any) => {
+                    return (
+                        <Pressable style={{ paddingVertical: heightRatio(3) }} onPress={() => onClose(id)}>
+                            <Text>{item.title}</Text>
+                        </Pressable>
+                    )
+                }} />
         </View>
     )
 }

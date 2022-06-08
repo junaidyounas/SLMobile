@@ -9,14 +9,17 @@ import { images } from 'assets/images'
 import MiniImage from 'components/atoms/miniImage'
 import MiniButton from 'components/atoms/miniButton'
 
-type Props = {}
+type Props = {
+    onSelect: any
+}
 
 const ImageSelector = (props: Props) => {
+    const { onSelect } = props;
     return (
         <View style={styles.container}>
             <View flexDirection="row" justifyContent="space-between" alignItems="center">
                 <Text style={styles.headerTxt}>Add Images</Text>
-                <MiniButton />
+                <MiniButton onPress={onSelect} />
             </View>
             <View style={styles.imagesContainer}>
                 <MiniImage />
