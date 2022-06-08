@@ -8,33 +8,30 @@ import React from 'react'
 import { Alert, StyleSheet } from 'react-native'
 import { heightRatio } from 'utils/functions/pixelRatio'
 import { onOpen } from 'react-native-actions-sheet-picker';
+import ImagesPicker from 'components/organisms/imagesPicker'
+import { AppConstants } from 'constants/appConstants'
+import { permissionRequester } from 'utils/functions/permissionRequester'
 
 type Props = {}
-const ImageSelectConstants = ['Select from gallery', 'Take photo from camera', 'cancel']
 
 const SellScreen = (props: Props) => {
-  const onSelectImageOption = (value: string) => {
-    if (value === ImageSelectConstants[0]) {
-      Alert.alert('Gallery')
-    } else if (value === ImageSelectConstants[1]) {
-      Alert.alert('Take Photo')
-    } else if (value === ImageSelectConstants[2]) {
-      Alert.alert('Cancel');
-    }
-  }
+
   return (
     <>
-      <HiddenPicker
-        id={'selectimage'}
-        options={ImageSelectConstants}
-        onOptionSelect={onSelectImageOption}
+      <ImagesPicker
+        id={AppConstants.images_picker}
         label={'Select Option'}
-      />
+        onOptionSelect={undefined} />
       <ScrollView contentContainerStyle={{ paddingBottom: heightRatio(7) }} style={styles.container}>
         <GradientTopBarWithBackBtn isBack title="Create new Ad" />
         <View pt={2} />
-        <ImageSelector onSelect={() => {
-          onOpen('selectimage')
+        <ImageSelector onSelect={async () => {
+          const isPermissionOk: boolean = await permissionRequester.imagesPermission();
+          console.log(isPermissionOk)
+          if (isPermissionOk) {
+            onOpen(AppConstants.images_picker);
+          }
+
         }} />
         <InputTextView marginTop={2} placeholder="Please write title" label={"Post Title"} />
         <InputTextView

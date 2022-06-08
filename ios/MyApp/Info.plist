@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCalendarsUsageDescription</key>
+  	<string>To Schedule your meet this app need to access calenders</string>
+	<key>NSCameraUsageDescription</key>
+  	<string>By getting your product picture this app needs camera access</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+  	<string>This app needs location access when in use</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+  	<string>To pick pictures from your phone this app needs gallery access</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
