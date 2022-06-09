@@ -1,7 +1,7 @@
 import {Alert, Platform} from 'react-native';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
-const imagesPermission = (): boolean => {
+const galleryPermission = (): boolean => {
   let isPermissionOk = false;
   if (Platform.OS === 'ios') {
     check(PERMISSIONS.IOS.PHOTO_LIBRARY).then(result => {
@@ -86,5 +86,5 @@ const imagesPermission = (): boolean => {
 };
 
 export const permissionRequester = {
-  imagesPermission,
+  galleryPermission,
 };

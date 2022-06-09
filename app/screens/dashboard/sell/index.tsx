@@ -26,7 +26,7 @@ const SellScreen = (props: Props) => {
         <GradientTopBarWithBackBtn isBack title="Create new Ad" />
         <View pt={2} />
         <ImageSelector onSelect={async () => {
-          const isPermissionOk: boolean = await permissionRequester.imagesPermission();
+          const isPermissionOk: boolean = await permissionRequester.galleryPermission();
           console.log(isPermissionOk)
           if (isPermissionOk) {
             onOpen(AppConstants.images_picker);
