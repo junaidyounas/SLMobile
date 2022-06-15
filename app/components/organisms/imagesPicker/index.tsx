@@ -1,7 +1,7 @@
 import { AppConstants } from 'constants/appConstants'
 import { Pressable } from 'native-base'
 import React from 'react'
-import { Alert, StyleSheet, Text } from 'react-native'
+import { Alert, Platform, StyleSheet, Text } from 'react-native'
 import { onClose, Picker } from 'react-native-actions-sheet-picker'
 import { heightRatio } from 'utils/functions/pixelRatio'
 import DocumentPicker from 'react-native-document-picker';
@@ -9,22 +9,28 @@ import DocumentPicker from 'react-native-document-picker';
 type Props = {
     id: string,
     label: string,
-    onOptionSelect: any
+    onOptionSelect: any;
+    onSelectSuccess: any
 }
 const ImageSelectConstants = ['Select from gallery', 'Take photo from camera', 'cancel']
 
-const pickImages = async () => {
-    try {
-        const res = await DocumentPicker.pick({
-            type: [DocumentPicker.types.allFiles],
-        });
-    } catch (err) {
-        console.log(err)
-    }
-}
+
 
 const ImagesPicker = (props: Props) => {
-    const { id, label, onOptionSelect } = props;
+    const { id, label, onOptionSelect, onSelectSuccess } = props;
+
+
+    const pickImages = async () => {
+        try {
+            const res = await DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.images],
+            });
+            onSelectSuccess(res);
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }
     const onSelectImageOption = (value: string) => {
         if (value === ImageSelectConstants[0]) {
             pickImages();
@@ -34,6 +40,7 @@ const ImagesPicker = (props: Props) => {
             Alert.alert('Cancel');
         }
     }
+    console.log('Image Picker', id == AppConstants.images_picker)
     if (id == AppConstants.images_picker) {
         return (
             <Picker
@@ -51,7 +58,8 @@ const ImagesPicker = (props: Props) => {
                             <Text>{item}</Text>
                         </Pressable>
                     )
-                }} />
+                }}
+            />
         )
     } else {
         return (

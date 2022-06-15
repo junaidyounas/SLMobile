@@ -8,13 +8,15 @@ import { globalstyles } from 'theme/globalStyles'
 import { images } from 'assets/images'
 import MiniImage from 'components/atoms/miniImage'
 import MiniButton from 'components/atoms/miniButton'
+import { ImageDocumentBeforeUpload } from 'types/ImageDocumentBeforeUpload'
 
 type Props = {
-    onSelect: any
+    onSelect: any,
+    images: ImageDocumentBeforeUpload[]
 }
 
 const ImageSelector = (props: Props) => {
-    const { onSelect } = props;
+    const { onSelect, images } = props;
     return (
         <View style={styles.container}>
             <View flexDirection="row" justifyContent="space-between" alignItems="center">
@@ -22,12 +24,11 @@ const ImageSelector = (props: Props) => {
                 <MiniButton onPress={onSelect} />
             </View>
             <View style={styles.imagesContainer}>
-                <MiniImage />
-                <MiniImage />
-                <MiniImage />
-                <MiniImage />
-                <MiniImage />
-                <MiniImage />
+                {
+                    images?.map((item, i) => (
+                        <MiniImage key={i} image={item.uri} />
+                    ))
+                }
             </View>
 
         </View>

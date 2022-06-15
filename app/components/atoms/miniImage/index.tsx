@@ -4,12 +4,15 @@ import { Image } from 'native-base'
 import { images } from 'assets/images'
 import { widthRatio } from 'utils/functions/pixelRatio'
 
-type Props = {}
+type Props = {
+    image: string
+}
 
 const MiniImage = (props: Props) => {
+    const { image } = props;
     return (
         <TouchableOpacity>
-            <Image alt=" " source={images.dummy.image} style={styles.image} />
+            <Image alt=" " fallbackSource={images.dummy.image} ignoreFallback={false} source={{ uri: image }} style={styles.image} />
         </TouchableOpacity>
     )
 }

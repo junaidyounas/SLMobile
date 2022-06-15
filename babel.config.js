@@ -12,7 +12,8 @@ module.exports = {
           constants: './app/constants',
           utils: './app/utils',
           theme: './app/theme',
-          assets: './app/assets'
+          assets: './app/assets',
+          services: './app/services'
         },
       },
     ],
