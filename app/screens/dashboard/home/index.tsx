@@ -1,14 +1,12 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { colors } from 'theme/colors'
-import SearchBarWithLocationBar from 'components/organisms/searchBarWithLocationBar'
-import SearchBarWithMenuIcon from 'components/organisms/searchBarWithMenuIcon'
-import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
-import { FlatList, Text, View } from 'native-base'
-import SinglePostItem from 'components/organisms/singlePostItem'
 import LocationWithIcon from 'components/atoms/locationWithIcon'
-import { textRatio } from 'utils/functions/textRatio'
+import SearchBarWithMenuIcon from 'components/organisms/searchBarWithMenuIcon'
+import SinglePostItem from 'components/organisms/singlePostItem'
+import { FlatList, Text, View } from 'native-base'
+import React from 'react'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { fonts } from 'theme/fonts'
+import { heightRatio, widthRatio } from 'utils/functions/pixelRatio'
+import { textRatio } from 'utils/functions/textRatio'
 
 type Props = {}
 

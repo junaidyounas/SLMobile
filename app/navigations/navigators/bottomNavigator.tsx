@@ -102,6 +102,7 @@ const BottomNavigator = (props: Props) => {
                     display: "none",
                 },
                 tabBarHideOnKeyboard: true,
+                unmountOnBlur: true
             }}
                 name={screens.SELL} component={SellScreen} />
             <Tab.Screen name={screens.CHAT} component={ChatScreen} />
