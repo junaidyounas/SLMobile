@@ -21,6 +21,8 @@ import {
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import ButtonComponent from 'components/base/button';
+import {Category, SubCategory} from 'types/Category';
+import {categoryService} from 'services/categoryService';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -35,8 +37,12 @@ const SellScreen = (props: Props) => {
   const formikRef = useRef<any>();
 
   const [images, setImages] = useState<ImageDocumentBeforeUpload[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [subCategories, setSubCategories] = useState<Category>();
 
   const [imgsForServer, setImgsForServer] = useState<string[]>([]);
+  const [selectedCategoryName, setCategoryName] = useState('');
+  const [nestedCategories, setNestedCategories] = useState<string[]>([]);
 
   const uploadImages = () => {
     var arr: string[] = [];
@@ -55,9 +61,23 @@ const SellScreen = (props: Props) => {
     setImgsForServer(arr);
   };
 
+  // get all category from server
+  const getAllCategories = () => {
+    categoryService
+      .getAll()
+      .then(res => {
+        setCategories(res);
+      })
+      .catch(err => {});
+  };
+
   useEffect(() => {
     uploadImages();
   }, [images]);
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
   return (
     <>
@@ -89,6 +109,7 @@ const SellScreen = (props: Props) => {
             description: '',
             price: '',
             category: '',
+            subCategory: '',
           }}
           onSubmit={() => {
             logMe('On Formik Submit sell');
@@ -137,7 +158,30 @@ const SellScreen = (props: Props) => {
                 label="Select Category"
                 placeholder="Select Category"
                 id="category"
+                setValue={(e: Category) => {
+                  setFieldValue('category', e._id);
+                  setCategoryName(e.title);
+                  setSubCategories(e);
+                }}
+                value={selectedCategoryName}
+                data={categories}
+                error={errors.category}
               />
+
+              {subCategories ? (
+                <GeneralPicker
+                  marginTop={2}
+                  placeholder="Select Sub Category"
+                  id="sub_category"
+                  setValue={(e: any) => {
+                    setFieldValue('subCategory', e.title);
+                    setNestedCategories(e);
+                  }}
+                  value={values.subCategory}
+                  data={subCategories?.subCategories}
+                  error={errors.subCategory}
+                />
+              ) : null}
               <View style={{paddingTop: heightRatio(2)}} />
               <ButtonComponent title="Submit" onPress={undefined} />
             </>
