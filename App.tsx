@@ -1,12 +1,18 @@
-import { extendTheme, NativeBaseProvider } from 'native-base';
+import {extendTheme, NativeBaseProvider} from 'native-base';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { nativeComponentsTheme } from './app/theme/components';
+import {StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {nativeComponentsTheme} from './app/theme/components';
 import MainContainer from './app/navigations/mainContainer';
-import { colors, nativeBaseColors } from './app/theme/colors';
-import { nativeBaseFonts, nativeBaseFontsConfig, nativeBaseFontsSizes } from './app/theme/fonts';
-import { nativeBaseConfig } from 'theme/config';
+import {colors, nativeBaseColors} from './app/theme/colors';
+import {
+  nativeBaseFonts,
+  nativeBaseFontsConfig,
+  nativeBaseFontsSizes,
+} from './app/theme/fonts';
+import {nativeBaseConfig} from 'theme/config';
+import {Provider} from 'react-redux';
+import {store} from './app/store/store';
 
 type Props = {};
 
@@ -16,14 +22,16 @@ const App = (props: Props) => {
     fontConfig: nativeBaseFontsConfig,
     fonts: nativeBaseFonts,
     components: nativeComponentsTheme,
-    fontSizes: nativeBaseFontsSizes
+    fontSizes: nativeBaseFontsSizes,
   });
   return (
-    <NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-      <SafeAreaView style={styles.container}>
-        <MainContainer />
-      </SafeAreaView>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider theme={theme} config={nativeBaseConfig}>
+        <SafeAreaView style={styles.container}>
+          <MainContainer />
+        </SafeAreaView>
+      </NativeBaseProvider>
+    </Provider>
   );
 };
 
@@ -31,6 +39,6 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });

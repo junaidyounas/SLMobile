@@ -13,7 +13,8 @@ module.exports = {
           utils: './app/utils',
           theme: './app/theme',
           assets: './app/assets',
-          services: './app/services'
+          services: './app/services',
+          store: './app/store',
         },
       },
     ],
