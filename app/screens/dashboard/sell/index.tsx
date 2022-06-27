@@ -23,6 +23,9 @@ import * as Yup from 'yup';
 import ButtonComponent from 'components/base/button';
 import {Category, SubCategory} from 'types/Category';
 import {categoryService} from 'services/categoryService';
+import {postService} from 'services/postService';
+import {CreatePostType} from 'types/posts/CreatePostType';
+import {PostConditionsEnum} from 'enum/PostConditionsEnum';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -43,6 +46,7 @@ const SellScreen = (props: Props) => {
   const [imgsForServer, setImgsForServer] = useState<string[]>([]);
   const [selectedCategoryName, setCategoryName] = useState('');
   const [nestedCategories, setNestedCategories] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const uploadImages = () => {
     var arr: string[] = [];
@@ -70,6 +74,23 @@ const SellScreen = (props: Props) => {
       })
       .catch(err => {});
   };
+
+  // create new ad
+  function createNewAdToServer(obj: CreatePostType) {
+    setIsLoading(true);
+    postService
+      .createNewPost(obj)
+      .then(res => {
+        logMe(res);
+        formikRef.current.resetForm();
+      })
+      .catch(err => {
+        logMe(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
 
   useEffect(() => {
     uploadImages();
@@ -111,8 +132,20 @@ const SellScreen = (props: Props) => {
             category: '',
             subCategory: '',
           }}
-          onSubmit={() => {
+          onSubmit={values => {
             logMe('On Formik Submit sell');
+            const obj: CreatePostType = {
+              title: values.title,
+              description: values.description,
+              price: parseInt(values.price),
+              condition: 'New',
+              location: 'Lahore, Pakistan',
+              category: values.category,
+              subCategory: values.subCategory,
+              images: imgsForServer,
+            };
+            logMe(obj);
+            createNewAdToServer(obj);
           }}
           validationSchema={AddPostSchema}>
           {({
@@ -122,6 +155,7 @@ const SellScreen = (props: Props) => {
             values,
             touched,
             setFieldTouched,
+            handleSubmit,
           }) => (
             <>
               <InputTextView
@@ -183,7 +217,11 @@ const SellScreen = (props: Props) => {
                 />
               ) : null}
               <View style={{paddingTop: heightRatio(2)}} />
-              <ButtonComponent title="Submit" onPress={undefined} />
+              <ButtonComponent
+                isLoading={isLoading}
+                title="Submit"
+                onPress={handleSubmit}
+              />
             </>
           )}
         </Formik>

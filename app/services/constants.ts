@@ -7,4 +7,7 @@ export const urls = {
 
   // categories
   categories: '/categories',
+
+  // post
+  posts: '/posts',
 };
