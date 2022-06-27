@@ -71,6 +71,7 @@ const LoginScreen = (props: Props) => {
                 value={values.password}
                 error={touched.password ? errors.password : ''}
                 onChange={handleChange('password')}
+                isSecure={isEyeOff}
                 rightIcon={
                   <Pressable onPress={() => setIsEyeOff(!isEyeOff)}>
                     <Ionicons

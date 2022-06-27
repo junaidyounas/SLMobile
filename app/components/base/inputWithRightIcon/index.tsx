@@ -17,6 +17,7 @@ type Props = {
   value?: string;
   keyboardType?: KeyboardTypeOptions;
   error?: string;
+  isSecure?: boolean;
 };
 
 const InputWithRightIcon = (props: Props) => {
@@ -29,6 +30,7 @@ const InputWithRightIcon = (props: Props) => {
     value,
     keyboardType,
     error,
+    isSecure,
   } = props;
 
   let otherStyles = [];
@@ -41,6 +43,7 @@ const InputWithRightIcon = (props: Props) => {
         <View style={{flex: 1}}>
           {label ? <Text style={styles.label}>{label}</Text> : null}
           <Input
+            secureTextEntry={isSecure}
             style={styles.input}
             placeholder={placeholder}
             placeholderTextColor={colors.gray[400]}

@@ -12,7 +12,8 @@ import {
 } from './app/theme/fonts';
 import {nativeBaseConfig} from 'theme/config';
 import {Provider} from 'react-redux';
-import {store} from './app/store/store';
+import {persistor, store} from './app/store/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 type Props = {};
 
@@ -26,11 +27,13 @@ const App = (props: Props) => {
   });
   return (
     <Provider store={store}>
-      <NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-        <SafeAreaView style={styles.container}>
-          <MainContainer />
-        </SafeAreaView>
-      </NativeBaseProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeBaseProvider theme={theme} config={nativeBaseConfig}>
+          <SafeAreaView style={styles.container}>
+            <MainContainer />
+          </SafeAreaView>
+        </NativeBaseProvider>
+      </PersistGate>
     </Provider>
   );
 };

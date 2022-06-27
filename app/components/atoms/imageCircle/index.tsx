@@ -3,6 +3,7 @@ import React from 'react';
 import {widthRatio} from 'utils/functions/pixelRatio';
 import {Image} from 'native-base';
 import {images} from 'assets/images';
+import {colors} from 'theme/colors';
 
 type Props = {
   size?: number;
@@ -16,6 +17,8 @@ const ImageCircle = (props: Props) => {
         width: widthRatio(size),
         height: widthRatio(size),
         borderRadius: widthRatio(size),
+        borderWidth: 0.5,
+        borderColor: colors.gray[400],
       }
     : {width: widthRatio(15), height: widthRatio(15)};
   return (
@@ -23,7 +26,7 @@ const ImageCircle = (props: Props) => {
       <Image
         style={ifSize}
         alt=" "
-        source={images.dummy.image}
+        source={images.dummy.avatar}
         resizeMode="cover"
       />
     </View>

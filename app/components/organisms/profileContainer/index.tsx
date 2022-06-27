@@ -7,7 +7,7 @@ import {textRatio} from 'utils/functions/textRatio';
 import MiniButton from 'components/atoms/miniButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
-import {login} from 'store/auth/authSlice';
+import {logout} from 'store/auth/authSlice';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 
@@ -22,7 +22,9 @@ const ProfileContainer = (props: Props) => {
       <ImageCircle size={20} />
       <View style={styles.nameContainer}>
         <Text style={styles.name}>{user.name}</Text>
-        <Text style={styles.email}>{user.email}</Text>
+        <Text style={styles.email}>
+          {user.email ? user.email : 'You are logged out please login now'}
+        </Text>
         <MiniButton
           title={token ? 'Logout' : 'Login'}
           width={18}
@@ -30,7 +32,7 @@ const ProfileContainer = (props: Props) => {
             if (!token) {
               navigate(screens.LOGIN);
             } else {
-              dispatch(login(''));
+              dispatch(logout());
             }
           }}
         />
