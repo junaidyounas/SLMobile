@@ -11,13 +11,18 @@ type Props = {
   isDisabled?: boolean;
   onPress: any;
   isLoading?: boolean;
+  width?: number;
 };
 
 const ButtonComponent = (props: Props) => {
-  const {title, isDisabled, onPress, isLoading} = props;
+  const {title, isDisabled, onPress, isLoading, width} = props;
+  let otherContainerStyles = [];
+  if (width) {
+    otherContainerStyles.push({width: widthRatio(width)});
+  }
   return (
     <Box
-      style={styles.container}
+      style={[styles.container, otherContainerStyles]}
       bg={
         isDisabled ? globalstyles.btnDisabledGradient : globalstyles.btnGradient
       }>

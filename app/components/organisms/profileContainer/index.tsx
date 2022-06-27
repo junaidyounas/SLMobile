@@ -8,22 +8,31 @@ import MiniButton from 'components/atoms/miniButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import {login} from 'store/auth/authSlice';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 
 type Props = {};
 
 const ProfileContainer = (props: Props) => {
   const token = useSelector((state: IAppState) => state.auth.token);
+  const user = useSelector((state: IAppState) => state.auth.user);
   const dispatch = useDispatch();
   return (
     <View shadow={1} style={styles.container}>
       <ImageCircle size={20} />
       <View style={styles.nameContainer}>
-        <Text style={styles.name}>Junaid Younas</Text>
-        <Text style={styles.email}>junaidammar2013@gmail.com</Text>
+        <Text style={styles.name}>{user.name}</Text>
+        <Text style={styles.email}>{user.email}</Text>
         <MiniButton
           title={token ? 'Logout' : 'Login'}
           width={18}
-          onPress={() => dispatch(login(''))}
+          onPress={() => {
+            if (!token) {
+              navigate(screens.LOGIN);
+            } else {
+              dispatch(login(''));
+            }
+          }}
         />
       </View>
     </View>

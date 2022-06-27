@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAppState} from 'store/IAppState';
+import {LoginResponse} from 'types/auth/LoginResponse';
 import {AuthState} from './AuthState';
 export const authSlice = createSlice({
   name: 'auth',
@@ -9,10 +10,13 @@ export const authSlice = createSlice({
     login: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
+    addUser: (state, action: PayloadAction<LoginResponse>) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const {login} = authSlice.actions;
+export const {login, addUser} = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const token = (state: IAppState) => state.auth.token;
