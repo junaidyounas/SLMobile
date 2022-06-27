@@ -25,7 +25,8 @@ import {Category, SubCategory} from 'types/Category';
 import {categoryService} from 'services/categoryService';
 import {postService} from 'services/postService';
 import {CreatePostType} from 'types/posts/CreatePostType';
-import {PostConditionsEnum} from 'enum/PostConditionsEnum';
+import ConditionTabs from 'components/molecules/conditionTabs';
+import {CONDITIONS} from 'enum/Conditions';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -44,6 +45,8 @@ const SellScreen = (props: Props) => {
   const [subCategories, setSubCategories] = useState<Category>();
 
   const [imgsForServer, setImgsForServer] = useState<string[]>([]);
+  const [selectedCondition, setCondition] = useState(CONDITIONS.NEW);
+
   const [selectedCategoryName, setCategoryName] = useState('');
   const [nestedCategories, setNestedCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -138,7 +141,7 @@ const SellScreen = (props: Props) => {
               title: values.title,
               description: values.description,
               price: parseInt(values.price),
-              condition: 'New',
+              condition: selectedCondition,
               location: 'Lahore, Pakistan',
               category: values.category,
               subCategory: values.subCategory,
@@ -186,6 +189,11 @@ const SellScreen = (props: Props) => {
                 placeholder="Price"
                 label={'Price'}
                 keyboardType="numeric"
+              />
+              <View pt={4} />
+              <ConditionTabs
+                onChange={setCondition}
+                selectedTab={selectedCondition}
               />
               <GeneralPicker
                 marginTop={2}
