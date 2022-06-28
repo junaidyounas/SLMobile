@@ -16,6 +16,7 @@ type Props = {};
 const HomeScreen = (props: Props) => {
   const [posts, setPosts] = useState<Array<SinglePostType>>([]);
   const [currentPage, setPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -27,10 +28,10 @@ const HomeScreen = (props: Props) => {
     }, 2000);
   }, []);
 
-  function getAllPosts(page: number = 1) {
+  function getAllPosts(page: number = 1, search: string = '') {
     logMe(page);
     postService
-      .showAllPosts(page)
+      .showAllPosts(page, search)
       .then(res => {
         if (res.length > 0 && page > 1) {
           const data: any = [...posts, ...res];
@@ -48,6 +49,12 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     getAllPosts(currentPage);
   }, [currentPage]);
+
+  // getAllPosts(currentPage, search);
+  useEffect(() => {
+    logMe(search);
+  }, [search]);
+
   return (
     <>
       <View style={styles.locAndsearchContainer}>
@@ -55,7 +62,12 @@ const HomeScreen = (props: Props) => {
           <Text style={styles.yourLocText}>Your Location</Text>
           <LocationWithIcon location="Islamabad" fontSize={16} />
         </TouchableOpacity>
-        <SearchBarWithMenuIcon />
+        <SearchBarWithMenuIcon
+          setQuery={setSearch}
+          onSearchIconPress={() => {
+            getAllPosts(1, search);
+          }}
+        />
       </View>
       <View style={styles.container}>
         <View pt={2} />
