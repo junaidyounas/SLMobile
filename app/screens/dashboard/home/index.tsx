@@ -50,11 +50,6 @@ const HomeScreen = (props: Props) => {
     getAllPosts(currentPage);
   }, [currentPage]);
 
-  // getAllPosts(currentPage, search);
-  useEffect(() => {
-    logMe(search);
-  }, [search]);
-
   return (
     <>
       <View style={styles.locAndsearchContainer}>
