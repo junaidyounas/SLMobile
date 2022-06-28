@@ -42,7 +42,21 @@ const showAllPosts = (page?: number, query?: string) => {
   });
 };
 
+const getAllMyPosts = () => {
+  return new Promise<Array<SinglePostType>>((resolve, reject) => {
+    api
+      .get(urls.my_posts)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const postService = {
   createNewPost,
   showAllPosts,
+  getAllMyPosts,
 };
