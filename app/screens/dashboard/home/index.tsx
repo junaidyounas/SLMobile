@@ -19,19 +19,26 @@ const HomeScreen = (props: Props) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = React.useCallback(() => {
-    getAllPosts();
+    getAllPosts(1);
+    setPage(1);
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
   }, []);
 
-  function getAllPosts() {
+  function getAllPosts(page: number = 1) {
+    logMe(page);
     postService
-      .showAllPosts(currentPage)
+      .showAllPosts(page)
       .then(res => {
-        logMe(res);
-        setPosts(res);
+        if (res.length > 0 && page > 1) {
+          const data: any = [...posts, ...res];
+          setPosts(data);
+          setPage(page);
+        } else if (page == 1) {
+          setPosts(res);
+        }
       })
       .catch(err => {
         logMe(err);
@@ -39,8 +46,8 @@ const HomeScreen = (props: Props) => {
   }
 
   useEffect(() => {
-    getAllPosts();
-  }, []);
+    getAllPosts(currentPage);
+  }, [currentPage]);
   return (
     <>
       <View style={styles.locAndsearchContainer}>
@@ -62,6 +69,10 @@ const HomeScreen = (props: Props) => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
+          onEndReachedThreshold={0.4}
+          onEndReached={() => {
+            setPage(currentPage + 1);
+          }}
         />
       </View>
     </>
