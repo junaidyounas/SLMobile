@@ -80,6 +80,10 @@ const SellScreen = (props: Props) => {
 
   // create new ad
   function createNewAdToServer(obj: CreatePostType) {
+    if (obj.images.length === 0) {
+      Alert.alert('Please select image again.');
+      return;
+    }
     setIsLoading(true);
     postService
       .createNewPost(obj)
@@ -145,7 +149,7 @@ const SellScreen = (props: Props) => {
               location: 'Lahore, Pakistan',
               category: values.category,
               subCategory: values.subCategory,
-              images: imgsForServer,
+              images: imgsForServer.filter(img => img !== null),
             };
             logMe(obj);
             createNewAdToServer(obj);
