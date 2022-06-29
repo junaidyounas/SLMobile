@@ -11,4 +11,7 @@ export const screens = {
   SELL: 'SellScreen',
   MYADS: 'MyAdsScreen',
   CHAT: 'ChatScreen',
+
+  // off bottom screens
+  SinglePostScreen: 'SinglePostScreen',
 };

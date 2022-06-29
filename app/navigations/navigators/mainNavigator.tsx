@@ -4,6 +4,7 @@ import * as React from 'react';
 import EmailAskScreen from 'screens/auth/emailAsk';
 import LoginScreen from 'screens/auth/login';
 import RegisterScreen from 'screens/auth/register';
+import SinglePostScreen from 'screens/singlePost';
 import BottomNavigator from './bottomNavigator';
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,10 @@ function MainNavigator() {
         <Stack.Screen
           name={screens.BOTTOMNAVIGATOR}
           component={BottomNavigator}
+        />
+        <Stack.Screen
+          name={screens.SinglePostScreen}
+          component={SinglePostScreen}
         />
       </Stack.Group>
     </Stack.Navigator>
