@@ -1,5 +1,5 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { screens } from 'navigations/screens.constants';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {screens} from 'navigations/screens.constants';
 import * as React from 'react';
 import EmailAskScreen from 'screens/auth/emailAsk';
 import LoginScreen from 'screens/auth/login';
@@ -23,7 +23,10 @@ function MainNavigator() {
       </Stack.Group>
       {/* Bottom */}
       <Stack.Group>
-        <Stack.Screen name={screens.BOTTOMNAVIGATOR} component={BottomNavigator} />
+        <Stack.Screen
+          name={screens.BOTTOMNAVIGATOR}
+          component={BottomNavigator}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
