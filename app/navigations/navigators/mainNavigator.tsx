@@ -28,10 +28,7 @@ function MainNavigator() {
           name={screens.BOTTOMNAVIGATOR}
           component={BottomNavigator}
         />
-        <Stack.Screen
-          name={screens.SinglePostScreen}
-          component={SinglePostScreen}
-        />
+        <Stack.Screen name={screens.SINGLEPOST} component={SinglePostScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

@@ -8,6 +8,8 @@ import {textRatio} from 'utils/functions/textRatio';
 import {fonts} from 'theme/fonts';
 import LocationWithIcon from 'components/atoms/locationWithIcon';
 import {SinglePostType} from 'types/posts/SinglePostType';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 
 type Props = {
   item: SinglePostType;
@@ -28,7 +30,9 @@ const SinglePostItem = (props: Props) => {
     location: item.location,
   };
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigate(screens.SINGLEPOST)}
+      style={styles.container}>
       <Box shadow={1} borderRadius={widthRatio(4)}>
         <Image alt=" " style={styles.image} source={{uri: image}} />
         <Text noOfLines={1} style={styles.titleText}>

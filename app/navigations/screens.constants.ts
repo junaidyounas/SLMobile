@@ -13,5 +13,5 @@ export const screens = {
   CHAT: 'ChatScreen',
 
   // off bottom screens
-  SinglePostScreen: 'SinglePostScreen',
+  SINGLEPOST: 'SinglePostScreen',
 };
