@@ -23,8 +23,12 @@ const MyAdsScreen = (props: Props) => {
   function getAllPosts() {
     postService
       .getAllMyPosts()
-      .then(res => {
-        logMe(res);
+      .then((res: any) => {
+        if (res.statusCode == 401) {
+        } else {
+          setPosts(res);
+        }
+        logMe(res.statusCode);
         // setPosts(res);
       })
       .catch(err => {});

@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {storeToken} from 'store/async-storage/auth';
 import {IAppState} from 'store/IAppState';
 import {LoginResponse} from 'types/auth/LoginResponse';
 import {AuthState} from './AuthState';
@@ -8,9 +9,11 @@ export const authSlice = createSlice({
   initialState: AuthState,
   reducers: {
     login: (state, action: PayloadAction<string>) => {
+      storeToken(action.payload);
       state.token = action.payload;
     },
     logout: state => {
+      storeToken('');
       state.token = '';
       state.user = {_id: '', token: '', name: '', email: '', phone: ''};
     },
