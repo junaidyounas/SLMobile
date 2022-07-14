@@ -1,12 +1,12 @@
-import {RefreshControl, StyleSheet} from 'react-native';
-import React, {useEffect, useState} from 'react';
 import GradientTopBarWithBackBtn from 'components/organisms/gradientTopBarWithTitleAndBack';
+import MyAdsSingleItem from 'components/organisms/myAdsSingleItem';
 import {FlatList, View} from 'native-base';
-import SinglePostItem from 'components/organisms/singlePostItem';
-import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
-import {SinglePostType} from 'types/posts/SinglePostType';
+import React, {useEffect, useState} from 'react';
+import {RefreshControl, StyleSheet} from 'react-native';
 import {postService} from 'services/postService';
+import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
+import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 
 type Props = {};
 
@@ -48,7 +48,7 @@ const MyAdsScreen = (props: Props) => {
           columnWrapperStyle={styles.row} // space them out evenly
           ListFooterComponent={() => <View pb={10} />}
           data={posts}
-          renderItem={SinglePostItem}
+          renderItem={MyAdsSingleItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }

@@ -55,8 +55,36 @@ const getAllMyPosts = () => {
   });
 };
 
+const getSinglePostById = (id: string) => {
+  return new Promise<SinglePostType>((resolve, reject) => {
+    api
+      .get(`${urls.posts}/${id}`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+const patchExistingPost = (post: CreatePostType, id: string) => {
+  return new Promise((resolve, reject) => {
+    api
+      .patch(`${urls.posts}/${id}`, post)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const postService = {
   createNewPost,
   showAllPosts,
   getAllMyPosts,
+  getSinglePostById,
+  patchExistingPost,
 };

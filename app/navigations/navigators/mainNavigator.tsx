@@ -4,6 +4,7 @@ import * as React from 'react';
 import EmailAskScreen from 'screens/auth/emailAsk';
 import LoginScreen from 'screens/auth/login';
 import RegisterScreen from 'screens/auth/register';
+import EditPostScreen from 'screens/editPost';
 import SinglePostScreen from 'screens/singlePost';
 import BottomNavigator from './bottomNavigator';
 
@@ -29,6 +30,7 @@ function MainNavigator() {
           component={BottomNavigator}
         />
         <Stack.Screen name={screens.SINGLEPOST} component={SinglePostScreen} />
+        <Stack.Screen name={screens.EDITPOST} component={EditPostScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
