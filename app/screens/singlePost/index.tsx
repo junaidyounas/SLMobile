@@ -77,7 +77,7 @@ const SinglePostScreen = (props: Props) => {
           <DetailsTable condition={post.condition} title="Condition" />
           <DetailsTable condition={post?.user?.name} title="Posted by" />
         </View>
-        <ConnectBar />
+        <ConnectBar data={post} />
       </ScrollView>
     </Box>
   );

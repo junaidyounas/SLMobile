@@ -5,7 +5,10 @@ import {colors} from 'theme/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import ConnectUserPicker from '../connectUserPicker';
-type Props = {};
+import {SinglePostType} from 'types/posts/SinglePostType';
+type Props = {
+  data: SinglePostType;
+};
 
 const ConnectBar = (props: Props) => {
   return (
@@ -17,7 +20,7 @@ const ConnectBar = (props: Props) => {
           size={widthRatio(5)}
         />
       </TouchableOpacity>
-      <ConnectUserPicker />
+      <ConnectUserPicker postData={props.data} />
     </View>
   );
 };

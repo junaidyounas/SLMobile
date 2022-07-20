@@ -1,9 +1,17 @@
 import {Pressable} from 'native-base';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {onClose, onOpen, Picker} from 'react-native-actions-sheet-picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {colors} from 'theme/colors';
+import {SinglePostType} from 'types/posts/SinglePostType';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 
 type Props = {
@@ -14,24 +22,34 @@ type Props = {
   whatsappMessage?: number;
   imoCall?: number;
   imoMessage?: number;
+  postData?: SinglePostType;
 };
 
 const ConnectUserPicker = (props: Props) => {
-  const {marginTop, whatsappCall, whatsappMessage, imoCall, imoMessage} = props;
+  const {
+    marginTop,
+    whatsappCall,
+    whatsappMessage,
+    imoCall,
+    imoMessage,
+    postData,
+  } = props;
 
   const data = [
     {id: 1, title: 'Call'},
-    {id: 3, title: 'Message'},
-    whatsappCall ? {id: 2, title: 'Call by whatsapp'} : {},
+    {id: 2, title: 'Message'},
+    whatsappCall ? {id: 3, title: 'Call by whatsapp'} : {},
     whatsappMessage ? {id: 4, title: 'Message by Whatsapp'} : {},
-    imoCall ? {id: 2, title: 'Call by Imo'} : {},
-    imoMessage ? {id: 4, title: 'Message by Imo'} : {},
+    imoCall ? {id: 5, title: 'Call by Imo'} : {},
+    imoMessage ? {id: 6, title: 'Message by Imo'} : {},
   ];
 
   let otherStyles = [];
   if (marginTop) {
     otherStyles.push({marginTop: heightRatio(marginTop)});
   }
+
+  const {phone = null} = {phone: postData?.user?.phone};
   return (
     <View style={[styles.parent, otherStyles]}>
       <TouchableOpacity
@@ -54,7 +72,17 @@ const ConnectUserPicker = (props: Props) => {
           return (
             <Pressable
               style={{paddingVertical: heightRatio(3)}}
-              onPress={() => {
+              onPress={async () => {
+                if (!phone) {
+                  return;
+                }
+                if (item.id == 1) {
+                  await Linking.openURL(`tel:${phone}`);
+                } else if (item.id == 2) {
+                  const separator = Platform.OS === 'ios' ? '&' : '?';
+                  const url = `sms:${phone}${separator}body=I wana know about this ad.`;
+                  await Linking.openURL(url);
+                }
                 onClose('connectUser');
               }}>
               <Text>{item.title}</Text>
