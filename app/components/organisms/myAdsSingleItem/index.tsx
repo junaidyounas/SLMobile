@@ -10,6 +10,7 @@ import LocationWithIcon from 'components/atoms/locationWithIcon';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
+import {AppConstants} from 'constants/appConstants';
 
 type Props = {
   item: SinglePostType;
@@ -26,7 +27,7 @@ const MyAdsSingleItem = (props: Props) => {
   } = {
     title: item.title,
     price: item.price,
-    image: `http://192.168.1.251:3000/${item.images[0]}`,
+    image: `${AppConstants.serverUrl}${item.images[0]}`,
     location: item.location,
   };
   return (

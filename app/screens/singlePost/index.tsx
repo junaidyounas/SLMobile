@@ -15,16 +15,18 @@ import DetailsTable from 'components/organisms/detailsTable';
 import {postService} from 'services/postService';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
+import {AppConstants} from 'constants/appConstants';
+import ConnectBar from 'components/organisms/connectBar';
 
 type Props = {
   route?: any;
 };
 
-const ImageSingleItem = () => {
+const ImageSingleItem = ({item}: {item: string}) => {
   return (
     <Image
       style={{width: widthRatio(100), height: heightRatio(50)}}
-      source={images.dummy.image}
+      source={{uri: AppConstants.serverUrl + item}}
       alt=" "
     />
   );
@@ -34,7 +36,7 @@ const SinglePostScreen = (props: Props) => {
   const {itemId = ''} = props.route?.params;
 
   // states
-  const [post, setPost] = useState<SinglePostType | any>();
+  const [post, setPost] = useState<Partial<SinglePostType>>({});
 
   function getSinglePostById(itemId: string) {
     postService
@@ -49,6 +51,7 @@ const SinglePostScreen = (props: Props) => {
     logMe(itemId);
     getSinglePostById(itemId);
   }, [itemId]);
+
   return (
     <Box style={styles.container} bg={globalstyles.btnGradient}>
       <ScrollView>
@@ -56,7 +59,7 @@ const SinglePostScreen = (props: Props) => {
         <FlatList
           horizontal
           pagingEnabled
-          data={[1, 2, 3, 4, 5, 6]}
+          data={post.images}
           renderItem={ImageSingleItem}
         />
         <PriceAndName name={post.title} price={post.price} />
@@ -66,9 +69,15 @@ const SinglePostScreen = (props: Props) => {
             location={post.location}
             fontSize={16}
           />
+          <Text style={styles.detailsText}>Description</Text>
+          <Text style={styles.descriptionText}>{post.description}</Text>
           <Text style={styles.detailsText}>Details</Text>
-          <DetailsTable />
+          <DetailsTable condition={post.category?.title} title="Category" />
+          <DetailsTable condition={post.subCategory} title="Sub Category" />
+          <DetailsTable condition={post.condition} title="Condition" />
+          <DetailsTable condition={post?.user?.name} title="Posted by" />
         </View>
+        <ConnectBar />
       </ScrollView>
     </Box>
   );
@@ -87,5 +96,9 @@ const styles = StyleSheet.create({
     color: colors.gray[100],
     fontFamily: fonts.poppins_semi_bold,
     marginTop: heightRatio(3),
+  },
+  descriptionText: {
+    color: colors.gray[100],
+    fontFamily: fonts.poppins_light,
   },
 });

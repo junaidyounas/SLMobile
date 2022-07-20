@@ -6,14 +6,18 @@ import {heightRatio} from 'utils/functions/pixelRatio';
 import {textRatio} from 'utils/functions/textRatio';
 import {fonts} from 'theme/fonts';
 
-type Props = {};
+type Props = {
+  condition?: string;
+  title: string;
+};
 
 const DetailsTable = (props: Props) => {
+  const {condition, title} = props;
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <Text style={styles.conditionText}>Condition</Text>
-        <Text style={styles.conditionText}>New</Text>
+        <Text style={styles.conditionText}>{title}</Text>
+        <Text style={styles.conditionText}>{condition}</Text>
       </View>
     </View>
   );

@@ -8,7 +8,7 @@ import {colors} from 'theme/colors';
 
 type Props = {
   fontSize?: number;
-  location: string;
+  location?: string;
   color?: string;
 };
 

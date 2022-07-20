@@ -115,7 +115,7 @@ const EditPostScreen = (props: Props) => {
         console.log(res);
         // setSinglePostData(res);
         const imgs: any = res.images.map(item => {
-          return {uri: `http://192.168.1.251:3000/${item}`};
+          return {uri: `${AppConstants.serverUrl}${item}`};
         });
         setImgsForServer(res.images);
         setImages(imgs);
