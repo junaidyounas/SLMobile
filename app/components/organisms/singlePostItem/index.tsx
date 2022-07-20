@@ -31,7 +31,7 @@ const SinglePostItem = (props: Props) => {
   };
   return (
     <TouchableOpacity
-      onPress={() => navigate(screens.SINGLEPOST)}
+      onPress={() => navigate(screens.SINGLEPOST, {itemId: item._id})}
       style={styles.container}>
       <Box shadow={1} borderRadius={widthRatio(4)}>
         <Image alt=" " style={styles.image} source={{uri: image}} />

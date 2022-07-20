@@ -1,5 +1,5 @@
 import {StyleSheet, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, FlatList, Image, ScrollView, View} from 'native-base';
 import {globalstyles} from 'theme/globalStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,8 +12,13 @@ import {fonts} from 'theme/fonts';
 import PriceAndName from 'components/molecules/priceAndName';
 import LocationWithIcon from 'components/atoms/locationWithIcon';
 import DetailsTable from 'components/organisms/detailsTable';
+import {postService} from 'services/postService';
+import {SinglePostType} from 'types/posts/SinglePostType';
+import {logMe} from 'utils/functions/logBinder';
 
-type Props = {};
+type Props = {
+  route?: any;
+};
 
 const ImageSingleItem = () => {
   return (
@@ -26,6 +31,24 @@ const ImageSingleItem = () => {
 };
 
 const SinglePostScreen = (props: Props) => {
+  const {itemId = ''} = props.route?.params;
+
+  // states
+  const [post, setPost] = useState<SinglePostType | any>();
+
+  function getSinglePostById(itemId: string) {
+    postService
+      .getSinglePostById(itemId)
+      .then(res => {
+        setPost(res);
+        logMe(res);
+      })
+      .finally(() => {});
+  }
+  useEffect(() => {
+    logMe(itemId);
+    getSinglePostById(itemId);
+  }, [itemId]);
   return (
     <Box style={styles.container} bg={globalstyles.btnGradient}>
       <ScrollView>
@@ -36,11 +59,11 @@ const SinglePostScreen = (props: Props) => {
           data={[1, 2, 3, 4, 5, 6]}
           renderItem={ImageSingleItem}
         />
-        <PriceAndName />
+        <PriceAndName name={post.title} price={post.price} />
         <View style={styles.content}>
           <LocationWithIcon
             color={colors.gray[100]}
-            location="Islamabad"
+            location={post.location}
             fontSize={16}
           />
           <Text style={styles.detailsText}>Details</Text>

@@ -4,16 +4,23 @@ import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import {textRatio} from 'utils/functions/textRatio';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Pressable} from 'native-base';
+import {goBack} from 'navigations/navRef';
 type Props = {};
 
 const BackAndShareButtonHeader = (props: Props) => {
   return (
     <View style={styles.headerBar}>
-      <Ionicons
-        size={textRatio(30)}
-        name="chevron-back-sharp"
-        color={colors.gray[100]}
-      />
+      <Pressable
+        onPress={() => {
+          goBack();
+        }}>
+        <Ionicons
+          size={textRatio(30)}
+          name="chevron-back-sharp"
+          color={colors.gray[100]}
+        />
+      </Pressable>
       <Ionicons
         size={textRatio(30)}
         name="share-social-sharp"

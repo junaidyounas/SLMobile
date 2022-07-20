@@ -5,13 +5,17 @@ import {colors} from 'theme/colors';
 import {textRatio} from 'utils/functions/textRatio';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 
-type Props = {};
+type Props = {
+  name?: string;
+  price?: number;
+};
 
 const PriceAndName = (props: Props) => {
+  const {name, price} = props;
   return (
     <View style={styles.priceNameContainer}>
-      <Text style={styles.priceText}>Rs 68,000</Text>
-      <Text style={styles.nameText}>New yellow flowers from hilly area</Text>
+      <Text style={styles.priceText}>Rs {price}</Text>
+      <Text style={styles.nameText}>{name}</Text>
     </View>
   );
 };
