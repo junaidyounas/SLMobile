@@ -1,28 +1,23 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+import ConnectUserPicker from '../connectUserPicker';
 type Props = {};
 
 const ConnectBar = (props: Props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.btnBg}>
+      <TouchableOpacity style={styles.btnBg}>
         <FontAwesome
           name="send"
           color={colors.darkblue[600]}
           size={widthRatio(5)}
         />
-      </View>
-      <View style={styles.btnBg}>
-        <MaterialIcons
-          name="wifi-calling"
-          color={colors.darkblue[600]}
-          size={widthRatio(6)}
-        />
-      </View>
+      </TouchableOpacity>
+      <ConnectUserPicker />
     </View>
   );
 };
