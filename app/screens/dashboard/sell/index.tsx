@@ -27,6 +27,7 @@ import {postService} from 'services/postService';
 import {CreatePostType} from 'types/posts/CreatePostType';
 import ConditionTabs from 'components/molecules/conditionTabs';
 import {CONDITIONS} from 'enum/Conditions';
+import LocationSelector from 'components/organisms/locationSelector';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -184,6 +185,7 @@ const SellScreen = (props: Props) => {
                 placeholder="Please write description"
                 label={'Post Description'}
               />
+              <LocationSelector />
               <InputTextView
                 value={values.price}
                 onChange={handleChange('price')}

@@ -1,5 +1,11 @@
 import {Alert, Platform} from 'react-native';
-import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {
+  check,
+  PERMISSIONS,
+  RESULTS,
+  request,
+  requestMultiple,
+} from 'react-native-permissions';
 
 const galleryPermission = async () => {
   let isPermissionOk = false;
@@ -94,4 +100,52 @@ const galleryPermission = async () => {
 
 export const permissionRequester = {
   galleryPermission,
+};
+
+export const requestLocationPermission = async () => {
+  let currentStatus = false;
+  if (Platform.OS === 'android') {
+    await requestMultiple([
+      PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+      PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION,
+    ]).then(statuses => {
+      if (
+        statuses[
+          (PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+          PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION)
+        ] == 'granted'
+      ) {
+        currentStatus = true;
+      } else if (
+        statuses[
+          (PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+          PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION)
+        ] == RESULTS.BLOCKED
+      ) {
+        currentStatus = false;
+        Alert.alert(
+          'User denied the permission go to settings and give permissions',
+        );
+      }
+    });
+  }
+
+  if (Platform.OS === 'ios') {
+    await requestMultiple([PERMISSIONS.IOS.LOCATION_WHEN_IN_USE]).then(
+      statuses => {
+        if (statuses[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE] == 'granted') {
+          currentStatus = true;
+        } else if (
+          statuses[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE] == RESULTS.BLOCKED
+        ) {
+          currentStatus = false;
+          Alert.alert(
+            'User denied the permission go to settings and give permissions',
+          );
+        }
+      },
+    );
+  }
+
+  return currentStatus;
 };
