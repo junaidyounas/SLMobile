@@ -17,7 +17,12 @@ const createNewPost = (post: CreatePostType) => {
   });
 };
 
-const showAllPosts = (page?: number, query?: string, category?: string) => {
+const showAllPosts = (
+  page?: number,
+  query?: string,
+  category?: string,
+  subCategory?: string,
+) => {
   const url = new URL(urls.posts);
   if (query) {
     url.searchParams.append('search', query);
@@ -27,6 +32,9 @@ const showAllPosts = (page?: number, query?: string, category?: string) => {
   }
   if (category) {
     url.searchParams.append('category', category);
+  }
+  if (subCategory) {
+    url.searchParams.append('subCategory', subCategory);
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
