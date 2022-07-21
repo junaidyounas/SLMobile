@@ -1,4 +1,5 @@
 import LocationWithIcon from 'components/atoms/locationWithIcon';
+import CategorySelector from 'components/organisms/categorySelector';
 import SearchBarWithMenuIcon from 'components/organisms/searchBarWithMenuIcon';
 import SinglePostItem from 'components/organisms/singlePostItem';
 import {FlatList, Text, View} from 'native-base';
@@ -18,6 +19,8 @@ const HomeScreen = (props: Props) => {
   const [currentPage, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubCat, setSelectedSubCat] = useState('');
 
   const onRefresh = React.useCallback(() => {
     getAllPosts(1);
@@ -62,6 +65,12 @@ const HomeScreen = (props: Props) => {
           onSearchIconPress={() => {
             getAllPosts(1, search);
           }}
+        />
+        <CategorySelector
+          category={selectedCategory}
+          setCategory={setSelectedCategory}
+          selectedSubCat={selectedSubCat}
+          setSelectedSubCat={setSelectedSubCat}
         />
       </View>
       <View style={styles.container}>

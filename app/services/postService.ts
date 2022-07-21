@@ -1,7 +1,3 @@
-import {addUser, login} from 'store/auth/authSlice';
-import {store} from 'store/store';
-import {LoginResponse} from 'types/auth/LoginResponse';
-import {Category} from 'types/Category';
 import {CreatePostType} from 'types/posts/CreatePostType';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
@@ -21,13 +17,16 @@ const createNewPost = (post: CreatePostType) => {
   });
 };
 
-const showAllPosts = (page?: number, query?: string) => {
+const showAllPosts = (page?: number, query?: string, category?: string) => {
   const url = new URL(urls.posts);
   if (query) {
     url.searchParams.append('search', query);
   }
   if (page) {
     url.searchParams.append('page', page.toString());
+  }
+  if (category) {
+    url.searchParams.append('category', category);
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
