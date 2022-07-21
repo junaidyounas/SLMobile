@@ -46,7 +46,7 @@ const CategorySelector = (props: Props) => {
         <Box
           style={[styles.btn, {marginRight: widthRatio(1)}]}
           bg={globalstyles.btnGradient}>
-          <Text style={styles.text}>
+          <Text style={styles.text} numberOfLines={1}>
             {categoryTitle ? categoryTitle : 'Category'}
           </Text>
         </Box>
@@ -61,7 +61,7 @@ const CategorySelector = (props: Props) => {
           <Box
             style={[styles.btn, {marginLeft: widthRatio(1)}]}
             bg={globalstyles.btnGradient}>
-            <Text style={styles.text}>
+            <Text style={styles.text} numberOfLines={1}>
               {selectedSubCat ? selectedSubCat : 'Sub Category'}
             </Text>
           </Box>

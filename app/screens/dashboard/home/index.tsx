@@ -19,7 +19,7 @@ const HomeScreen = (props: Props) => {
   const [currentPage, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [selectedSubCat, setSelectedSubCat] = useState('');
 
   const onRefresh = React.useCallback(() => {
@@ -34,7 +34,7 @@ const HomeScreen = (props: Props) => {
   function getAllPosts(page: number = 1, search: string = '') {
     logMe(page);
     postService
-      .showAllPosts(page, search)
+      .showAllPosts(page, search, selectedCategoryId)
       .then(res => {
         if (res.length > 0 && page > 1) {
           const data: any = [...posts, ...res];
@@ -52,6 +52,10 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     getAllPosts(currentPage);
   }, [currentPage]);
+  useEffect(() => {
+    setPage(1);
+    getAllPosts(1);
+  }, [selectedCategoryId, selectedSubCat]);
 
   return (
     <>
@@ -67,8 +71,8 @@ const HomeScreen = (props: Props) => {
           }}
         />
         <CategorySelector
-          category={selectedCategory}
-          setCategory={setSelectedCategory}
+          category={selectedCategoryId}
+          setCategory={setSelectedCategoryId}
           selectedSubCat={selectedSubCat}
           setSelectedSubCat={setSelectedSubCat}
         />
