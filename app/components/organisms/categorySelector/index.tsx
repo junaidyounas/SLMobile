@@ -47,7 +47,7 @@ const CategorySelector = (props: Props) => {
           style={[styles.btn, {marginRight: widthRatio(1)}]}
           bg={globalstyles.btnGradient}>
           <Text style={styles.text} numberOfLines={1}>
-            {categoryTitle ? categoryTitle : 'Category'}
+            {categoryTitle ? categoryTitle : 'Search by category'}
           </Text>
         </Box>
       </TouchableWithoutFeedback>
