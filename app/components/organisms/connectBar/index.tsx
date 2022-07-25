@@ -6,14 +6,34 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import ConnectUserPicker from '../connectUserPicker';
 import {SinglePostType} from 'types/posts/SinglePostType';
+import {chatService} from 'services/chatService';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 type Props = {
   data: SinglePostType;
 };
 
 const ConnectBar = (props: Props) => {
+  const {data} = props;
+  const createChatSession = () => {
+    navigate(screens.CHATSESSIONS);
+    // const obj = {
+    //   postId: data._id,
+    //   receiverId: data.user._id,
+    //   lastMessage: 'Interested in this ad!',
+    // };
+    // chatService.createSession(obj).then(res => {
+    //   console.log(res);
+    // });
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.btnBg}>
+      <TouchableOpacity
+        onPress={() => {
+          createChatSession();
+        }}
+        style={styles.btnBg}>
         <FontAwesome
           name="send"
           color={colors.darkblue[600]}

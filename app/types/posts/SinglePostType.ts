@@ -1,3 +1,5 @@
+import {User} from 'types/auth/LoginResponse';
+
 export interface SinglePostType {
   _id: any;
   title: string;
@@ -10,5 +12,5 @@ export interface SinglePostType {
   isVisible: string;
   isActive: string;
   images: string[];
-  user: any;
+  user: User;
 }

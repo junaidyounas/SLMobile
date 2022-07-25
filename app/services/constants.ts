@@ -11,4 +11,7 @@ export const urls = {
   // post
   posts: '/posts',
   my_posts: '/posts/my',
+
+  // chat
+  create_chat_session: '/chat/create-session',
 };

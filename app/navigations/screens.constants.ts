@@ -15,4 +15,7 @@ export const screens = {
   // off bottom screens
   SINGLEPOST: 'SinglePostScreen',
   EDITPOST: 'EditPostScreen',
+
+  // chat
+  CHATSESSIONS: 'ChatSessions',
 };

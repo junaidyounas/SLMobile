@@ -6,6 +6,7 @@ import {StyleSheet} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import ChatSessions from 'screens/chat/sessions';
 import AccountScreen from 'screens/dashboard/account';
 import AlertScreen from 'screens/dashboard/alert';
 import ChatScreen from 'screens/dashboard/chat';
@@ -151,7 +152,7 @@ const BottomNavigator = (props: Props) => {
         name={screens.SELL}
         component={SellScreen}
       />
-      <Tab.Screen name={screens.CHAT} component={ChatScreen} />
+      <Tab.Screen name={screens.CHAT} component={ChatSessions} />
       <Tab.Screen name={screens.ACCOUNT} component={AccountScreen} />
     </Tab.Navigator>
   );
