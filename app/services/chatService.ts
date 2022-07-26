@@ -24,6 +24,20 @@ const createSession = (obj: {
   });
 };
 
+const getAllCurrentUserChatSessions = () => {
+  return new Promise<Array<ChatSession>>((resolve, reject) => {
+    api
+      .get(`${urls.chat_sessions}`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const chatService = {
   createSession,
+  getAllCurrentUserChatSessions,
 };

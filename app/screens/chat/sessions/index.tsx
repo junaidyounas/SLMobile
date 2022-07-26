@@ -1,21 +1,40 @@
 import {StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, View} from 'native-base';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import BackAndShareButtonHeader from 'components/molecules/backAndShareHeader';
 import GradientTopBarWithBackBtn from 'components/organisms/gradientTopBarWithTitleAndBack';
 import SingleChatSessionItem from 'components/organisms/singleChatSessionItem';
 import {colors} from 'theme/colors';
+import {chatService} from 'services/chatService';
+import {ChatSession} from 'types/chat/Session';
+import {useIsFocused} from '@react-navigation/native';
 
 type Props = {};
 
 const ChatSessions = (props: Props) => {
+  const focused = useIsFocused();
+  const [sessions, setSessions] = useState<Array<ChatSession>>();
+
+  function getChatSessions() {
+    chatService
+      .getAllCurrentUserChatSessions()
+      .then((res: any) => {
+        setSessions(res);
+      })
+      .finally(() => {});
+  }
+
+  useEffect(() => {
+    getChatSessions();
+  }, [focused]);
+
   return (
     <View style={styles.container}>
-      <GradientTopBarWithBackBtn title={'My Ads'} isBack />
+      <GradientTopBarWithBackBtn title={'Chats'} isBack />
       <FlatList
         ItemSeparatorComponent={() => <View style={styles.separtor} />}
-        data={[1, 2, 3, 4, 5, 6]}
+        data={sessions}
         renderItem={SingleChatSessionItem}
       />
     </View>

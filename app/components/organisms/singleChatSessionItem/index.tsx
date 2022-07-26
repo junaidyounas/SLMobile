@@ -8,10 +8,28 @@ import {textRatio} from 'utils/functions/textRatio';
 import {globalstyles} from 'theme/globalStyles';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
 import {images} from 'assets/images';
+import {ChatSession} from 'types/chat/Session';
+import {AppConstants} from 'constants/appConstants';
+import {timeDateFormat, timeFormat} from 'utils/functions/timeDateFormat';
 
-type Props = {};
+type Props = {
+  item: ChatSession;
+};
 
 const SingleChatSessionItem = (props: Props) => {
+  const {item} = props;
+
+  const {
+    postTitle = '',
+    price = 0,
+    image = '',
+    updatedAt = new Date(),
+  } = {
+    postTitle: item.postId?.title,
+    price: item.postId?.price,
+    image: item.postId?.images[0],
+    updatedAt: item.updatedAt,
+  };
   return (
     <Box style={styles.container}>
       <View style={styles.image}>
@@ -20,15 +38,17 @@ const SingleChatSessionItem = (props: Props) => {
           fallbackSource={images.dummy.image}
           ignoreFallback={false}
           style={styles.imageCircle}
-          source={images.dummy.image}
+          source={{uri: `${AppConstants.serverUrl}${image}`}}
         />
       </View>
       <View style={styles.textContainer}>
         <View style={styles.nameTimeContainer}>
-          <Text>Junaid Younas</Text>
-          <Text style={globalstyles.text.time}>5:30PM</Text>
+          <Text>{postTitle}</Text>
+          <Text style={globalstyles.text.time}>
+            {timeDateFormat(updatedAt.toString())}
+          </Text>
         </View>
-        <Text style={styles.lastMessage}>Hi i want this product</Text>
+        <Text style={styles.lastMessage}>{price}</Text>
       </View>
     </Box>
   );
