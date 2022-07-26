@@ -7,19 +7,24 @@ import {Message} from 'types/chat/Message';
 type Props = {
   item: Message;
   index: number;
+  userId: string;
 };
 
 const SingleChatMessage = (props: Props) => {
-  const {index} = props;
-  const wrapEven: any = index % 2 === 0 ? {flexWrap: 'wrap-reverse'} : {};
+  const {index, item, userId} = props;
+
+  const wrapEven: any =
+    userId == item.senderId || userId == item.receiverId
+      ? {flexWrap: 'wrap-reverse'}
+      : {};
   const bgEven: any =
-    index % 2 === 0
+    item.senderId || userId == item.receiverId
       ? {
           backgroundColor: colors.darkblue[700],
         }
       : {};
   const colorEven: any =
-    index % 2 === 0
+    item.senderId || userId == item.receiverId
       ? {
           color: colors.white,
         }
@@ -27,11 +32,7 @@ const SingleChatMessage = (props: Props) => {
   return (
     <View style={[styles.container, wrapEven]}>
       <View style={[styles.chatText, bgEven]}>
-        <Text style={[colorEven]}>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum
-        </Text>
+        <Text style={[colorEven]}>{item.message}</Text>
       </View>
     </View>
   );

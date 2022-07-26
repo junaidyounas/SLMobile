@@ -22,20 +22,26 @@ const SingleChatSessionItem = (props: Props) => {
   const {item} = props;
 
   const {
+    _id = '',
     postTitle = '',
     price = 0,
     image = '',
     updatedAt = new Date(),
+    senderId = '',
+    receiverId = '',
   } = {
+    _id: item._id,
     postTitle: item.postId?.title,
     price: item.postId?.price,
     image: item.postId?.images[0],
     updatedAt: item.updatedAt,
+    senderId: item.senderId,
+    receiverId: item.receiverId,
   };
   return (
     <Pressable
       onPress={() => {
-        navigate(screens.SINGLECHAT);
+        navigate(screens.SINGLECHAT, {id: _id, senderId, receiverId});
       }}
       style={styles.container}>
       <View style={styles.image}>

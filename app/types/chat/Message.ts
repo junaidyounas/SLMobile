@@ -1,6 +1,10 @@
 export type Message = {
   message: string;
-  isRead: boolean;
-  isDeleted: boolean;
-  createdAt: Date;
+  type?: 'text' | 'image';
+  images?: string[];
+  isRead?: false;
+  isDeleted?: false;
+  createdAt?: Date;
+  senderId: string;
+  receiverId: string;
 };

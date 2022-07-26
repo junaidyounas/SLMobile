@@ -15,4 +15,7 @@ export const urls = {
   // chat
   create_chat_session: '/chat/create-session',
   chat_sessions: '/chat/sessions',
+  chat_session: '/chat/session',
+  chat_messages: '/chat/messages',
+  send_message: '/chat/send-message',
 };

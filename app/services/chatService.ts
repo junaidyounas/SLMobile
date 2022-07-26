@@ -2,6 +2,7 @@ import {addUser, login} from 'store/auth/authSlice';
 import {store} from 'store/store';
 import {LoginResponse} from 'types/auth/LoginResponse';
 import {Category} from 'types/Category';
+import {Message} from 'types/chat/Message';
 import {ChatSession} from 'types/chat/Session';
 import {api} from './apiService';
 import {urls} from './constants';
@@ -37,7 +38,51 @@ const getAllCurrentUserChatSessions = () => {
   });
 };
 
+const getSingleChatSession = (id: string) => {
+  return new Promise<Array<ChatSession>>((resolve, reject) => {
+    api
+      .get(`${urls.chat_session}/${id}`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+const getChatMessages = (id: string) => {
+  return new Promise<Array<ChatSession>>((resolve, reject) => {
+    api
+      .get(`${urls.chat_messages}/${id}`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+const sendMessage = (obj: Message, id: string) => {
+  return new Promise<Array<ChatSession>>((resolve, reject) => {
+    api
+      .post(`${urls.send_message}/${id}`, obj)
+      .then((res: any) => {
+        console.log(res.data);
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
 export const chatService = {
   createSession,
   getAllCurrentUserChatSessions,
+  getSingleChatSession,
+  getChatMessages,
+  sendMessage,
 };

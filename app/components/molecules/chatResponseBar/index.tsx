@@ -34,7 +34,7 @@ const ChatResponseBar = (props: Props) => {
           isLoading ? (
             <Spinner size="lg" mr={2} color={colors.darkblue[700]} />
           ) : (
-            <Pressable mr={2}>
+            <Pressable onPress={() => onSend()} mr={2}>
               <Ionicons
                 color={colors.darkblue[700]}
                 name="md-send"
