@@ -18,4 +18,5 @@ export const screens = {
 
   // chat
   CHATSESSIONS: 'ChatSessions',
+  SINGLECHAT: 'SingleChatScreen',
 };

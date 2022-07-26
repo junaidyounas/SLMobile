@@ -5,6 +5,7 @@ import EmailAskScreen from 'screens/auth/emailAsk';
 import LoginScreen from 'screens/auth/login';
 import RegisterScreen from 'screens/auth/register';
 import ChatSessions from 'screens/chat/sessions';
+import SingleChatScreen from 'screens/chat/singleChat';
 import EditPostScreen from 'screens/editPost';
 import SinglePostScreen from 'screens/singlePost';
 import BottomNavigator from './bottomNavigator';
@@ -36,6 +37,7 @@ function MainNavigator() {
       {/* chat */}
       <Stack.Group>
         <Stack.Screen name={screens.CHATSESSIONS} component={ChatSessions} />
+        <Stack.Screen name={screens.SINGLECHAT} component={SingleChatScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

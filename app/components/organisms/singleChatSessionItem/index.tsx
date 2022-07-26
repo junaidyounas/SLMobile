@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import React from 'react';
-import {Box, Image, Text, View} from 'native-base';
+import {Box, Image, Pressable, Text, View} from 'native-base';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import {fonts} from 'theme/fonts';
@@ -11,6 +11,8 @@ import {images} from 'assets/images';
 import {ChatSession} from 'types/chat/Session';
 import {AppConstants} from 'constants/appConstants';
 import {timeDateFormat, timeFormat} from 'utils/functions/timeDateFormat';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 
 type Props = {
   item: ChatSession;
@@ -31,7 +33,11 @@ const SingleChatSessionItem = (props: Props) => {
     updatedAt: item.updatedAt,
   };
   return (
-    <Box style={styles.container}>
+    <Pressable
+      onPress={() => {
+        navigate(screens.SINGLECHAT);
+      }}
+      style={styles.container}>
       <View style={styles.image}>
         <Image
           alt=" "
@@ -50,7 +56,7 @@ const SingleChatSessionItem = (props: Props) => {
         </View>
         <Text style={styles.lastMessage}>{price}</Text>
       </View>
-    </Box>
+    </Pressable>
   );
 };
 
