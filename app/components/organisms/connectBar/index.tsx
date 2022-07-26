@@ -16,15 +16,15 @@ type Props = {
 const ConnectBar = (props: Props) => {
   const {data} = props;
   const createChatSession = () => {
-    navigate(screens.CHATSESSIONS);
-    // const obj = {
-    //   postId: data._id,
-    //   receiverId: data.user._id,
-    //   lastMessage: 'Interested in this ad!',
-    // };
-    // chatService.createSession(obj).then(res => {
-    //   console.log(res);
-    // });
+    const obj = {
+      postId: data._id,
+      receiverId: data.user._id,
+      lastMessage: 'Interested in this ad!',
+    };
+    chatService.createSession(obj).then(res => {
+      console.log(res);
+      navigate(screens.CHATSESSIONS);
+    });
   };
 
   return (
