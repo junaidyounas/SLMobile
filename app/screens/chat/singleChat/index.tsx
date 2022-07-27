@@ -27,17 +27,42 @@ const SingleChatScreen = (props: Props) => {
 
   const [response, setResponse] = useState('');
 
+  // pages
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(20);
+
   function getSingleChatSession() {
     chatService
       .getChatMessages(id)
       .then((res: any) => {
-        setMessages(res.messages.reverse());
+        setMessages(res.messages);
+      })
+      .finally(() => {});
+  }
+
+  function moreMessages(start: number, end: number) {
+    console.log(start, end);
+    chatService
+      .getChatMessages(id, start, end)
+      .then((res: any) => {
+        if (res.messages.length > 0) {
+          // console.log(res.messages);
+          const data: any = [...messages, ...res.messages];
+          if (res.messages.length <= 19 && start == 0 && end == 20) {
+            setMessages(res.messages);
+          } else {
+            setStart(start + 20);
+            setEnd(end + 20);
+            setMessages(data);
+          }
+        }
       })
       .finally(() => {});
   }
 
   function sendMessage() {
-    const obj = {message: response, senderId, receiverId};
+    const recId = user._id == senderId ? receiverId : senderId;
+    const obj = {message: response, senderId: user._id, receiverId: recId};
     console.log(obj);
     setIsLoading(true);
     chatService
@@ -45,6 +70,8 @@ const SingleChatScreen = (props: Props) => {
       .then((res: any) => {
         getSingleChatSession();
         setResponse('');
+        setStart(0);
+        setEnd(20);
       })
       .finally(() => {
         setIsLoading(false);
@@ -66,6 +93,10 @@ const SingleChatScreen = (props: Props) => {
         renderItem={({item, index}) => (
           <SingleChatMessage item={item} index={index} userId={user._id} />
         )}
+        onEndReachedThreshold={0.4}
+        onEndReached={() => {
+          moreMessages(start, end);
+        }}
       />
       <ChatResponseBar
         onSend={sendMessage}

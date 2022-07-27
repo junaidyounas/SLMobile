@@ -51,10 +51,13 @@ const getSingleChatSession = (id: string) => {
   });
 };
 
-const getChatMessages = (id: string) => {
+const getChatMessages = (id: string, start: number = 0, end: number = 20) => {
   return new Promise<Array<ChatSession>>((resolve, reject) => {
+    const queries = new URL('');
+    queries.searchParams.append('start', start.toString());
+    queries.searchParams.append('end', end.toString());
     api
-      .get(`${urls.chat_messages}/${id}`)
+      .get(`${urls.chat_messages}/${id}${queries}`)
       .then((res: any) => {
         resolve(res.data);
       })

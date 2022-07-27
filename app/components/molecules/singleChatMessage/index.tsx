@@ -13,22 +13,18 @@ type Props = {
 const SingleChatMessage = (props: Props) => {
   const {index, item, userId} = props;
 
-  const wrapEven: any =
-    userId == item.senderId || userId == item.receiverId
-      ? {flexWrap: 'wrap-reverse'}
-      : {};
-  const bgEven: any =
-    item.senderId || userId == item.receiverId
-      ? {
-          backgroundColor: colors.darkblue[700],
-        }
-      : {};
-  const colorEven: any =
-    item.senderId || userId == item.receiverId
-      ? {
-          color: colors.white,
-        }
-      : {};
+  const ifSender = item.senderId == userId;
+  const wrapEven: any = ifSender ? {} : {flexWrap: 'wrap-reverse'};
+  const bgEven: any = ifSender
+    ? {
+        backgroundColor: colors.darkblue[700],
+      }
+    : {};
+  const colorEven: any = ifSender
+    ? {
+        color: colors.white,
+      }
+    : {};
   return (
     <View style={[styles.container, wrapEven]}>
       <View style={[styles.chatText, bgEven]}>
