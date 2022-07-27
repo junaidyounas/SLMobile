@@ -9,13 +9,27 @@ import {SinglePostType} from 'types/posts/SinglePostType';
 import {chatService} from 'services/chatService';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
+import {useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
+import {useToast} from 'native-base';
+import CustomToast from 'components/base/toast';
 type Props = {
   data: SinglePostType;
 };
 
 const ConnectBar = (props: Props) => {
   const {data} = props;
+  const toast = useToast();
+  const user = useSelector((state: IAppState) => state.auth.user);
   const createChatSession = () => {
+    if (user._id == data.user._id) {
+      toast.show({
+        render: () => {
+          return <CustomToast />;
+        },
+      });
+      return;
+    }
     const obj = {
       postId: data._id,
       receiverId: data.user._id,

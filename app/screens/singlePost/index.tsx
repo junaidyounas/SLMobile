@@ -17,6 +17,8 @@ import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
 import {AppConstants} from 'constants/appConstants';
 import ConnectBar from 'components/organisms/connectBar';
+import {useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
 
 type Props = {
   route?: any;
