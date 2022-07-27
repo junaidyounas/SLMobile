@@ -11,6 +11,7 @@ import {chatService} from 'services/chatService';
 import {Message} from 'types/chat/Message';
 import {IAppState} from 'store/IAppState';
 import {useSelector} from 'react-redux';
+import SingleChatPostDetails from 'components/molecules/singleChatPostDetails';
 
 type Props = {
   route?: any;
@@ -24,12 +25,22 @@ const SingleChatScreen = (props: Props) => {
   const [loading, setIsLoading] = useState(false);
 
   const [messages, setMessages] = useState<Array<Message>>([]);
+  const [sessionDetails, setSessionDetails] = useState<ChatSession>();
 
   const [response, setResponse] = useState('');
 
   // pages
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(20);
+
+  function getSingleChatSessionDetails() {
+    chatService
+      .getSingleChatSession(id)
+      .then((res: any) => {
+        setSessionDetails(res);
+      })
+      .finally(() => {});
+  }
 
   function getSingleChatSession() {
     chatService
@@ -80,10 +91,12 @@ const SingleChatScreen = (props: Props) => {
 
   useEffect(() => {
     getSingleChatSession();
+    getSingleChatSessionDetails();
   }, [focused]);
   return (
     <View style={styles.container}>
       <GradientTopBarWithBackBtn title={'Chat'} isBack />
+      <SingleChatPostDetails data={sessionDetails} />
       <FlatList
         inverted
         ListHeaderComponent={() => (

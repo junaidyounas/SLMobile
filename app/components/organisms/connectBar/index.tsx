@@ -36,7 +36,6 @@ const ConnectBar = (props: Props) => {
       lastMessage: 'Interested in this ad!',
     };
     chatService.createSession(obj).then(res => {
-      console.log(res);
       navigate(screens.CHATSESSIONS);
     });
   };

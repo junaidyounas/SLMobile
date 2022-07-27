@@ -14,7 +14,7 @@ const SingleChatMessage = (props: Props) => {
   const {index, item, userId} = props;
 
   const ifSender = item.senderId == userId;
-  const wrapEven: any = ifSender ? {} : {flexWrap: 'wrap-reverse'};
+  const wrapEven: any = !ifSender ? {} : {flexWrap: 'wrap-reverse'};
   const bgEven: any = ifSender
     ? {
         backgroundColor: colors.darkblue[700],
