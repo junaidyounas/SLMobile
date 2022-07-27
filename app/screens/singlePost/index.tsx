@@ -56,8 +56,8 @@ const SinglePostScreen = (props: Props) => {
 
   return (
     <Box style={styles.container} bg={globalstyles.btnGradient}>
+      <BackAndShareButtonHeader />
       <ScrollView>
-        <BackAndShareButtonHeader />
         <FlatList
           horizontal
           pagingEnabled
@@ -79,8 +79,8 @@ const SinglePostScreen = (props: Props) => {
           <DetailsTable condition={post.condition} title="Condition" />
           <DetailsTable condition={post?.user?.name} title="Posted by" />
         </View>
-        <ConnectBar data={post} />
       </ScrollView>
+      <ConnectBar data={post} />
     </Box>
   );
 };
