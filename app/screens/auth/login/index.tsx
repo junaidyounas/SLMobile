@@ -17,6 +17,7 @@ import * as Yup from 'yup';
 import {logMe} from 'utils/functions/logBinder';
 import ButtonComponent from 'components/base/button';
 import {userService} from 'services/userService';
+import GoogleSignInButton from 'components/molecules/googleSignInButton';
 type Props = {};
 
 const LoginFormSchema = Yup.object({
@@ -116,6 +117,7 @@ const LoginScreen = (props: Props) => {
             }}>
             <Text style={styles.forgotText2}>Register now</Text>
           </TouchableOpacity>
+          <GoogleSignInButton />
         </Center>
       </View>
     </AuthLayout>
