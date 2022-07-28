@@ -10,6 +10,8 @@ import Geocoder from 'react-native-geocoding';
 import {logMe} from 'utils/functions/logBinder';
 import {requestLocationPermission} from 'utils/functions/permissionRequester';
 import {getCurrentLocationObject} from 'utils/functions/getLocObj';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 const {
   PRIORITIES: {HIGH_ACCURACY},
   useLocationSettings,
@@ -31,6 +33,7 @@ const LocationSelector = (props: Props) => {
   const getCurrentLocation = async () => {
     setIsLoading(true);
     const data: any = await getCurrentLocationObject();
+    console.log('data', data);
     if (!data) {
       Alert.alert('No data available');
       setIsLoading(false);
@@ -42,7 +45,7 @@ const LocationSelector = (props: Props) => {
       <LabelText label={'Location'} />
       <Pressable
         onPress={() => {
-          getCurrentLocation();
+          navigate(screens.LOCATION_CHOOSER);
         }}
         style={styles.locationContainer}>
         <Text style={styles.selectedText}>Location</Text>

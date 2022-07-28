@@ -7,6 +7,7 @@ import RegisterScreen from 'screens/auth/register';
 import ChatSessions from 'screens/chat/sessions';
 import SingleChatScreen from 'screens/chat/singleChat';
 import EditPostScreen from 'screens/editPost';
+import LocationChooser from 'screens/locationChooser';
 import SinglePostScreen from 'screens/singlePost';
 import BottomNavigator from './bottomNavigator';
 
@@ -39,6 +40,11 @@ function MainNavigator() {
         <Stack.Screen name={screens.CHATSESSIONS} component={ChatSessions} />
         <Stack.Screen name={screens.SINGLECHAT} component={SingleChatScreen} />
       </Stack.Group>
+
+      <Stack.Screen
+        name={screens.LOCATION_CHOOSER}
+        component={LocationChooser}
+      />
     </Stack.Navigator>
   );
 }

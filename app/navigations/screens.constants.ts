@@ -19,4 +19,7 @@ export const screens = {
   // chat
   CHATSESSIONS: 'ChatSessions',
   SINGLECHAT: 'SingleChatScreen',
+
+  // Location
+  LOCATION_CHOOSER: 'LocationChooser',
 };

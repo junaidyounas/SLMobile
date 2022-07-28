@@ -28,6 +28,9 @@ import {CreatePostType} from 'types/posts/CreatePostType';
 import ConditionTabs from 'components/molecules/conditionTabs';
 import {CONDITIONS} from 'enum/Conditions';
 import LocationSelector from 'components/organisms/locationSelector';
+import {useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
+import EmptyStateScreen from 'components/molecules/emptyStateScreen';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -40,6 +43,7 @@ type Props = {};
 
 const SellScreen = (props: Props) => {
   const formikRef = useRef<any>();
+  const user = useSelector((state: IAppState) => state.auth.user);
 
   const [images, setImages] = useState<ImageDocumentBeforeUpload[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -108,140 +112,149 @@ const SellScreen = (props: Props) => {
     getAllCategories();
   }, []);
 
-  return (
-    <>
-      <ImagesPicker
-        id={AppConstants.images_picker}
-        label={'Select Option'}
-        onOptionSelect={undefined}
-        onSelectSuccess={setImages}
-      />
-      <ScrollView
-        contentContainerStyle={{paddingBottom: heightRatio(7)}}
-        style={styles.container}>
-        <GradientTopBarWithBackBtn isBack title="Create new Ad" />
-        <View pt={2} />
-        <ImageSelector
-          images={images}
-          onSelect={async () => {
-            const isPermissionOk: boolean =
-              await permissionRequester.galleryPermission();
-            if (isPermissionOk) {
-              onOpen(AppConstants.images_picker);
-            }
-          }}
+  if (user.token) {
+    return (
+      <>
+        <ImagesPicker
+          id={AppConstants.images_picker}
+          label={'Select Option'}
+          onOptionSelect={undefined}
+          onSelectSuccess={setImages}
         />
-        <Formik
-          innerRef={formikRef}
-          initialValues={{
-            title: '',
-            description: '',
-            price: '',
-            category: '',
-            subCategory: '',
-          }}
-          onSubmit={values => {
-            logMe('On Formik Submit sell');
-            const obj: CreatePostType = {
-              title: values.title,
-              description: values.description,
-              price: parseInt(values.price),
-              condition: selectedCondition,
-              location: 'Lahore, Pakistan',
-              category: values.category,
-              subCategory: values.subCategory,
-              images: imgsForServer.filter(img => img !== null),
-            };
-            logMe(obj);
-            createNewAdToServer(obj);
-          }}
-          validationSchema={AddPostSchema}>
-          {({
-            handleChange,
-            setFieldValue,
-            errors,
-            values,
-            touched,
-            setFieldTouched,
-            handleSubmit,
-          }) => (
-            <>
-              <InputTextView
-                value={values.title}
-                onChange={handleChange('title')}
-                error={touched.title ? errors.title : ''}
-                marginTop={2}
-                onBlur={() => setFieldTouched('title')}
-                placeholder="Please write title"
-                label={'Post Title'}
-              />
-              <InputTextView
-                value={values.description}
-                onChange={handleChange('description')}
-                error={touched.description ? errors.description : ''}
-                isTextView
-                marginTop={2}
-                onBlur={() => setFieldTouched('description')}
-                placeholder="Please write description"
-                label={'Post Description'}
-              />
-              <LocationSelector />
-              <InputTextView
-                value={values.price}
-                onChange={handleChange('price')}
-                error={touched.price ? errors.price : ''}
-                marginTop={2}
-                onBlur={() => setFieldTouched('price')}
-                placeholder="Price"
-                label={'Price'}
-                keyboardType="numeric"
-              />
-              <View pt={4} />
-              <ConditionTabs
-                onChange={setCondition}
-                selectedTab={selectedCondition}
-              />
-              <GeneralPicker
-                marginTop={2}
-                label="Select Category"
-                placeholder="Select Category"
-                id="category"
-                setValue={(e: Category) => {
-                  setFieldValue('category', e._id);
-                  setCategoryName(e.title);
-                  setSubCategories(e);
-                }}
-                value={selectedCategoryName}
-                data={categories}
-                error={errors.category}
-              />
-
-              {subCategories ? (
+        <ScrollView
+          contentContainerStyle={{paddingBottom: heightRatio(7)}}
+          style={styles.container}>
+          <GradientTopBarWithBackBtn isBack title="Create new Ad" />
+          <View pt={2} />
+          <ImageSelector
+            images={images}
+            onSelect={async () => {
+              const isPermissionOk: boolean =
+                await permissionRequester.galleryPermission();
+              if (isPermissionOk) {
+                onOpen(AppConstants.images_picker);
+              }
+            }}
+          />
+          <Formik
+            innerRef={formikRef}
+            initialValues={{
+              title: '',
+              description: '',
+              price: '',
+              category: '',
+              subCategory: '',
+            }}
+            onSubmit={values => {
+              logMe('On Formik Submit sell');
+              const obj: CreatePostType = {
+                title: values.title,
+                description: values.description,
+                price: parseInt(values.price),
+                condition: selectedCondition,
+                location: 'Lahore, Pakistan',
+                category: values.category,
+                subCategory: values.subCategory,
+                images: imgsForServer.filter(img => img !== null),
+              };
+              logMe(obj);
+              createNewAdToServer(obj);
+            }}
+            validationSchema={AddPostSchema}>
+            {({
+              handleChange,
+              setFieldValue,
+              errors,
+              values,
+              touched,
+              setFieldTouched,
+              handleSubmit,
+            }) => (
+              <>
+                <InputTextView
+                  value={values.title}
+                  onChange={handleChange('title')}
+                  error={touched.title ? errors.title : ''}
+                  marginTop={2}
+                  onBlur={() => setFieldTouched('title')}
+                  placeholder="Please write title"
+                  label={'Post Title'}
+                />
+                <InputTextView
+                  value={values.description}
+                  onChange={handleChange('description')}
+                  error={touched.description ? errors.description : ''}
+                  isTextView
+                  marginTop={2}
+                  onBlur={() => setFieldTouched('description')}
+                  placeholder="Please write description"
+                  label={'Post Description'}
+                />
+                <LocationSelector />
+                <InputTextView
+                  value={values.price}
+                  onChange={handleChange('price')}
+                  error={touched.price ? errors.price : ''}
+                  marginTop={2}
+                  onBlur={() => setFieldTouched('price')}
+                  placeholder="Price"
+                  label={'Price'}
+                  keyboardType="numeric"
+                />
+                <View pt={4} />
+                <ConditionTabs
+                  onChange={setCondition}
+                  selectedTab={selectedCondition}
+                />
                 <GeneralPicker
                   marginTop={2}
-                  placeholder="Select Sub Category"
-                  id="sub_category"
-                  setValue={(e: any) => {
-                    setFieldValue('subCategory', e.title);
-                    setNestedCategories(e);
+                  label="Select Category"
+                  placeholder="Select Category"
+                  id="category"
+                  setValue={(e: Category) => {
+                    setFieldValue('category', e._id);
+                    setCategoryName(e.title);
+                    setSubCategories(e);
                   }}
-                  value={values.subCategory}
-                  data={subCategories?.subCategories}
-                  error={errors.subCategory}
+                  value={selectedCategoryName}
+                  data={categories}
+                  error={errors.category}
                 />
-              ) : null}
-              <View style={{paddingTop: heightRatio(2)}} />
-              <ButtonComponent
-                isLoading={isLoading}
-                title="Submit"
-                onPress={handleSubmit}
-              />
-            </>
-          )}
-        </Formik>
-      </ScrollView>
-    </>
-  );
+
+                {subCategories ? (
+                  <GeneralPicker
+                    marginTop={2}
+                    placeholder="Select Sub Category"
+                    id="sub_category"
+                    setValue={(e: any) => {
+                      setFieldValue('subCategory', e.title);
+                      setNestedCategories(e);
+                    }}
+                    value={values.subCategory}
+                    data={subCategories?.subCategories}
+                    error={errors.subCategory}
+                  />
+                ) : null}
+                <View style={{paddingTop: heightRatio(2)}} />
+                <ButtonComponent
+                  isLoading={isLoading}
+                  title="Submit"
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
+        </ScrollView>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <GradientTopBarWithBackBtn isBack title="Create new Ad" />
+        <EmptyStateScreen text="Login to post new ad" />
+      </>
+    );
+  }
 };
 
 export default SellScreen;

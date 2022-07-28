@@ -13,7 +13,7 @@ export const getCurrentLocationObject = async () => {
       console.log('info', info);
       const lng = info.coords.longitude;
       const lat = info.coords.latitude;
-      Geocoder.init('AIzaSyC9p1rHfXFy65R_ajwWkrF6PWcsk9sfJNM'); // use a valid API key
+      Geocoder.init('AIzaSyA6Fln466j0tXOTKRhawztWHVNwegmQGBM'); // use a valid API key
       Geocoder.from(lat, lng)
         .then(json => {
           var addressComponent = json.results[0].formatted_address;

@@ -9,12 +9,19 @@ import {colors} from 'theme/colors';
 import {chatService} from 'services/chatService';
 import {ChatSession} from 'types/chat/Session';
 import {useIsFocused} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
+import EmptyStateScreen from 'components/molecules/emptyStateScreen';
 
 type Props = {};
 
 const ChatSessions = (props: Props) => {
   const focused = useIsFocused();
   const [sessions, setSessions] = useState<Array<ChatSession>>();
+
+  const user = useSelector((state: IAppState) => state.auth.user);
 
   function getChatSessions() {
     chatService
@@ -32,11 +39,17 @@ const ChatSessions = (props: Props) => {
   return (
     <View style={styles.container}>
       <GradientTopBarWithBackBtn title={'Chats'} isBack />
-      <FlatList
-        ItemSeparatorComponent={() => <View style={styles.separtor} />}
-        data={sessions}
-        renderItem={SingleChatSessionItem}
-      />
+      {!user.token ? (
+        <EmptyStateScreen text="Login to see your chat messages" />
+      ) : (
+        <>
+          <FlatList
+            ItemSeparatorComponent={() => <View style={styles.separtor} />}
+            data={sessions}
+            renderItem={SingleChatSessionItem}
+          />
+        </>
+      )}
     </View>
   );
 };
