@@ -1,7 +1,7 @@
 import GradientTopBarWithBackBtn from 'components/organisms/gradientTopBarWithTitleAndBack';
 import {AppConstants} from 'constants/appConstants';
 import {FlatList, Pressable, Text, View} from 'native-base';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';
 import {
   GooglePlaceData,
@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   addLocationInHistory,
   addPostLocation,
+  addSearchLocation,
   removeLocationFromHistory,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
@@ -21,12 +22,19 @@ import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {textRatio} from 'utils/functions/textRatio';
 import {Location} from 'types/Location';
+import {goBack} from 'navigations/navRef';
 
-type Props = {};
+type Props = {
+  route?: any;
+};
 
 const LocationChooser = (props: Props) => {
   const ref: any = useRef();
   const dispatch = useDispatch();
+  const {flag} = props.route?.params;
+  useEffect(() => {
+    console.log(flag);
+  }, [flag]);
   const locationHistory = useSelector(
     (state: IAppState) => state.app.locationHistory,
   );
@@ -61,7 +69,6 @@ const LocationChooser = (props: Props) => {
           <GooglePlacesAutocomplete
             textInputProps={{
               placeHolderTextColor: colors.gray[500],
-              value: addLocation?.title,
             }}
             numberOfLines={2}
             ref={ref as any}
@@ -123,7 +130,9 @@ const LocationChooser = (props: Props) => {
               );
             }}
             filterReverseGeocodingByTypes={['locality']}
-            placeholder={'Write your location'}
+            placeholder={
+              addLocation?.title ? addLocation?.title : 'Write your location'
+            }
             minLength={5}
             onFail={error => logMe(error)}
             fetchDetails={true}
@@ -135,9 +144,15 @@ const LocationChooser = (props: Props) => {
                 latitude: geometry.lat,
                 longitude: geometry.lng,
               };
+              if (flag == 'search') {
+                dispatch(addSearchLocation(obj));
+              } else {
+                dispatch(addPostLocation(obj));
+              }
               dispatch(addLocationInHistory(obj));
-              dispatch(addPostLocation(obj));
+
               logMe(obj);
+              goBack();
             }}
             query={{
               key: AppConstants.mapAPIKey,

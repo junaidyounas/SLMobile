@@ -1,10 +1,12 @@
 import {StyleSheet} from 'react-native';
 import React from 'react';
-import {Text, View} from 'native-base';
+import {Pressable, Text, View} from 'native-base';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {textRatio} from 'utils/functions/textRatio';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {colors} from 'theme/colors';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 
 type Props = {
   fontSize?: number;
@@ -16,7 +18,11 @@ const LocationWithIcon = (props: Props) => {
   const {fontSize, location, color} = props;
   const ifColor = color ? {color: color} : {};
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => {
+        navigate(screens.LOCATION_CHOOSER, {flag: 'search'});
+      }}
+      style={styles.container}>
       <Ionicons
         name="location"
         size={textRatio(15)}
@@ -31,7 +37,7 @@ const LocationWithIcon = (props: Props) => {
         ]}>
         {location}
       </Text>
-    </View>
+    </Pressable>
   );
 };
 

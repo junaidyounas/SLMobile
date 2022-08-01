@@ -5,7 +5,9 @@ import SinglePostItem from 'components/organisms/singlePostItem';
 import {FlatList, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {RefreshControl, StyleSheet, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
 import {postService} from 'services/postService';
+import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
@@ -21,6 +23,10 @@ const HomeScreen = (props: Props) => {
   const [refreshing, setRefreshing] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [selectedSubCat, setSelectedSubCat] = useState('');
+
+  const searchLocation = useSelector(
+    (state: IAppState) => state.app.searchLocation,
+  );
 
   const onRefresh = React.useCallback(() => {
     getAllPosts(1);
@@ -62,7 +68,12 @@ const HomeScreen = (props: Props) => {
       <View style={styles.locAndsearchContainer}>
         <TouchableOpacity>
           <Text style={styles.yourLocText}>Your Location</Text>
-          <LocationWithIcon location="Islamabad" fontSize={16} />
+          <LocationWithIcon
+            location={
+              searchLocation?.title ? searchLocation?.title : 'Set Location'
+            }
+            fontSize={16}
+          />
         </TouchableOpacity>
         <SearchBarWithMenuIcon
           setQuery={setSearch}
