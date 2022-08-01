@@ -28,7 +28,7 @@ const MyAdsSingleItem = (props: Props) => {
     title: item.title,
     price: item.price,
     image: `${AppConstants.serverUrl}${item.images[0]}`,
-    location: item.location,
+    location: item?.location?.title,
   };
   return (
     <TouchableOpacity

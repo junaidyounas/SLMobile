@@ -31,10 +31,7 @@ type Props = {
 const LocationChooser = (props: Props) => {
   const ref: any = useRef();
   const dispatch = useDispatch();
-  const {flag} = props.route?.params;
-  useEffect(() => {
-    console.log(flag);
-  }, [flag]);
+  const params = props?.route?.params;
   const locationHistory = useSelector(
     (state: IAppState) => state.app.locationHistory,
   );
@@ -144,7 +141,7 @@ const LocationChooser = (props: Props) => {
                 latitude: geometry.lat,
                 longitude: geometry.lng,
               };
-              if (flag == 'search') {
+              if (params?.flag && params?.flag == 'search') {
                 dispatch(addSearchLocation(obj));
               } else {
                 dispatch(addPostLocation(obj));

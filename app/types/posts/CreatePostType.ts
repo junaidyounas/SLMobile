@@ -1,9 +1,11 @@
+import {Location} from 'types/Location';
+
 export interface CreatePostType {
   title: string;
   description: string;
   price: number;
   condition: string;
-  location: string;
+  location: Location;
   category: any;
   subCategory: string;
   images: string[];

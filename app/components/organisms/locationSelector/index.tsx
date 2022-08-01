@@ -14,14 +14,18 @@ import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import {IAppState} from 'store/IAppState';
 import {useSelector} from 'react-redux';
+import {Location} from 'types/Location';
 const {
   PRIORITIES: {HIGH_ACCURACY},
   useLocationSettings,
 } = LocationEnabler;
 
-type Props = {};
+type Props = {
+  selectedLocation?: Location;
+};
 
 const LocationSelector = (props: Props) => {
+  const {selectedLocation} = props;
   const [enabled, requestResolution] = useLocationSettings(
     {
       priority: HIGH_ACCURACY, // default BALANCED_POWER_ACCURACY
@@ -56,7 +60,11 @@ const LocationSelector = (props: Props) => {
         }}
         style={styles.locationContainer}>
         <Text style={styles.selectedText}>
-          {addLocation?.title ? addLocation.title : 'Location'}
+          {addLocation?.title
+            ? selectedLocation?.title
+              ? selectedLocation?.title
+              : addLocation.title
+            : 'Location'}
         </Text>
       </Pressable>
     </View>

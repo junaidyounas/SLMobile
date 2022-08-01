@@ -31,6 +31,7 @@ import LocationSelector from 'components/organisms/locationSelector';
 import {useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import EmptyStateScreen from 'components/molecules/emptyStateScreen';
+import {goBack} from 'navigations/navRef';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -44,6 +45,10 @@ type Props = {};
 const SellScreen = (props: Props) => {
   const formikRef = useRef<any>();
   const user = useSelector((state: IAppState) => state.auth.user);
+
+  const addLocation = useSelector(
+    (state: IAppState) => state.app.addPostLocation,
+  );
 
   const [images, setImages] = useState<ImageDocumentBeforeUpload[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -89,12 +94,17 @@ const SellScreen = (props: Props) => {
       Alert.alert('Please select image again.');
       return;
     }
+    if (!addLocation.title) {
+      Alert.alert('Please select location');
+      return;
+    }
     setIsLoading(true);
     postService
       .createNewPost(obj)
       .then(res => {
         logMe(res);
         formikRef.current.resetForm();
+        goBack();
       })
       .catch(err => {
         logMe(err);
@@ -152,7 +162,7 @@ const SellScreen = (props: Props) => {
                 description: values.description,
                 price: parseInt(values.price),
                 condition: selectedCondition,
-                location: 'Lahore, Pakistan',
+                location: addLocation,
                 category: values.category,
                 subCategory: values.subCategory,
                 images: imgsForServer.filter(img => img !== null),

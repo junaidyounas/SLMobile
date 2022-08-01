@@ -5,6 +5,7 @@ import GeneralPicker from 'components/organisms/generalPicker';
 import GradientTopBarWithBackBtn from 'components/organisms/gradientTopBarWithTitleAndBack';
 import ImageSelector from 'components/organisms/imageSelector';
 import ImagesPicker from 'components/organisms/imagesPicker';
+import LocationSelector from 'components/organisms/locationSelector';
 import {AppConstants} from 'constants/appConstants';
 import {CONDITIONS} from 'enum/Conditions';
 import {Formik} from 'formik';
@@ -12,9 +13,11 @@ import {ScrollView, View} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 import {onOpen} from 'react-native-actions-sheet-picker';
+import {useSelector} from 'react-redux';
 import {categoryService} from 'services/categoryService';
 import {postService} from 'services/postService';
 import {uploadService} from 'services/uploadService';
+import {IAppState} from 'store/IAppState';
 import {Category} from 'types/Category';
 import {ImageDocumentBeforeUpload} from 'types/ImageDocumentBeforeUpload';
 import {CreatePostType} from 'types/posts/CreatePostType';
@@ -38,6 +41,9 @@ type Props = {
 const EditPostScreen = (props: Props) => {
   const formikRef = useRef<any>();
   const {itemId} = props.route?.params;
+  const addLocation = useSelector(
+    (state: IAppState) => state.app.addPostLocation,
+  );
 
   const [images, setImages] = useState<ImageDocumentBeforeUpload[] | string[]>(
     [],
@@ -100,9 +106,9 @@ const EditPostScreen = (props: Props) => {
       });
   }
 
-  // useEffect(() => {
-  //   uploadImages();
-  // }, [images]);
+  useEffect(() => {
+    formikRef.current.setFieldValue('location', addLocation);
+  }, [addLocation]);
 
   useEffect(() => {
     getAllCategories();
@@ -123,6 +129,7 @@ const EditPostScreen = (props: Props) => {
         formikRef.current.setFieldValue('description', res.description);
         formikRef.current.setFieldValue('price', res.price.toString());
         formikRef.current.setFieldValue('category', res.category._id);
+        formikRef.current.setFieldValue('location', res.location);
         setCategoryName(res.category.title);
         const subCategories = categories.find(
           item => item._id === res.category._id,
@@ -175,6 +182,7 @@ const EditPostScreen = (props: Props) => {
             price: '',
             category: '',
             subCategory: '',
+            location: {title: '', latitude: 0, longitude: 0},
           }}
           onSubmit={values => {
             logMe('On Formik Submit sell');
@@ -183,7 +191,7 @@ const EditPostScreen = (props: Props) => {
               description: values.description,
               price: parseInt(values.price),
               condition: selectedCondition,
-              location: 'Lahore, Pakistan',
+              location: values.location,
               category: values.category,
               subCategory: values.subCategory,
               images: imgsForServer.filter(img => img !== null),
@@ -221,6 +229,7 @@ const EditPostScreen = (props: Props) => {
                 placeholder="Please write description"
                 label={'Post Description'}
               />
+              <LocationSelector selectedLocation={values.location} />
               <InputTextView
                 value={values.price}
                 onChange={handleChange('price')}
