@@ -10,6 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {
   addLocationInHistory,
+  addPostLocation,
   removeLocationFromHistory,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
@@ -28,6 +29,9 @@ const LocationChooser = (props: Props) => {
   const dispatch = useDispatch();
   const locationHistory = useSelector(
     (state: IAppState) => state.app.locationHistory,
+  );
+  const addLocation = useSelector(
+    (state: IAppState) => state.app.addPostLocation,
   );
 
   const locationHistoryRenderItem = ({
@@ -57,6 +61,7 @@ const LocationChooser = (props: Props) => {
           <GooglePlacesAutocomplete
             textInputProps={{
               placeHolderTextColor: colors.gray[500],
+              value: addLocation?.title,
             }}
             numberOfLines={2}
             ref={ref as any}
@@ -95,14 +100,6 @@ const LocationChooser = (props: Props) => {
                 height: heightRatio(70),
                 position: 'relative',
               },
-              // row: {
-              //   backgroundColor: colors.white,
-              //   height: 44,
-              //   flexDirection: 'row',
-              //   fontFamily: fonts.poppins_regular,
-              //   zIndex: 2000,
-              //   position: 'relative',
-              // },
               separator: {
                 height: 0.5,
                 backgroundColor: colors.gray[500],
@@ -139,6 +136,7 @@ const LocationChooser = (props: Props) => {
                 longitude: geometry.lng,
               };
               dispatch(addLocationInHistory(obj));
+              dispatch(addPostLocation(obj));
               logMe(obj);
             }}
             query={{

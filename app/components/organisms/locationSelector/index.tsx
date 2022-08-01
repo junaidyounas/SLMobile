@@ -12,6 +12,8 @@ import {requestLocationPermission} from 'utils/functions/permissionRequester';
 import {getCurrentLocationObject} from 'utils/functions/getLocObj';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
+import {IAppState} from 'store/IAppState';
+import {useSelector} from 'react-redux';
 const {
   PRIORITIES: {HIGH_ACCURACY},
   useLocationSettings,
@@ -28,6 +30,11 @@ const LocationSelector = (props: Props) => {
     },
     false /* optional: default undefined */,
   );
+
+  const addLocation = useSelector(
+    (state: IAppState) => state.app.addPostLocation,
+  );
+
   const [isLoading, setIsLoading] = useState(false);
 
   const getCurrentLocation = async () => {
@@ -48,7 +55,9 @@ const LocationSelector = (props: Props) => {
           navigate(screens.LOCATION_CHOOSER);
         }}
         style={styles.locationContainer}>
-        <Text style={styles.selectedText}>Location</Text>
+        <Text style={styles.selectedText}>
+          {addLocation?.title ? addLocation.title : 'Location'}
+        </Text>
       </Pressable>
     </View>
   );

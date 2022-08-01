@@ -12,10 +12,20 @@ export const appSlice = createSlice({
     removeLocationFromHistory: (state, action: PayloadAction<number>) => {
       state.locationHistory.splice(action.payload, 1);
     },
+    addPostLocation: (state, action: PayloadAction<Location>) => {
+      state.addPostLocation = action.payload;
+    },
+    addSearchLocation: (state, action: PayloadAction<Location>) => {
+      state.searchLocation = action.payload;
+    },
   },
 });
 
-export const {addLocationInHistory, removeLocationFromHistory} =
-  appSlice.actions;
+export const {
+  addLocationInHistory,
+  removeLocationFromHistory,
+  addPostLocation,
+  addSearchLocation,
+} = appSlice.actions;
 
 export default appSlice.reducer;
