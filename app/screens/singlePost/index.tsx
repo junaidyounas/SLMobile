@@ -68,7 +68,7 @@ const SinglePostScreen = (props: Props) => {
         <View style={styles.content}>
           <LocationWithIcon
             color={colors.gray[100]}
-            location={post.location}
+            location={post.location?.title}
             fontSize={16}
           />
           <Text style={styles.detailsText}>Description</Text>
