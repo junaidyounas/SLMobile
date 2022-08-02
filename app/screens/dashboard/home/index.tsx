@@ -40,7 +40,13 @@ const HomeScreen = (props: Props) => {
   function getAllPosts(page: number = 1, search: string = '') {
     logMe(page);
     postService
-      .showAllPosts(page, search, selectedCategoryId, selectedSubCat)
+      .showAllPosts(
+        page,
+        search,
+        selectedCategoryId,
+        selectedSubCat,
+        searchLocation,
+      )
       .then(res => {
         if (res.length > 0 && page > 1) {
           const data: any = [...posts, ...res];

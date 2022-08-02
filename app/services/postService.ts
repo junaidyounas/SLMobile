@@ -1,3 +1,4 @@
+import {Location} from 'types/Location';
 import {CreatePostType} from 'types/posts/CreatePostType';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
@@ -22,6 +23,7 @@ const showAllPosts = (
   query?: string,
   category?: string,
   subCategory?: string,
+  location?: Location,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -35,6 +37,10 @@ const showAllPosts = (
   }
   if (subCategory) {
     url.searchParams.append('subCategory', subCategory);
+  }
+  if (location?.latitude && location?.longitude) {
+    url.searchParams.append('latitude', location?.latitude.toString());
+    url.searchParams.append('longitude', location?.longitude.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
