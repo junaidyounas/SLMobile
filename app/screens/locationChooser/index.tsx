@@ -39,6 +39,10 @@ const LocationChooser = (props: Props) => {
     (state: IAppState) => state.app.addPostLocation,
   );
 
+  const searchLocation = useSelector(
+    (state: IAppState) => state.app.searchLocation,
+  );
+
   const locationHistoryRenderItem = ({
     item,
     index,
@@ -48,7 +52,17 @@ const LocationChooser = (props: Props) => {
   }) => {
     return (
       <View style={styles.locationHistoryItem}>
-        <Text style={styles.locationHistoryText}>{item.title}</Text>
+        <Pressable
+          onPress={() => {
+            if (params?.flag && params?.flag == 'search') {
+              dispatch(addSearchLocation(item));
+            } else {
+              dispatch(addPostLocation(item));
+            }
+            goBack();
+          }}>
+          <Text style={styles.locationHistoryText}>{item.title}</Text>
+        </Pressable>
         <Pressable
           onPress={() => {
             dispatch(removeLocationFromHistory(index));
@@ -128,7 +142,11 @@ const LocationChooser = (props: Props) => {
             }}
             filterReverseGeocodingByTypes={['locality']}
             placeholder={
-              addLocation?.title ? addLocation?.title : 'Write your location'
+              addLocation?.title
+                ? params?.flag
+                  ? searchLocation?.title
+                  : addLocation?.title
+                : 'Write your location'
             }
             minLength={5}
             onFail={error => logMe(error)}
@@ -138,8 +156,8 @@ const LocationChooser = (props: Props) => {
               const locationName = data.description;
               const obj: any = {
                 title: locationName,
-                latitude: geometry.lat,
-                longitude: geometry.lng,
+                coordinates: [geometry.lng, geometry.lat],
+                type: 'Point',
               };
               if (params?.flag && params?.flag == 'search') {
                 dispatch(addSearchLocation(obj));

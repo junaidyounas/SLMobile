@@ -38,9 +38,9 @@ const showAllPosts = (
   if (subCategory) {
     url.searchParams.append('subCategory', subCategory);
   }
-  if (location?.latitude && location?.longitude) {
-    url.searchParams.append('latitude', location?.latitude.toString());
-    url.searchParams.append('longitude', location?.longitude.toString());
+  if (location?.coordinates) {
+    url.searchParams.append('latitude', location?.coordinates[1].toString());
+    url.searchParams.append('longitude', location?.coordinates[0].toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
