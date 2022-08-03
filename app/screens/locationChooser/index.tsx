@@ -142,11 +142,9 @@ const LocationChooser = (props: Props) => {
             }}
             filterReverseGeocodingByTypes={['locality']}
             placeholder={
-              addLocation?.title
-                ? params?.flag
-                  ? searchLocation?.title
-                  : addLocation?.title
-                : 'Write your location'
+              params?.flag == 'search'
+                ? searchLocation?.title
+                : addLocation?.title
             }
             minLength={5}
             onFail={error => logMe(error)}

@@ -1,11 +1,15 @@
 import MultiSliderComponent from 'components/atoms/multiSlider';
+import ButtonComponent from 'components/base/button';
 import PriceRangeChooser from 'components/molecules/priceRanger';
 import CategorySelector from 'components/organisms/categorySelector';
 import LocationSelector from 'components/organisms/locationSelector';
-import {Text, View} from 'native-base';
+import {Box, Text, View} from 'native-base';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {fonts} from 'theme/fonts';
+import {globalstyles} from 'theme/globalStyles';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {textRatio} from 'utils/functions/textRatio';
 
@@ -42,6 +46,13 @@ const FilterScreen = (props: Props) => {
           minPrice={minPrice}
         />
       </View>
+      <View style={styles.btnContainer}>
+        <ButtonComponent
+          width={90}
+          title={'Done'}
+          onPress={() => navigate(screens.HOME)}
+        />
+      </View>
     </View>
   );
 };
@@ -50,6 +61,7 @@ export default FilterScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingVertical: heightRatio(2),
   },
   innerContainer: {
@@ -59,5 +71,12 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.poppins_medium,
     fontSize: textRatio(18),
+  },
+  btnContainer: {
+    position: 'absolute',
+    bottom: 15,
+    width: widthRatio(100),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

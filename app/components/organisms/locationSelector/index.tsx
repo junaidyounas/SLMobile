@@ -41,6 +41,10 @@ const LocationSelector = (props: Props) => {
     (state: IAppState) => state.app.addPostLocation,
   );
 
+  const searchLocation = useSelector(
+    (state: IAppState) => state.app.searchLocation,
+  );
+
   const [isLoading, setIsLoading] = useState(false);
 
   const getCurrentLocation = async () => {
@@ -58,15 +62,11 @@ const LocationSelector = (props: Props) => {
       {!isLabel ? null : <LabelText label={'Location'} />}
       <Pressable
         onPress={() => {
-          navigate(screens.LOCATION_CHOOSER, {flag});
+          navigate(screens.LOCATION_CHOOSER, {flag: flag});
         }}
         style={styles.locationContainer}>
         <Text numberOfLines={1} style={styles.selectedText}>
-          {addLocation?.title
-            ? selectedLocation?.title
-              ? selectedLocation?.title
-              : addLocation.title
-            : 'Location'}
+          {flag == 'search' ? searchLocation?.title : addLocation?.title}
         </Text>
       </Pressable>
     </View>
