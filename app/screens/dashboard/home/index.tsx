@@ -27,6 +27,9 @@ const HomeScreen = (props: Props) => {
   const searchLocation = useSelector(
     (state: IAppState) => state.app.searchLocation,
   );
+  const searchCategory = useSelector(
+    (state: IAppState) => state.app.searchCategory,
+  );
 
   const onRefresh = React.useCallback(() => {
     getAllPosts(1);
@@ -43,8 +46,8 @@ const HomeScreen = (props: Props) => {
       .showAllPosts(
         page,
         search,
-        selectedCategoryId,
-        selectedSubCat,
+        searchCategory?.id,
+        searchCategory?.subCategory,
         searchLocation,
       )
       .then(res => {
@@ -67,7 +70,7 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     setPage(1);
     getAllPosts(1);
-  }, [selectedCategoryId, selectedSubCat, searchLocation]);
+  }, [searchCategory, searchLocation]);
 
   return (
     <>

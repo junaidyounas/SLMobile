@@ -4,12 +4,17 @@ export const AppState: AppStateType = {
   locationHistory: [],
   addPostLocation: {
     title: '',
-    longitude: 0,
-    latitude: 0,
+    type: '',
+    coordinates: [],
   },
   searchLocation: {
     title: '',
-    longitude: 0,
-    latitude: 0,
+    type: '',
+    coordinates: [],
+  },
+  searchCategory: {
+    title: '',
+    id: '',
+    subCategory: '',
   },
 };

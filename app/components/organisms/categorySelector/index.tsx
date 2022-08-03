@@ -10,19 +10,21 @@ import {Category} from 'types/Category';
 import {onClose, onOpen, Picker} from 'react-native-actions-sheet-picker';
 import {logMe} from 'utils/functions/logBinder';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-type Props = {
-  category: string;
-  setCategory: any;
-  selectedSubCat: any;
-  setSelectedSubCat: any;
-};
+import {useDispatch, useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
+import {addSearchCategory} from 'store/appState/appSlice';
+type Props = {};
 
 const CategorySelector = (props: Props) => {
-  const {setCategory, selectedSubCat, setSelectedSubCat, category} = props;
   const [categoryTitle, setCatTitle] = useState('');
   const [subCategories, setSubCategories] = useState<Category>();
   const [categories, setCategories] = useState<Category[]>();
   const focus = useIsFocused();
+
+  const searchCategory = useSelector(
+    (state: IAppState) => state.app.searchCategory,
+  );
+  const dispatch = useDispatch();
 
   // get all category from server
   const getAllCategories = () => {
@@ -47,13 +49,15 @@ const CategorySelector = (props: Props) => {
           style={[styles.btn, {marginRight: widthRatio(1)}]}
           bg={globalstyles.btnGradient}>
           <Text style={styles.text} numberOfLines={1}>
-            {categoryTitle ? categoryTitle : 'Search by category'}
+            {searchCategory?.title
+              ? searchCategory?.title
+              : 'Search by category'}
           </Text>
         </Box>
       </TouchableWithoutFeedback>
 
       {/* If sub category not exists then disable sub category button  */}
-      {subCategories?.subCategories ? (
+      {searchCategory?.subCategory ? (
         <TouchableWithoutFeedback
           onPress={() => {
             onOpen('homeResultsSubCategory');
@@ -62,19 +66,18 @@ const CategorySelector = (props: Props) => {
             style={[styles.btn, {marginLeft: widthRatio(1)}]}
             bg={globalstyles.btnGradient}>
             <Text style={styles.text} numberOfLines={1}>
-              {selectedSubCat ? selectedSubCat : 'Sub Category'}
+              {searchCategory?.subCategory
+                ? searchCategory?.subCategory
+                : 'Sub Category'}
             </Text>
           </Box>
         </TouchableWithoutFeedback>
       ) : null}
-      {category ? (
+      {searchCategory?.id ? (
         <Pressable
           style={{marginLeft: widthRatio(2)}}
           onPress={() => {
-            setCategory('');
-            setCatTitle('');
-            setSubCategories([] as any);
-            setSelectedSubCat('');
+            dispatch(addSearchCategory({} as any));
           }}>
           <AntDesign name="closecircleo" size={widthRatio(7)} />
         </Pressable>
@@ -89,8 +92,10 @@ const CategorySelector = (props: Props) => {
             <Pressable
               style={{paddingVertical: heightRatio(3)}}
               onPress={() => {
-                setCategory(item._id);
-                setCatTitle(item.title);
+                var obj: any = {};
+                obj.id = item._id;
+                obj.title = item.title;
+                dispatch(addSearchCategory(obj));
                 setSubCategories(item);
                 onClose('homeResultsCategory');
               }}>
@@ -110,7 +115,12 @@ const CategorySelector = (props: Props) => {
             <Pressable
               style={{paddingVertical: heightRatio(3)}}
               onPress={() => {
-                setSelectedSubCat(item.title);
+                let obj: any = {
+                  id: searchCategory.id,
+                  title: searchCategory.title,
+                };
+                Object.assign(obj, {subCategory: item.title});
+                dispatch(addSearchCategory(obj));
                 onClose('homeResultsSubCategory');
               }}>
               <Text>{item.title}</Text>

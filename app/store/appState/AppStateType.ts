@@ -4,4 +4,5 @@ export interface AppStateType {
   locationHistory: Location[];
   addPostLocation: Location;
   searchLocation: Location;
+  searchCategory: {title: string; id: string; subCategory: string};
 }

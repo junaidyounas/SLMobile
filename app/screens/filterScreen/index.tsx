@@ -30,12 +30,7 @@ const FilterScreen = (props: Props) => {
         <Text style={[styles.label, {paddingBottom: heightRatio(0.5)}]}>
           Set Category
         </Text>
-        <CategorySelector
-          category={selectedCategoryId}
-          setCategory={setSelectedCategoryId}
-          selectedSubCat={selectedSubCat}
-          setSelectedSubCat={setSelectedSubCat}
-        />
+        <CategorySelector />
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
           Price Range
         </Text>

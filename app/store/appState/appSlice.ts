@@ -18,6 +18,12 @@ export const appSlice = createSlice({
     addSearchLocation: (state, action: PayloadAction<Location>) => {
       state.searchLocation = action.payload;
     },
+    addSearchCategory: (
+      state,
+      action: PayloadAction<{title: string; id: string; subCategory: string}>,
+    ) => {
+      state.searchCategory = action.payload;
+    },
   },
 });
 
@@ -26,6 +32,7 @@ export const {
   removeLocationFromHistory,
   addPostLocation,
   addSearchLocation,
+  addSearchCategory,
 } = appSlice.actions;
 
 export default appSlice.reducer;
