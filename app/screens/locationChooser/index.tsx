@@ -76,7 +76,7 @@ const LocationChooser = (props: Props) => {
     <View style={styles.container}>
       <GradientTopBarWithBackBtn title={'My Ads'} isBack />
       <View style={styles.inputView}>
-        <View flexDirection="row" alignItems="center" zIndex="2000">
+        <View pr={2} flexDirection="row" alignItems="center" zIndex="2000">
           <GooglePlacesAutocomplete
             textInputProps={{
               placeHolderTextColor: colors.gray[500],
@@ -175,6 +175,23 @@ const LocationChooser = (props: Props) => {
               components: 'country:pk',
             }}
           />
+          <Pressable
+            pl={2}
+            onPress={() => {
+              const obj: any = {
+                title: '',
+                coordinates: null,
+                type: '',
+              };
+              if (params?.flag && params?.flag == 'search') {
+                dispatch(addSearchLocation(obj));
+              } else {
+                dispatch(addPostLocation(obj));
+              }
+              goBack();
+            }}>
+            <Entypo name="circle-with-cross" size={textRatio(30)} />
+          </Pressable>
         </View>
 
         {/* location history array */}
