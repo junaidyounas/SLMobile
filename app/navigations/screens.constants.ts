@@ -22,4 +22,7 @@ export const screens = {
 
   // Location
   LOCATION_CHOOSER: 'LocationChooser',
+
+  // Filter
+  FILTER_SCREEN: 'FilterScreen',
 };

@@ -26,7 +26,7 @@ export default SearchBarWithMenuIcon;
 
 const styles = StyleSheet.create({
   container: {
-    padding: widthRatio(1),
+    paddingVertical: widthRatio(1),
     backgroundColor: colors.primary[100],
     flexDirection: 'row',
     alignItems: 'center',

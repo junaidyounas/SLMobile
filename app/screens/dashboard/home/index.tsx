@@ -72,7 +72,7 @@ const HomeScreen = (props: Props) => {
   return (
     <>
       <View style={styles.locAndsearchContainer}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={styles.yourLocText}>Your Location</Text>
           <LocationWithIcon
             location={
@@ -80,19 +80,19 @@ const HomeScreen = (props: Props) => {
             }
             fontSize={16}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <SearchBarWithMenuIcon
           setQuery={setSearch}
           onSearchIconPress={() => {
             getAllPosts(1, search);
           }}
         />
-        <CategorySelector
+        {/* <CategorySelector
           category={selectedCategoryId}
           setCategory={setSelectedCategoryId}
           selectedSubCat={selectedSubCat}
           setSelectedSubCat={setSelectedSubCat}
-        />
+        /> */}
       </View>
       <View style={styles.container}>
         <View pt={2} />

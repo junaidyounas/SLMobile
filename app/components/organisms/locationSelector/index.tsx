@@ -22,10 +22,12 @@ const {
 
 type Props = {
   selectedLocation?: Location;
+  isLabel?: boolean;
+  flag?: string;
 };
 
 const LocationSelector = (props: Props) => {
-  const {selectedLocation} = props;
+  const {selectedLocation, isLabel, flag} = props;
   const [enabled, requestResolution] = useLocationSettings(
     {
       priority: HIGH_ACCURACY, // default BALANCED_POWER_ACCURACY
@@ -53,13 +55,13 @@ const LocationSelector = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <LabelText label={'Location'} />
+      {!isLabel ? null : <LabelText label={'Location'} />}
       <Pressable
         onPress={() => {
-          navigate(screens.LOCATION_CHOOSER);
+          navigate(screens.LOCATION_CHOOSER, {flag});
         }}
         style={styles.locationContainer}>
-        <Text style={styles.selectedText}>
+        <Text numberOfLines={1} style={styles.selectedText}>
           {addLocation?.title
             ? selectedLocation?.title
               ? selectedLocation?.title
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
   container: {
     width: widthRatio(100),
     paddingHorizontal: widthRatio(3),
-    marginTop: heightRatio(2),
   },
   locationContainer: {
     backgroundColor: colors.gray[200],
