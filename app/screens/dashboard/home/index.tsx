@@ -67,7 +67,7 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     setPage(1);
     getAllPosts(1);
-  }, [selectedCategoryId, selectedSubCat]);
+  }, [selectedCategoryId, selectedSubCat, searchLocation]);
 
   return (
     <>
