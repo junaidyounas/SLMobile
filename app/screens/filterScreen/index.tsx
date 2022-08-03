@@ -1,17 +1,21 @@
-import {StyleSheet} from 'react-native';
-import React, {useState} from 'react';
-import {Text, View} from 'native-base';
-import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
-import {fonts} from 'theme/fonts';
-import {textRatio} from 'utils/functions/textRatio';
-import LocationSelector from 'components/organisms/locationSelector';
+import MultiSliderComponent from 'components/atoms/multiSlider';
+import PriceRangeChooser from 'components/molecules/priceRanger';
 import CategorySelector from 'components/organisms/categorySelector';
+import LocationSelector from 'components/organisms/locationSelector';
+import {Text, View} from 'native-base';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
+import {fonts} from 'theme/fonts';
+import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
+import {textRatio} from 'utils/functions/textRatio';
 
 type Props = {};
 
 const FilterScreen = (props: Props) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [selectedSubCat, setSelectedSubCat] = useState('');
+  const [minPrice, setMinPrice] = useState(500);
+  const [maxPrice, setMaxPrice] = useState(100000);
   return (
     <View style={styles.container}>
       <Text style={[styles.label, {paddingHorizontal: widthRatio(3)}]}>
@@ -27,6 +31,15 @@ const FilterScreen = (props: Props) => {
           setCategory={setSelectedCategoryId}
           selectedSubCat={selectedSubCat}
           setSelectedSubCat={setSelectedSubCat}
+        />
+        <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
+          Price Range
+        </Text>
+        <PriceRangeChooser
+          setMaxPrice={setMaxPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          minPrice={minPrice}
         />
       </View>
     </View>
