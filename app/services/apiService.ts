@@ -1,4 +1,5 @@
 import {create} from 'apisauce';
+import { AppConstants } from 'constants/appConstants';
 import {store} from 'store/store';
 import {logMe} from 'utils/functions/logBinder';
 
@@ -8,7 +9,7 @@ async function getValue() {
 }
 // define the api
 export const api = create({
-  baseURL: 'http://192.168.1.251:3000',
+  baseURL: `${AppConstants.serverUrl}`,
   headers: {
     'Cache-Control': 'no-cache',
     'Content-Type': 'application/json',
