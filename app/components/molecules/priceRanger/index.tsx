@@ -1,8 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {Input} from 'native-base';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {addGTPrice, addLTPrice} from 'store/appState/appSlice';
+import {IAppState} from 'store/IAppState';
 import {colors} from 'theme/colors';
+import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 
 type Props = {
   setMaxPrice: any;
@@ -12,7 +15,9 @@ type Props = {
 };
 
 const PriceRangeChooser = (props: Props) => {
-  const {maxPrice, minPrice, setMaxPrice, setMinPrice} = props;
+  const {setMaxPrice, setMinPrice, minPrice, maxPrice} = props;
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -24,11 +29,9 @@ const PriceRangeChooser = (props: Props) => {
           borderWidth={0}
           textDecorationLine={'none'}
           onChangeText={(value: string) => {
-            if (Number(value) > 500) {
-              setMinPrice(Number(value));
-            }
+            setMinPrice(Number(value));
           }}
-          value={minPrice.toString()}
+          value={minPrice ? minPrice?.toString() : undefined}
         />
         <View style={{width: widthRatio(1)}} />
         <Input
@@ -43,7 +46,7 @@ const PriceRangeChooser = (props: Props) => {
               setMaxPrice(Number(value));
             }
           }}
-          value={maxPrice.toString()}
+          value={maxPrice ? maxPrice?.toString() : undefined}
         />
       </View>
     </View>

@@ -24,6 +24,8 @@ const showAllPosts = (
   category?: string,
   subCategory?: string,
   location?: Location,
+  pricegt?: number,
+  pricelt?: number,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -41,6 +43,12 @@ const showAllPosts = (
   if (location?.coordinates) {
     url.searchParams.append('longitude', location?.coordinates[0]?.toString());
     url.searchParams.append('latitude', location?.coordinates[1]?.toString());
+  }
+  if (pricegt) {
+    url.searchParams.append('pricegt', pricegt.toString());
+  }
+  if (pricelt) {
+    url.searchParams.append('pricelt', pricelt.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {

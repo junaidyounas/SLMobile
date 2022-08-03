@@ -57,7 +57,7 @@ const CategorySelector = (props: Props) => {
       </TouchableWithoutFeedback>
 
       {/* If sub category not exists then disable sub category button  */}
-      {searchCategory?.subCategory ? (
+      {searchCategory?.title ? (
         <TouchableWithoutFeedback
           onPress={() => {
             onOpen('homeResultsSubCategory');
@@ -97,6 +97,7 @@ const CategorySelector = (props: Props) => {
                 obj.title = item.title;
                 dispatch(addSearchCategory(obj));
                 setSubCategories(item);
+                console.log(item);
                 onClose('homeResultsCategory');
               }}>
               <Text>{item.title}</Text>

@@ -17,4 +17,6 @@ export const AppState: AppStateType = {
     id: '',
     subCategory: '',
   },
+  pricegt: 0,
+  pricelt: 999999999,
 };

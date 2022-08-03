@@ -1,25 +1,29 @@
-import MultiSliderComponent from 'components/atoms/multiSlider';
 import ButtonComponent from 'components/base/button';
 import PriceRangeChooser from 'components/molecules/priceRanger';
 import CategorySelector from 'components/organisms/categorySelector';
 import LocationSelector from 'components/organisms/locationSelector';
-import {Box, Text, View} from 'native-base';
+import {Text, View} from 'native-base';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
-import React, {useState} from 'react';
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {addGTPrice, addLTPrice} from 'store/appState/appSlice';
+import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
-import {globalstyles} from 'theme/globalStyles';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {textRatio} from 'utils/functions/textRatio';
 
 type Props = {};
 
 const FilterScreen = (props: Props) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [selectedSubCat, setSelectedSubCat] = useState('');
-  const [minPrice, setMinPrice] = useState(500);
-  const [maxPrice, setMaxPrice] = useState(100000);
+  const dispatch = useDispatch();
+
+  const pricegt = useSelector((state: IAppState) => state.app.pricegt);
+  const pricelt = useSelector((state: IAppState) => state.app.pricelt);
+
+  const [minPrice, setMinPrice] = useState(pricegt);
+  const [maxPrice, setMaxPrice] = useState(pricelt);
   return (
     <View style={styles.container}>
       <Text style={[styles.label, {paddingHorizontal: widthRatio(3)}]}>
@@ -45,7 +49,11 @@ const FilterScreen = (props: Props) => {
         <ButtonComponent
           width={90}
           title={'Done'}
-          onPress={() => navigate(screens.HOME)}
+          onPress={() => {
+            dispatch(addGTPrice(Number(minPrice)));
+            dispatch(addLTPrice(Number(maxPrice)));
+            navigate(screens.HOME);
+          }}
         />
       </View>
     </View>
