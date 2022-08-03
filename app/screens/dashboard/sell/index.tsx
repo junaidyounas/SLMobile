@@ -200,7 +200,8 @@ const SellScreen = (props: Props) => {
                   placeholder="Please write description"
                   label={'Post Description'}
                 />
-                <LocationSelector />
+                <View pb={2} />
+                <LocationSelector isLabel={true} />
                 <InputTextView
                   value={values.price}
                   onChange={handleChange('price')}
