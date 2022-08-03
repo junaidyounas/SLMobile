@@ -16,8 +16,8 @@ const SearchBarWithMenuIcon = (props: Props) => {
   return (
     <View style={styles.container}>
       <SearchBar onIconPress={onSearchIconPress} setQuery={setQuery} />
-      {/* <View pl={2} /> */}
-      {/* <MenuIcon /> */}
+      <View pl={2} />
+      <MenuIcon />
     </View>
   );
 };
