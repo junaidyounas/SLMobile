@@ -259,6 +259,7 @@ const SellScreen = (props: Props) => {
 
                 {values.subCategory == 'Mobile Phones' ? (
                   <BrandChooser
+                    marginHorizontal={1.5}
                     id={AppConstants.pickerIds.mobileBrand}
                     marginTop={2}
                     data={MobileBrands}

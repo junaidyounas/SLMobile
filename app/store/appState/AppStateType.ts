@@ -5,6 +5,7 @@ export interface AppStateType {
   addPostLocation: Location;
   searchLocation: Location;
   searchCategory: {title: string; id: string; subCategory: string};
-  pricegt: number;
-  pricelt: number;
+  pricegt: number | undefined;
+  pricelt: number | undefined;
+  searchBrand: string;
 }

@@ -16,16 +16,29 @@ type Props = {
   setValue: any;
   value: string;
   error?: string;
+  marginHorizontal?: number;
 };
 
 const BrandChooser = (props: Props) => {
-  const {label, marginTop, placeholder, id, data, setValue, value, error} =
-    props;
+  const {
+    label,
+    marginTop,
+    placeholder,
+    id,
+    data,
+    setValue,
+    value,
+    error,
+    marginHorizontal,
+  } = props;
   const [s, setSelected] = useState('');
 
   let otherStyles = [];
   if (marginTop) {
     otherStyles.push({marginTop: heightRatio(marginTop)});
+  }
+  if (marginHorizontal) {
+    otherStyles.push({marginHorizontal: heightRatio(marginHorizontal)});
   }
   return (
     <View style={[styles.parent, otherStyles]}>
@@ -59,9 +72,7 @@ const BrandChooser = (props: Props) => {
 export default BrandChooser;
 
 const styles = StyleSheet.create({
-  parent: {
-    marginHorizontal: widthRatio(3),
-  },
+  parent: {},
   container: {
     backgroundColor: colors.gray[200],
     height: heightRatio(6.5),

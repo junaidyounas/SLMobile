@@ -1,14 +1,17 @@
 import ButtonComponent from 'components/base/button';
+import BrandChooser from 'components/molecules/brandChooser';
 import PriceRangeChooser from 'components/molecules/priceRanger';
 import CategorySelector from 'components/organisms/categorySelector';
 import LocationSelector from 'components/organisms/locationSelector';
+import {AppConstants} from 'constants/appConstants';
+import {MobileBrands} from 'data/mobileBrands';
 import {Text, View} from 'native-base';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addGTPrice, addLTPrice} from 'store/appState/appSlice';
+import {addGTPrice, addLTPrice, addSearchBrand} from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
@@ -21,6 +24,11 @@ const FilterScreen = (props: Props) => {
 
   const pricegt = useSelector((state: IAppState) => state.app.pricegt);
   const pricelt = useSelector((state: IAppState) => state.app.pricelt);
+  const searchCategory = useSelector(
+    (state: IAppState) => state.app.searchCategory,
+  );
+
+  const searchBrand = useSelector((state: IAppState) => state.app.searchBrand);
 
   const [minPrice, setMinPrice] = useState(pricegt);
   const [maxPrice, setMaxPrice] = useState(pricelt);
@@ -35,14 +43,28 @@ const FilterScreen = (props: Props) => {
           Set Category
         </Text>
         <CategorySelector />
+        {searchCategory.subCategory == 'Mobile Phones' ? (
+          <BrandChooser
+            marginHorizontal={0}
+            id={AppConstants.pickerIds.mobileBrand}
+            marginTop={2}
+            data={MobileBrands}
+            placeholder="Select Brand"
+            setValue={(e: any) => {
+              // setFieldValue('brand', e.title);
+              dispatch(addSearchBrand(e.title));
+            }}
+            value={searchBrand}
+          />
+        ) : null}
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
           Price Range
         </Text>
         <PriceRangeChooser
           setMaxPrice={setMaxPrice}
           setMinPrice={setMinPrice}
-          maxPrice={maxPrice}
-          minPrice={minPrice}
+          maxPrice={maxPrice as any}
+          minPrice={minPrice as any}
         />
       </View>
       <View style={styles.btnContainer}>

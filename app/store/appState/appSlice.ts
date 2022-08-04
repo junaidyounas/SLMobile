@@ -30,6 +30,9 @@ export const appSlice = createSlice({
     addLTPrice: (state, action: PayloadAction<number>) => {
       state.pricelt = action.payload;
     },
+    addSearchBrand: (state, action: PayloadAction<string>) => {
+      state.searchBrand = action.payload;
+    },
   },
 });
 
@@ -41,6 +44,7 @@ export const {
   addSearchCategory,
   addGTPrice,
   addLTPrice,
+  addSearchBrand,
 } = appSlice.actions;
 
 export default appSlice.reducer;
