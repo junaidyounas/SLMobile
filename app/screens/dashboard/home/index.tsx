@@ -43,7 +43,7 @@ const HomeScreen = (props: Props) => {
     }, 2000);
   }, []);
 
-  function getAllPosts(page: number = 1, search: string = '') {
+  function getAllPosts(page: number = 1) {
     logMe(page);
     postService
       .showAllPosts(
@@ -92,7 +92,7 @@ const HomeScreen = (props: Props) => {
         <SearchBarWithMenuIcon
           setQuery={setSearch}
           onSearchIconPress={() => {
-            getAllPosts(1, search);
+            getAllPosts(1);
           }}
         />
         {/* <CategorySelector
@@ -116,7 +116,7 @@ const HomeScreen = (props: Props) => {
           }
           onEndReachedThreshold={0.4}
           onEndReached={() => {
-            setPage(currentPage + 1);
+            getAllPosts(currentPage + 1);
           }}
         />
       </View>
