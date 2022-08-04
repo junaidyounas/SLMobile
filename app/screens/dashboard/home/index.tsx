@@ -35,15 +35,15 @@ const HomeScreen = (props: Props) => {
   const pricelt = useSelector((state: IAppState) => state.app.pricelt);
 
   const onRefresh = React.useCallback(() => {
-    getAllPosts(1);
-    setPage(1);
     setRefreshing(true);
     setTimeout(() => {
+      setPage(1);
+      setSearch('');
       setRefreshing(false);
     }, 2000);
   }, []);
 
-  function getAllPosts(page: number = 1, search: string = '') {
+  function getAllPosts(page: number = 1) {
     logMe(page);
     postService
       .showAllPosts(
@@ -92,7 +92,7 @@ const HomeScreen = (props: Props) => {
         <SearchBarWithMenuIcon
           setQuery={setSearch}
           onSearchIconPress={() => {
-            getAllPosts(1, search);
+            setPage(1);
           }}
         />
         {/* <CategorySelector
@@ -114,7 +114,7 @@ const HomeScreen = (props: Props) => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          onEndReachedThreshold={0.4}
+          onEndReachedThreshold={0.2}
           onEndReached={() => {
             setPage(currentPage + 1);
           }}
