@@ -4,6 +4,7 @@ import {LoginResponse} from 'types/auth/LoginResponse';
 import {Category} from 'types/Category';
 import {Message} from 'types/chat/Message';
 import {ChatSession} from 'types/chat/Session';
+import {logMe} from 'utils/functions/logBinder';
 import {api} from './apiService';
 import {urls} from './constants';
 
@@ -30,6 +31,7 @@ const getAllCurrentUserChatSessions = () => {
     api
       .get(`${urls.chat_sessions}`)
       .then((res: any) => {
+        logMe(res.data);
         resolve(res.data);
       })
       .catch(err => {
