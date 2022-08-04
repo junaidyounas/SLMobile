@@ -78,9 +78,12 @@ const SinglePostScreen = (props: Props) => {
           <DetailsTable condition={post.subCategory} title="Sub Category" />
           <DetailsTable condition={post.condition} title="Condition" />
           <DetailsTable condition={post?.user?.name} title="Posted by" />
+          {post?.brand ? (
+            <DetailsTable condition={post?.brand} title="Brand" />
+          ) : null}
         </View>
       </ScrollView>
-      <ConnectBar data={post} />
+      <ConnectBar data={post as any} />
     </Box>
   );
 };

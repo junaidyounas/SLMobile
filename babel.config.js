@@ -15,7 +15,8 @@ module.exports = {
           assets: './app/assets',
           services: './app/services',
           store: './app/store',
-          enum: './app/enum'
+          enum: './app/enum',
+          data: './app/data'
         },
       },
     ],

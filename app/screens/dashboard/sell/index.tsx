@@ -32,12 +32,16 @@ import {useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import EmptyStateScreen from 'components/molecules/emptyStateScreen';
 import {goBack} from 'navigations/navRef';
+import BrandChooser from 'components/molecules/brandChooser';
+import {MobileBrands} from 'data/mobileBrands';
+import MobileConditionTabs from 'components/molecules/mobileConditionType';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
   description: Yup.string().required('Description Required'),
   price: Yup.number().required('Price required'),
   category: Yup.string().required('Category Required'),
+  brand: Yup.string().optional(),
 });
 
 type Props = {};
@@ -154,6 +158,7 @@ const SellScreen = (props: Props) => {
               price: '',
               category: '',
               subCategory: '',
+              brand: '',
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -166,6 +171,7 @@ const SellScreen = (props: Props) => {
                 category: values.category,
                 subCategory: values.subCategory,
                 images: imgsForServer.filter(img => img !== null),
+                brand: values.brand,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -212,11 +218,15 @@ const SellScreen = (props: Props) => {
                   label={'Price'}
                   keyboardType="numeric"
                 />
-                <View pt={4} />
-                <ConditionTabs
-                  onChange={setCondition}
-                  selectedTab={selectedCondition}
-                />
+                {selectedCategoryName == 'Mobiles' ? (
+                  <>
+                    <View pt={4} />
+                    <MobileConditionTabs
+                      onChange={setCondition}
+                      selectedTab={selectedCondition}
+                    />
+                  </>
+                ) : null}
                 <GeneralPicker
                   marginTop={2}
                   label="Select Category"
@@ -244,6 +254,19 @@ const SellScreen = (props: Props) => {
                     value={values.subCategory}
                     data={subCategories?.subCategories}
                     error={errors.subCategory}
+                  />
+                ) : null}
+
+                {values.subCategory == 'Mobile Phones' ? (
+                  <BrandChooser
+                    id={AppConstants.pickerIds.mobileBrand}
+                    marginTop={2}
+                    data={MobileBrands}
+                    placeholder="Select Brand"
+                    setValue={(e: any) => {
+                      setFieldValue('brand', e.title);
+                    }}
+                    value={values.brand}
                   />
                 ) : null}
                 <View style={{paddingTop: heightRatio(2)}} />

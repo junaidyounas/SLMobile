@@ -8,5 +8,6 @@ export interface CreatePostType {
   location: Location;
   category: any;
   subCategory: string;
+  brand: string;
   images: string[];
 }

@@ -9,7 +9,7 @@ type Props = {
   onChange: any;
 };
 
-const ConditionTabs = (props: Props) => {
+const MobileConditionTabs = (props: Props) => {
   const {selectedTab, onChange} = props;
   return (
     <View style={styles.container}>
@@ -23,11 +23,26 @@ const ConditionTabs = (props: Props) => {
         onChange={onChange}
         title={CONDITIONS.USED}
       />
+      <SelectionTab
+        isSelected={selectedTab == CONDITIONS.OPEN}
+        onChange={onChange}
+        title={CONDITIONS.OPEN}
+      />
+      <SelectionTab
+        isSelected={selectedTab == CONDITIONS.REFURB}
+        onChange={onChange}
+        title={CONDITIONS.REFURB}
+      />
+      <SelectionTab
+        isSelected={selectedTab == CONDITIONS.NOTWORKING}
+        onChange={onChange}
+        title={CONDITIONS.NOTWORKING}
+      />
     </View>
   );
 };
 
-export default ConditionTabs;
+export default MobileConditionTabs;
 
 const styles = StyleSheet.create({
   container: {

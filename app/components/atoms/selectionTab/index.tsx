@@ -36,7 +36,9 @@ export default SelectionTab;
 
 const styles = StyleSheet.create({
   container: {
-    width: '45%',
+    flex: 1,
+    minWidth: widthRatio(40),
+    padding: widthRatio(1),
   },
   box: {
     paddingVertical: heightRatio(1),

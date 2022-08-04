@@ -10,6 +10,7 @@ export interface SinglePostType {
   category: {_id: string; title: string; subCategories: any};
   subCategory: string;
   condition: string;
+  brand: string;
   isVisible: string;
   isActive: string;
   images: string[];
