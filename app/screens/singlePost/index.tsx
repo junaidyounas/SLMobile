@@ -71,8 +71,7 @@ const SinglePostScreen = (props: Props) => {
             location={post.location?.title}
             fontSize={16}
           />
-          <Text style={styles.detailsText}>Description</Text>
-          <Text style={styles.descriptionText}>{post.description}</Text>
+
           <Text style={styles.detailsText}>Details</Text>
           <DetailsTable condition={post.category?.title} title="Category" />
           <DetailsTable condition={post.subCategory} title="Sub Category" />
@@ -81,6 +80,14 @@ const SinglePostScreen = (props: Props) => {
           {post?.brand ? (
             <DetailsTable condition={post?.brand} title="Brand" />
           ) : null}
+          {post?.make ? (
+            <DetailsTable condition={post?.make} title="Make" />
+          ) : null}
+
+          {/* Description */}
+          <Text style={styles.detailsText}>Description</Text>
+          <Text style={styles.descriptionText}>{post.description}</Text>
+          <View style={{paddingBottom: heightRatio(7)}} />
         </View>
       </ScrollView>
       <ConnectBar data={post as any} />

@@ -9,5 +9,6 @@ export interface CreatePostType {
   category: any;
   subCategory: string;
   brand: string;
+  make: string;
   images: string[];
 }

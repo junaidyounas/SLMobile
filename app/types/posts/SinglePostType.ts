@@ -11,6 +11,7 @@ export interface SinglePostType {
   subCategory: string;
   condition: string;
   brand: string;
+  make: string;
   isVisible: string;
   isActive: string;
   images: string[];

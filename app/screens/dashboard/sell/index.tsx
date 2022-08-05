@@ -35,6 +35,8 @@ import {goBack} from 'navigations/navRef';
 import BrandChooser from 'components/molecules/brandChooser';
 import {MobileBrands} from 'data/mobileBrands';
 import MobileConditionTabs from 'components/molecules/mobileConditionType';
+import LabelText from 'components/atoms/labelText';
+import {carMake} from 'data/carMake';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -42,6 +44,7 @@ const AddPostSchema = Yup.object({
   price: Yup.number().required('Price required'),
   category: Yup.string().required('Category Required'),
   brand: Yup.string().optional(),
+  make: Yup.string().optional(),
 });
 
 type Props = {};
@@ -159,6 +162,7 @@ const SellScreen = (props: Props) => {
               category: '',
               subCategory: '',
               brand: '',
+              make: '',
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -172,6 +176,7 @@ const SellScreen = (props: Props) => {
                 subCategory: values.subCategory,
                 images: imgsForServer.filter(img => img !== null),
                 brand: values.brand,
+                make: values.make,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -218,15 +223,18 @@ const SellScreen = (props: Props) => {
                   label={'Price'}
                   keyboardType="numeric"
                 />
+
                 {selectedCategoryName == 'Mobiles' ? (
                   <>
                     <View pt={4} />
+                    <LabelText marginLeft={3} label={'Condition'} />
                     <MobileConditionTabs
                       onChange={setCondition}
                       selectedTab={selectedCondition}
                     />
                   </>
                 ) : null}
+
                 <GeneralPicker
                   marginTop={2}
                   label="Select Category"
@@ -236,6 +244,7 @@ const SellScreen = (props: Props) => {
                     setFieldValue('category', e._id);
                     setCategoryName(e.title);
                     setSubCategories(e);
+                    setFieldValue('subCategory', '');
                   }}
                   value={selectedCategoryName}
                   data={categories}
@@ -270,6 +279,23 @@ const SellScreen = (props: Props) => {
                     value={values.brand}
                   />
                 ) : null}
+
+                {/* For vehicles */}
+                {values.subCategory === 'Cars' ||
+                values.subCategory === 'Cars Accessories' ? (
+                  <BrandChooser
+                    marginHorizontal={1.5}
+                    id={AppConstants.pickerIds.carMake}
+                    marginTop={2}
+                    data={carMake}
+                    placeholder="Make"
+                    setValue={(e: any) => {
+                      setFieldValue('make', e.title);
+                    }}
+                    value={values.make}
+                  />
+                ) : null}
+
                 <View style={{paddingTop: heightRatio(2)}} />
                 <ButtonComponent
                   isLoading={isLoading}

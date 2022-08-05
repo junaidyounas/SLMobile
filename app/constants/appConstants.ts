@@ -10,5 +10,6 @@ export const AppConstants = {
   mapAPIKey: 'AIzaSyAci9JnZdiG3VAYOVcJEsw0hDaJ9EQyDTI',
   pickerIds: {
     mobileBrand: 'MobileBrandsPicker',
+    carMake: 'CarMakePicker',
   },
 };

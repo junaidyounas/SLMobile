@@ -1,23 +1,25 @@
-import React from 'react'
-import { StyleSheet, Text } from 'react-native'
-import { fonts } from 'theme/fonts'
+import React from 'react';
+import {StyleSheet, Text} from 'react-native';
+import {fonts} from 'theme/fonts';
+import {widthRatio} from 'utils/functions/pixelRatio';
 
 type Props = {
-    label: string,
-}
+  label: string;
+  marginLeft?: number;
+};
 
 const LabelText = (props: Props) => {
-    const { label } = props;
+  const {label, marginLeft} = props;
 
-    return (
-        <Text style={styles.header}>{label}</Text>
-    )
-}
+  const mLeft = marginLeft ? {marginLeft: widthRatio(marginLeft)} : {};
 
-export default LabelText
+  return <Text style={[styles.header, mLeft]}>{label}</Text>;
+};
+
+export default LabelText;
 
 const styles = StyleSheet.create({
-    header: {
-        fontFamily: fonts.poppins_semi_bold
-    },
-})
+  header: {
+    fontFamily: fonts.poppins_semi_bold,
+  },
+});
