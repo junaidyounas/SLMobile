@@ -37,6 +37,7 @@ import {MobileBrands} from 'data/mobileBrands';
 import MobileConditionTabs from 'components/molecules/mobileConditionType';
 import LabelText from 'components/atoms/labelText';
 import {carMake} from 'data/carMake';
+import {years} from 'data/years';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -163,6 +164,7 @@ const SellScreen = (props: Props) => {
               subCategory: '',
               brand: '',
               make: '',
+              year: '',
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -177,6 +179,7 @@ const SellScreen = (props: Props) => {
                 images: imgsForServer.filter(img => img !== null),
                 brand: values.brand,
                 make: values.make,
+                year: values.year,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -293,6 +296,28 @@ const SellScreen = (props: Props) => {
                       setFieldValue('make', e.title);
                     }}
                     value={values.make}
+                  />
+                ) : null}
+
+                {values.subCategory === 'Cars' ||
+                values.subCategory === 'Cars Accessories' ||
+                values.subCategory === 'Buses' ||
+                values.subCategory === 'Trucks' ||
+                values.subCategory === 'Rickshaw' ||
+                values.subCategory === 'Chingchi' ||
+                values.subCategory === 'Tractors' ||
+                values.subCategory === 'Trailers' ||
+                values.subCategory === 'Vans' ? (
+                  <BrandChooser
+                    marginHorizontal={1.5}
+                    id={AppConstants.pickerIds.makeYear}
+                    marginTop={2}
+                    data={years}
+                    placeholder="Year"
+                    setValue={(e: any) => {
+                      setFieldValue('year', e.title);
+                    }}
+                    value={values.year}
                   />
                 ) : null}
 

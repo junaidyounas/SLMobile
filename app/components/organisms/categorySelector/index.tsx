@@ -14,8 +14,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import {
   addFilterMake,
+  addFilterYear,
   addSearchBrand,
   addSearchCategory,
+  removeAllInCategory,
 } from 'store/appState/appSlice';
 type Props = {};
 
@@ -81,9 +83,7 @@ const CategorySelector = (props: Props) => {
         <Pressable
           style={{marginLeft: widthRatio(2)}}
           onPress={() => {
-            dispatch(addSearchCategory({} as any));
-            dispatch(addSearchBrand(''));
-            dispatch(addFilterMake(''));
+            dispatch(removeAllInCategory());
           }}>
           <AntDesign name="closecircleo" size={widthRatio(7)} />
         </Pressable>

@@ -6,6 +6,7 @@ import LocationSelector from 'components/organisms/locationSelector';
 import {AppConstants} from 'constants/appConstants';
 import {carMake} from 'data/carMake';
 import {MobileBrands} from 'data/mobileBrands';
+import {years} from 'data/years';
 import {Text, View} from 'native-base';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
@@ -17,6 +18,7 @@ import {
   addGTPrice,
   addLTPrice,
   addSearchBrand,
+  addFilterYear,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
@@ -64,6 +66,7 @@ const FilterScreen = (props: Props) => {
             value={searchBrand}
           />
         ) : null}
+        {/* vehical make */}
         {appState.searchCategory?.subCategory === 'Cars' ||
         appState.searchCategory?.subCategory === 'Cars Accessories' ? (
           <BrandChooser
@@ -77,6 +80,28 @@ const FilterScreen = (props: Props) => {
             value={appState.make}
           />
         ) : null}
+        {/* vehical years */}
+        {appState.searchCategory?.subCategory === 'Cars' ||
+        appState.searchCategory?.subCategory === 'Cars Accessories' ||
+        appState.searchCategory?.subCategory === 'Buses' ||
+        appState.searchCategory?.subCategory === 'Trucks' ||
+        appState.searchCategory?.subCategory === 'Rickshaw' ||
+        appState.searchCategory?.subCategory === 'Chingchi' ||
+        appState.searchCategory?.subCategory === 'Tractors' ||
+        appState.searchCategory?.subCategory === 'Trailers' ||
+        appState.searchCategory?.subCategory === 'Vans' ? (
+          <BrandChooser
+            id={AppConstants.pickerIds.makeYear}
+            marginTop={2}
+            data={years}
+            placeholder="Year"
+            setValue={(e: any) => {
+              dispatch(addFilterYear(e.title));
+            }}
+            value={appState.year}
+          />
+        ) : null}
+
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
           Price Range
         </Text>

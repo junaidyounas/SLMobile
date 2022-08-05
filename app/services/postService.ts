@@ -27,6 +27,7 @@ const showAllPosts = (
   pricegt?: number,
   pricelt?: number,
   searchBrand?: string,
+  year?: string,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -53,6 +54,9 @@ const showAllPosts = (
   }
   if (searchBrand) {
     url.searchParams.append('searchBrand', searchBrand);
+  }
+  if (year) {
+    url.searchParams.append('year', year);
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
