@@ -1,6 +1,8 @@
 import ButtonComponent from 'components/base/button';
-import BrandChooser from 'components/molecules/brandChooser';
+import InputTextView from 'components/molecules/inputText';
+import OptionChooser from 'components/molecules/optionChooser';
 import PriceRangeChooser from 'components/molecules/priceRanger';
+import PropertyAddPost from 'components/molecules/propertyAddPost';
 import CategorySelector from 'components/organisms/categorySelector';
 import LocationSelector from 'components/organisms/locationSelector';
 import {AppConstants} from 'constants/appConstants';
@@ -19,6 +21,9 @@ import {
   addLTPrice,
   addSearchBrand,
   addFilterYear,
+  addFilterLandType,
+  addFilterAreaUnit,
+  addFilterArea,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
@@ -53,7 +58,7 @@ const FilterScreen = (props: Props) => {
         </Text>
         <CategorySelector />
         {searchCategory.subCategory == 'Mobile Phones' ? (
-          <BrandChooser
+          <OptionChooser
             marginHorizontal={0}
             id={AppConstants.pickerIds.mobileBrand}
             marginTop={2}
@@ -69,7 +74,7 @@ const FilterScreen = (props: Props) => {
         {/* vehical make */}
         {appState.searchCategory?.subCategory === 'Cars' ||
         appState.searchCategory?.subCategory === 'Cars Accessories' ? (
-          <BrandChooser
+          <OptionChooser
             id={AppConstants.pickerIds.carMake}
             marginTop={2}
             data={carMake}
@@ -90,7 +95,7 @@ const FilterScreen = (props: Props) => {
         appState.searchCategory?.subCategory === 'Tractors' ||
         appState.searchCategory?.subCategory === 'Trailers' ||
         appState.searchCategory?.subCategory === 'Vans' ? (
-          <BrandChooser
+          <OptionChooser
             id={AppConstants.pickerIds.makeYear}
             marginTop={2}
             data={years}
@@ -101,6 +106,30 @@ const FilterScreen = (props: Props) => {
             value={appState.year}
           />
         ) : null}
+
+        {/* Property Filter */}
+        <View pt={2} />
+        <PropertyAddPost
+          subCategory={appState.searchCategory?.subCategory}
+          setLandType={(value: string) => dispatch(addFilterLandType(value))}
+          setAreaUnit={(value: string) => {
+            dispatch(addFilterAreaUnit(value));
+          }}
+          landType={appState.landType}
+          areaUnit={appState.areaUnit}
+        />
+        {appState.areaUnit ? (
+          <InputTextView
+            value={appState.area}
+            onChange={(value: number) => dispatch(addFilterArea(value))}
+            marginTop={2}
+            placeholder="Area"
+            label={'Area'}
+            keyboardType="numeric"
+          />
+        ) : null}
+
+        {/* End Property Filter */}
 
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
           Price Range

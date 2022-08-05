@@ -39,11 +39,21 @@ export const appSlice = createSlice({
     addFilterYear: (state, action: PayloadAction<string>) => {
       state.year = action.payload;
     },
+    addFilterLandType: (state, action: PayloadAction<string>) => {
+      state.landType = action.payload;
+    },
+    addFilterAreaUnit: (state, action: PayloadAction<string>) => {
+      state.areaUnit = action.payload;
+    },
+    addFilterArea: (state, action: PayloadAction<number>) => {
+      state.area = action.payload;
+    },
     removeAllInCategory: state => {
       state.year = '';
       state.make = '';
       state.searchBrand = '';
       state.searchCategory = {} as any;
+      (state.landType = ''), (state.areaUnit = '');
     },
   },
 });
@@ -60,6 +70,9 @@ export const {
   addFilterMake,
   addFilterYear,
   removeAllInCategory,
+  addFilterLandType,
+  addFilterAreaUnit,
+  addFilterArea,
 } = appSlice.actions;
 
 export default appSlice.reducer;

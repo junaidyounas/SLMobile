@@ -10,4 +10,7 @@ export interface AppStateType {
   searchBrand: string;
   make: string;
   year: string;
+  landType: string;
+  areaUnit: string;
+  area: number;
 }

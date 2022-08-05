@@ -32,13 +32,14 @@ import {useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import EmptyStateScreen from 'components/molecules/emptyStateScreen';
 import {goBack} from 'navigations/navRef';
-import BrandChooser from 'components/molecules/brandChooser';
+import OptionChooser from 'components/molecules/optionChooser';
 import {MobileBrands} from 'data/mobileBrands';
 import MobileConditionTabs from 'components/molecules/mobileConditionType';
 import LabelText from 'components/atoms/labelText';
 import {carMake} from 'data/carMake';
 import {years} from 'data/years';
 import VehicalsOptionsAddPost from 'components/molecules/vehicalsAddPost';
+import PropertyAddPost from 'components/molecules/propertyAddPost';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -47,6 +48,10 @@ const AddPostSchema = Yup.object({
   category: Yup.string().required('Category Required'),
   brand: Yup.string().optional(),
   make: Yup.string().optional(),
+  type: Yup.string().optional(),
+  landType: Yup.string().optional(),
+  areaUnit: Yup.string().optional(),
+  area: Yup.number().optional(),
 });
 
 type Props = {};
@@ -166,6 +171,10 @@ const SellScreen = (props: Props) => {
               brand: '',
               make: '',
               year: '',
+              type: '',
+              landType: '',
+              areaUnit: '',
+              area: undefined,
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -181,6 +190,10 @@ const SellScreen = (props: Props) => {
                 brand: values.brand,
                 make: values.make,
                 year: values.year,
+                landType: values.landType,
+                type: values.type,
+                areaUnit: values.areaUnit,
+                area: Number(values.area) as any,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -201,12 +214,14 @@ const SellScreen = (props: Props) => {
                   onChange={handleChange('title')}
                   error={touched.title ? errors.title : ''}
                   marginTop={2}
+                  paddingHorizontal={3}
                   onBlur={() => setFieldTouched('title')}
                   placeholder="Please write title"
                   label={'Post Title'}
                 />
                 <InputTextView
                   value={values.description}
+                  paddingHorizontal={3}
                   onChange={handleChange('description')}
                   error={touched.description ? errors.description : ''}
                   isTextView
@@ -222,6 +237,7 @@ const SellScreen = (props: Props) => {
                   onChange={handleChange('price')}
                   error={touched.price ? errors.price : ''}
                   marginTop={2}
+                  paddingHorizontal={3}
                   onBlur={() => setFieldTouched('price')}
                   placeholder="Price"
                   label={'Price'}
@@ -271,7 +287,7 @@ const SellScreen = (props: Props) => {
                 ) : null}
 
                 {values.subCategory == 'Mobile Phones' ? (
-                  <BrandChooser
+                  <OptionChooser
                     marginHorizontal={1.5}
                     id={AppConstants.pickerIds.mobileBrand}
                     marginTop={2}
@@ -291,6 +307,31 @@ const SellScreen = (props: Props) => {
                   make={values.make}
                   setFieldValue={setFieldValue}
                   year={values.year}
+                />
+                <View pt={3} />
+                <View px={3}>
+                  <PropertyAddPost
+                    subCategory={values.subCategory}
+                    setLandType={(value: string) =>
+                      setFieldValue('landType', value)
+                    }
+                    setAreaUnit={(value: string) => {
+                      setFieldValue('areaUnit', value);
+                    }}
+                    landType={values.landType}
+                    areaUnit={values.areaUnit}
+                  />
+                </View>
+
+                <InputTextView
+                  value={values.area}
+                  onChange={handleChange('area')}
+                  error={touched.area ? errors.area : ''}
+                  paddingHorizontal={3}
+                  onBlur={() => setFieldTouched('area')}
+                  placeholder="Area"
+                  label={'Area'}
+                  keyboardType="numeric"
                 />
 
                 <View style={{paddingTop: heightRatio(2)}} />

@@ -12,6 +12,10 @@ export interface SinglePostType {
   condition: string;
   brand: string;
   make: string;
+  type: string;
+  areaUnit: string;
+  area: number;
+  landType: string;
   isVisible: string;
   isActive: string;
   images: string[];

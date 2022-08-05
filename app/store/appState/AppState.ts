@@ -22,4 +22,7 @@ export const AppState: AppStateType = {
   searchBrand: '',
   make: '',
   year: '',
+  landType: '',
+  areaUnit: '',
+  area: undefined as any,
 };

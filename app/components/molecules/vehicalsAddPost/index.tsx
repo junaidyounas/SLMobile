@@ -1,11 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BrandChooser from '../brandChooser';
-import {AppConstants} from 'constants/appConstants';
-import {years} from 'data/years';
-import VehicalsMake from './year';
-import {carMake} from 'data/carMake';
+import {StyleSheet} from 'react-native';
 import VehicalMake from './make';
+import VehicalsMake from './year';
 
 type Props = {
   subCategory: string;

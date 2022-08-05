@@ -86,6 +86,15 @@ const SinglePostScreen = (props: Props) => {
           {post?.year ? (
             <DetailsTable condition={post?.year} title="Year" />
           ) : null}
+          {post?.landType ? (
+            <DetailsTable condition={post?.landType} title="Land Type" />
+          ) : null}
+          {post?.areaUnit ? (
+            <DetailsTable condition={post?.areaUnit} title="Area Unit" />
+          ) : null}
+          {post?.area ? (
+            <DetailsTable condition={String(post?.area)} title="Area" />
+          ) : null}
 
           {/* Description */}
           <Text style={styles.detailsText}>Description</Text>

@@ -18,6 +18,7 @@ type Props = {
   value: any;
   onBlur?: any;
   keyboardType?: KeyboardTypeOptions;
+  paddingHorizontal?: number;
 };
 
 const InputTextView = (props: Props) => {
@@ -31,10 +32,14 @@ const InputTextView = (props: Props) => {
     value,
     onBlur,
     keyboardType,
+    paddingHorizontal,
   } = props;
   let otherStyles = [];
   if (marginTop) {
     otherStyles.push({marginTop: heightRatio(marginTop)});
+  }
+  if (paddingHorizontal) {
+    otherStyles.push({paddingHorizontal: widthRatio(paddingHorizontal)});
   }
   return (
     <View style={[styles.parent, otherStyles]}>
@@ -66,9 +71,7 @@ const InputTextView = (props: Props) => {
 export default InputTextView;
 
 const styles = StyleSheet.create({
-  parent: {
-    paddingHorizontal: widthRatio(3),
-  },
+  parent: {},
 
   container: {
     backgroundColor: colors.gray[100],

@@ -3,51 +3,57 @@ import React from 'react';
 import SelectionTab from 'components/atoms/selectionTab';
 import {widthRatio} from 'utils/functions/pixelRatio';
 import {CONDITIONS} from 'enum/Conditions';
+import {LANDTYPE} from 'enum/Land.enum';
+import {LandAreaEnum} from 'enum/LandArea.enum';
 
 type Props = {
   selectedTab: string;
   onChange: any;
 };
 
-const MobileConditionTabs = (props: Props) => {
+const LandAreaUnit = (props: Props) => {
   const {selectedTab, onChange} = props;
   return (
     <View style={styles.container}>
       <SelectionTab
-        isSelected={selectedTab == CONDITIONS.NEW}
+        isSelected={selectedTab == LandAreaEnum.ACRE}
         onChange={onChange}
-        title={CONDITIONS.NEW}
+        title={LandAreaEnum.ACRE}
       />
       <SelectionTab
-        isSelected={selectedTab == CONDITIONS.USED}
+        isSelected={selectedTab == LandAreaEnum.KANAL}
         onChange={onChange}
-        title={CONDITIONS.USED}
+        title={LandAreaEnum.KANAL}
       />
       <SelectionTab
-        isSelected={selectedTab == CONDITIONS.OPEN}
+        isSelected={selectedTab == LandAreaEnum.MARLA}
         onChange={onChange}
-        title={CONDITIONS.OPEN}
+        title={LandAreaEnum.MARLA}
       />
       <SelectionTab
-        isSelected={selectedTab == CONDITIONS.REFURB}
+        isSelected={selectedTab == LandAreaEnum.SQUAREFEET}
         onChange={onChange}
-        title={CONDITIONS.REFURB}
+        title={LandAreaEnum.SQUAREFEET}
       />
       <SelectionTab
-        isSelected={selectedTab == CONDITIONS.NOTWORKING}
+        isSelected={selectedTab == LandAreaEnum.SQUAREMETER}
         onChange={onChange}
-        title={CONDITIONS.NOTWORKING}
+        title={LandAreaEnum.SQUAREMETER}
+      />
+      <SelectionTab
+        isSelected={selectedTab == LandAreaEnum.SQUAREYARDS}
+        onChange={onChange}
+        title={LandAreaEnum.SQUAREYARDS}
       />
     </View>
   );
 };
 
-export default MobileConditionTabs;
+export default LandAreaUnit;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: widthRatio(3),
     justifyContent: 'space-between',
     flexWrap: 'wrap',
   },

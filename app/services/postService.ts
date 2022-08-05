@@ -28,6 +28,9 @@ const showAllPosts = (
   pricelt?: number,
   searchBrand?: string,
   year?: string,
+  landType?: string,
+  areaUnit?: string,
+  area?: number,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -57,6 +60,15 @@ const showAllPosts = (
   }
   if (year) {
     url.searchParams.append('year', year);
+  }
+  if (landType) {
+    url.searchParams.append('landType', landType);
+  }
+  if (areaUnit) {
+    url.searchParams.append('areaUnit', areaUnit);
+  }
+  if (area) {
+    url.searchParams.append('area', area.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {

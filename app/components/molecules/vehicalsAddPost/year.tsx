@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BrandChooser from '../brandChooser';
+import OptionChooser from '../optionChooser';
 import {AppConstants} from 'constants/appConstants';
 import {years} from 'data/years';
 
@@ -14,7 +14,7 @@ const VehicalsYear = (props: Props) => {
   const {value, setFieldValue} = props;
   return (
     <>
-      <BrandChooser
+      <OptionChooser
         marginHorizontal={1.5}
         id={AppConstants.pickerIds.makeYear}
         marginTop={2}

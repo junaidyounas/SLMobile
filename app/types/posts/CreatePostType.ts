@@ -11,5 +11,9 @@ export interface CreatePostType {
   brand: string;
   make: string;
   year: string;
+  type: string;
+  areaUnit: string;
+  area: number;
+  landType: string;
   images: string[];
 }

@@ -19,7 +19,7 @@ type Props = {
   marginHorizontal?: number;
 };
 
-const BrandChooser = (props: Props) => {
+const OptionChooser = (props: Props) => {
   const {
     label,
     marginTop,
@@ -69,7 +69,7 @@ const BrandChooser = (props: Props) => {
   );
 };
 
-export default BrandChooser;
+export default OptionChooser;
 
 const styles = StyleSheet.create({
   parent: {},

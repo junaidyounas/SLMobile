@@ -38,12 +38,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     minWidth: widthRatio(40),
-    padding: widthRatio(1),
+    padding: widthRatio(0),
   },
   box: {
     paddingVertical: heightRatio(1),
+    marginBottom: heightRatio(0.5),
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: widthRatio(2),
+    marginRight: widthRatio(1),
   },
 });
