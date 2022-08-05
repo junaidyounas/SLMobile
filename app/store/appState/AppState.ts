@@ -20,4 +20,6 @@ export const AppState: AppStateType = {
   pricegt: undefined,
   pricelt: undefined,
   searchBrand: '',
+  make: '',
+  year: '',
 };

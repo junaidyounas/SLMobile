@@ -8,4 +8,6 @@ export interface AppStateType {
   pricegt: number | undefined;
   pricelt: number | undefined;
   searchBrand: string;
+  make: string;
+  year: string;
 }

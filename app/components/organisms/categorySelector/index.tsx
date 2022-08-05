@@ -12,7 +12,11 @@ import {logMe} from 'utils/functions/logBinder';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
-import {addSearchBrand, addSearchCategory} from 'store/appState/appSlice';
+import {
+  addFilterMake,
+  addSearchBrand,
+  addSearchCategory,
+} from 'store/appState/appSlice';
 type Props = {};
 
 const CategorySelector = (props: Props) => {
@@ -79,6 +83,7 @@ const CategorySelector = (props: Props) => {
           onPress={() => {
             dispatch(addSearchCategory({} as any));
             dispatch(addSearchBrand(''));
+            dispatch(addFilterMake(''));
           }}>
           <AntDesign name="closecircleo" size={widthRatio(7)} />
         </Pressable>

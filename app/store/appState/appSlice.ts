@@ -33,6 +33,12 @@ export const appSlice = createSlice({
     addSearchBrand: (state, action: PayloadAction<string>) => {
       state.searchBrand = action.payload;
     },
+    addFilterMake: (state, action: PayloadAction<string>) => {
+      state.make = action.payload;
+    },
+    addFilterYear: (state, action: PayloadAction<string>) => {
+      state.year = action.payload;
+    },
   },
 });
 
@@ -45,6 +51,8 @@ export const {
   addGTPrice,
   addLTPrice,
   addSearchBrand,
+  addFilterMake,
+  addFilterYear,
 } = appSlice.actions;
 
 export default appSlice.reducer;

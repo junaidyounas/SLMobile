@@ -4,6 +4,7 @@ import PriceRangeChooser from 'components/molecules/priceRanger';
 import CategorySelector from 'components/organisms/categorySelector';
 import LocationSelector from 'components/organisms/locationSelector';
 import {AppConstants} from 'constants/appConstants';
+import {carMake} from 'data/carMake';
 import {MobileBrands} from 'data/mobileBrands';
 import {Text, View} from 'native-base';
 import {navigate} from 'navigations/navRef';
@@ -11,7 +12,12 @@ import {screens} from 'navigations/screens.constants';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addGTPrice, addLTPrice, addSearchBrand} from 'store/appState/appSlice';
+import {
+  addFilterMake,
+  addGTPrice,
+  addLTPrice,
+  addSearchBrand,
+} from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
@@ -29,6 +35,7 @@ const FilterScreen = (props: Props) => {
   );
 
   const searchBrand = useSelector((state: IAppState) => state.app.searchBrand);
+  const appState = useSelector((state: IAppState) => state.app);
 
   const [minPrice, setMinPrice] = useState(pricegt);
   const [maxPrice, setMaxPrice] = useState(pricelt);
@@ -55,6 +62,19 @@ const FilterScreen = (props: Props) => {
               dispatch(addSearchBrand(e.title));
             }}
             value={searchBrand}
+          />
+        ) : null}
+        {appState.searchCategory?.subCategory === 'Cars' ||
+        appState.searchCategory?.subCategory === 'Cars Accessories' ? (
+          <BrandChooser
+            id={AppConstants.pickerIds.carMake}
+            marginTop={2}
+            data={carMake}
+            placeholder="Make"
+            setValue={(e: any) => {
+              dispatch(addFilterMake(e.title));
+            }}
+            value={appState.make}
           />
         ) : null}
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
