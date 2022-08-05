@@ -83,6 +83,9 @@ const SinglePostScreen = (props: Props) => {
           {post?.make ? (
             <DetailsTable condition={post?.make} title="Make" />
           ) : null}
+          {post?.year ? (
+            <DetailsTable condition={post?.year} title="Year" />
+          ) : null}
 
           {/* Description */}
           <Text style={styles.detailsText}>Description</Text>

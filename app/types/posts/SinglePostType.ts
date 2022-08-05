@@ -16,4 +16,5 @@ export interface SinglePostType {
   isActive: string;
   images: string[];
   user: User;
+  year: string;
 }

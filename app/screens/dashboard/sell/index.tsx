@@ -38,6 +38,7 @@ import MobileConditionTabs from 'components/molecules/mobileConditionType';
 import LabelText from 'components/atoms/labelText';
 import {carMake} from 'data/carMake';
 import {years} from 'data/years';
+import VehicalsOptionsAddPost from 'components/molecules/vehicalsAddPost';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -193,7 +194,7 @@ const SellScreen = (props: Props) => {
               touched,
               setFieldTouched,
               handleSubmit,
-            }) => (
+            }: any) => (
               <>
                 <InputTextView
                   value={values.title}
@@ -284,42 +285,13 @@ const SellScreen = (props: Props) => {
                 ) : null}
 
                 {/* For vehicles */}
-                {values.subCategory === 'Cars' ||
-                values.subCategory === 'Cars Accessories' ? (
-                  <BrandChooser
-                    marginHorizontal={1.5}
-                    id={AppConstants.pickerIds.carMake}
-                    marginTop={2}
-                    data={carMake}
-                    placeholder="Make"
-                    setValue={(e: any) => {
-                      setFieldValue('make', e.title);
-                    }}
-                    value={values.make}
-                  />
-                ) : null}
 
-                {values.subCategory === 'Cars' ||
-                values.subCategory === 'Cars Accessories' ||
-                values.subCategory === 'Buses' ||
-                values.subCategory === 'Trucks' ||
-                values.subCategory === 'Rickshaw' ||
-                values.subCategory === 'Chingchi' ||
-                values.subCategory === 'Tractors' ||
-                values.subCategory === 'Trailers' ||
-                values.subCategory === 'Vans' ? (
-                  <BrandChooser
-                    marginHorizontal={1.5}
-                    id={AppConstants.pickerIds.makeYear}
-                    marginTop={2}
-                    data={years}
-                    placeholder="Year"
-                    setValue={(e: any) => {
-                      setFieldValue('year', e.title);
-                    }}
-                    value={values.year}
-                  />
-                ) : null}
+                <VehicalsOptionsAddPost
+                  subCategory={values.subCategory}
+                  make={values.make}
+                  setFieldValue={setFieldValue}
+                  year={values.year}
+                />
 
                 <View style={{paddingTop: heightRatio(2)}} />
                 <ButtonComponent
