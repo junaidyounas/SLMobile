@@ -63,6 +63,7 @@ const HomeScreen = (props: Props) => {
         appState.rooms,
         appState.bathrooms,
         appState.kitchens,
+        appState.make,
       )
       .then(res => {
         if (res.length > 0 && page > 1) {

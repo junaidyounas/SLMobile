@@ -1,4 +1,5 @@
 import ButtonComponent from 'components/base/button';
+import BikeAddPost from 'components/molecules/bikeAddPost';
 import InputTextView from 'components/molecules/inputText';
 import OptionChooser from 'components/molecules/optionChooser';
 import PriceRangeChooser from 'components/molecules/priceRanger';
@@ -152,6 +153,14 @@ const FilterScreen = (props: Props) => {
         ) : null}
 
         {/* End Property Filter */}
+
+        {/* Bike Filter Start */}
+        <BikeAddPost
+          bikeMake={appState.make}
+          setBikeMake={(e: any) => dispatch(addFilterMake(e.title))}
+          subCategory={appState.searchCategory?.subCategory}
+        />
+        {/* Bike Filter End */}
 
         <Text style={[styles.label, {paddingTop: heightRatio(2)}]}>
           Price Range

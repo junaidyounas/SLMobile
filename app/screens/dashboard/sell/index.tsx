@@ -40,6 +40,7 @@ import {carMake} from 'data/carMake';
 import {years} from 'data/years';
 import VehicalsOptionsAddPost from 'components/molecules/vehicalsAddPost';
 import PropertyAddPost from 'components/molecules/propertyAddPost';
+import BikeAddPost from 'components/molecules/bikeAddPost';
 
 const AddPostSchema = Yup.object({
   title: Yup.string().required('title is required'),
@@ -356,6 +357,13 @@ const SellScreen = (props: Props) => {
                       logMe(value);
                       setFieldValue('kitchens', value);
                     }}
+                  />
+                </View>
+                <View px={3}>
+                  <BikeAddPost
+                    bikeMake={values.make}
+                    setBikeMake={(e: any) => setFieldValue('make', e.title)}
+                    subCategory={values.subCategory}
                   />
                 </View>
 

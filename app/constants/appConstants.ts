@@ -12,5 +12,6 @@ export const AppConstants = {
     mobileBrand: 'MobileBrandsPicker',
     carMake: 'CarMakePicker',
     makeYear: 'MakeYearPicker',
+    bikeMake: 'BikeBrandsPicker',
   },
 };
