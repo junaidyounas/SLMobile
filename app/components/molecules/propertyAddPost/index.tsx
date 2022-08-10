@@ -21,6 +21,10 @@ type Props = {
   isFurnished: boolean;
   rooms: number;
   setRooms: any;
+  bathrooms: number;
+  kitchens: number;
+  setBathrooms: any;
+  setKitchens: any;
 };
 
 const PropertyAddPost = (props: Props) => {
@@ -36,6 +40,10 @@ const PropertyAddPost = (props: Props) => {
     isFurnished,
     rooms,
     setRooms,
+    kitchens,
+    bathrooms,
+    setBathrooms,
+    setKitchens,
   } = props;
   return (
     <>
@@ -69,9 +77,23 @@ const PropertyAddPost = (props: Props) => {
             selectedTab={isFurnished}
             onChange={setIsFurnished}
           />
+          <View pt={2} />
           <RoomsCounter
+            title="Rooms"
             rooms={rooms}
             onChange={(value: number) => setRooms(value)}
+          />
+          <View pt={2} />
+          <RoomsCounter
+            title="Bathrooms"
+            rooms={bathrooms}
+            onChange={(value: number) => setBathrooms(value)}
+          />
+          <View pt={2} />
+          <RoomsCounter
+            title="Kitchens"
+            rooms={kitchens}
+            onChange={(value: number) => setKitchens(value)}
           />
           <View pt={2} />
         </>

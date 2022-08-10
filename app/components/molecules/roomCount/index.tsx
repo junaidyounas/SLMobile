@@ -9,17 +9,18 @@ import {fonts} from 'theme/fonts';
 type Props = {
   rooms: number;
   onChange: any;
+  title: string;
 };
 
 const RoomsCounter = (props: Props) => {
-  const {rooms, onChange} = props;
+  const {rooms, onChange, title} = props;
   const selectedStyle = {
     borderWidth: 1.5,
     borderColor: colors.darkblue[700],
   };
   return (
     <View style={styles.container}>
-      <LabelText label={'Rooms'} />
+      <LabelText label={title} />
       <View style={styles.innerContainer}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i, j) => (
           <Pressable

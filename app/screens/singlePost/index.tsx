@@ -105,6 +105,17 @@ const SinglePostScreen = (props: Props) => {
             <DetailsTable condition={String(post?.rooms)} title="Rooms" />
           ) : null}
 
+          {post?.bathrooms ? (
+            <DetailsTable
+              condition={String(post?.bathrooms)}
+              title="Bathrooms"
+            />
+          ) : null}
+
+          {post?.kitchens ? (
+            <DetailsTable condition={String(post?.kitchens)} title="Kitchens" />
+          ) : null}
+
           {/* Description */}
           <Text style={styles.detailsText}>Description</Text>
           <Text style={styles.descriptionText}>{post.description}</Text>

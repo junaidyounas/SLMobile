@@ -15,4 +15,6 @@ export interface AppStateType {
   area: number;
   isFurnished: boolean;
   rooms: number;
+  bathrooms: number;
+  kitchens: number;
 }

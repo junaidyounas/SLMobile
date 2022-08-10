@@ -35,9 +35,9 @@ const HomeScreen = (props: Props) => {
   const appState = useSelector((state: IAppState) => state.app);
 
   const onRefresh = React.useCallback(() => {
+    setPage(1);
     setRefreshing(true);
     setTimeout(() => {
-      setPage(1);
       setSearch('');
       setRefreshing(false);
     }, 2000);
@@ -61,6 +61,8 @@ const HomeScreen = (props: Props) => {
         undefined,
         appState.isFurnished,
         appState.rooms,
+        appState.bathrooms,
+        appState.kitchens,
       )
       .then(res => {
         if (res.length > 0 && page > 1) {
@@ -82,16 +84,7 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     setPage(1);
     getAllPosts(1);
-  }, [
-    searchCategory,
-    searchLocation,
-    pricegt,
-    pricelt,
-    searchBrand,
-    appState.year,
-    appState.isFurnished,
-    appState.rooms,
-  ]);
+  }, [searchCategory, searchLocation, pricegt, pricelt, searchBrand, appState]);
 
   return (
     <>

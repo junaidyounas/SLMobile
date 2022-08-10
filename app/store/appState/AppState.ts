@@ -27,4 +27,6 @@ export const AppState: AppStateType = {
   area: undefined as any,
   isFurnished: undefined as any,
   rooms: undefined as any,
+  bathrooms: undefined as any,
+  kitchens: undefined as any,
 };

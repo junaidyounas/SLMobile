@@ -17,6 +17,8 @@ export interface SinglePostType {
   area: number;
   isFurnished: boolean;
   rooms: number;
+  bathrooms: number;
+  kitchens: number;
   landType: string;
   isVisible: string;
   isActive: string;

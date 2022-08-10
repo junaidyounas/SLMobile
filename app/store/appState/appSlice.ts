@@ -54,6 +54,12 @@ export const appSlice = createSlice({
     addFilterRooms: (state, action: PayloadAction<number>) => {
       state.rooms = action.payload;
     },
+    addFilterBathRooms: (state, action: PayloadAction<number>) => {
+      state.bathrooms = action.payload;
+    },
+    addFilterKitchens: (state, action: PayloadAction<number>) => {
+      state.kitchens = action.payload;
+    },
     removeAllInCategory: state => {
       state.year = '';
       state.make = '';
@@ -62,6 +68,8 @@ export const appSlice = createSlice({
       (state.landType = ''), (state.areaUnit = '');
       state.isFurnished = undefined as any;
       state.rooms = undefined as any;
+      state.bathrooms = undefined as any;
+      state.kitchens = undefined as any;
     },
   },
 });
@@ -83,6 +91,8 @@ export const {
   addFilterArea,
   addFilterIsFurnished,
   addFilterRooms,
+  addFilterBathRooms,
+  addFilterKitchens,
 } = appSlice.actions;
 
 export default appSlice.reducer;

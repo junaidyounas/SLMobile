@@ -54,6 +54,8 @@ const AddPostSchema = Yup.object({
   area: Yup.number().optional(),
   isFurnished: Yup.boolean().optional(),
   rooms: Yup.number().optional(),
+  bathrooms: Yup.number().optional(),
+  kitchens: Yup.number().optional(),
 });
 
 type Props = {};
@@ -179,6 +181,8 @@ const SellScreen = (props: Props) => {
               area: undefined,
               isFurnished: undefined,
               rooms: undefined,
+              bathrooms: undefined,
+              kitchens: undefined,
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -200,6 +204,8 @@ const SellScreen = (props: Props) => {
                 area: values.area as any,
                 isFurnished: values.isFurnished as any,
                 rooms: values.rooms as any,
+                bathrooms: values.bathrooms as any,
+                kitchens: values.kitchens as any,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -339,6 +345,16 @@ const SellScreen = (props: Props) => {
                     setRooms={(value: number) => {
                       logMe(value);
                       setFieldValue('rooms', value);
+                    }}
+                    kitchens={values.kitchens}
+                    bathrooms={values.bathrooms}
+                    setBathrooms={(value: number) => {
+                      logMe(value);
+                      setFieldValue('bathrooms', value);
+                    }}
+                    setKitchens={(value: number) => {
+                      logMe(value);
+                      setFieldValue('kitchens', value);
                     }}
                   />
                 </View>

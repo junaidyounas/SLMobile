@@ -9,7 +9,7 @@ import {AppConstants} from 'constants/appConstants';
 import {carMake} from 'data/carMake';
 import {MobileBrands} from 'data/mobileBrands';
 import {years} from 'data/years';
-import {Text, View} from 'native-base';
+import {ScrollView, Text, View} from 'native-base';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import React, {useEffect, useState} from 'react';
@@ -26,6 +26,8 @@ import {
   addFilterArea,
   addFilterIsFurnished,
   addFilterRooms,
+  addFilterBathRooms,
+  addFilterKitchens,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
@@ -49,7 +51,7 @@ const FilterScreen = (props: Props) => {
   const [minPrice, setMinPrice] = useState(pricegt);
   const [maxPrice, setMaxPrice] = useState(pricelt);
   return (
-    <View style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <Text style={[styles.label, {paddingHorizontal: widthRatio(3)}]}>
         Set Location
       </Text>
@@ -129,6 +131,14 @@ const FilterScreen = (props: Props) => {
           setRooms={(value: number) => {
             dispatch(addFilterRooms(value));
           }}
+          bathrooms={appState.bathrooms}
+          kitchens={appState.kitchens}
+          setBathrooms={(value: number) => {
+            dispatch(addFilterBathRooms(value));
+          }}
+          setKitchens={(value: number) => {
+            dispatch(addFilterKitchens(value));
+          }}
         />
         {appState.areaUnit ? (
           <InputTextView
@@ -164,7 +174,8 @@ const FilterScreen = (props: Props) => {
           }}
         />
       </View>
-    </View>
+      <View style={{height: heightRatio(10)}} />
+    </ScrollView>
   );
 };
 
@@ -173,7 +184,7 @@ export default FilterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: heightRatio(2),
+    paddingBottom: heightRatio(10),
   },
   innerContainer: {
     paddingHorizontal: widthRatio(3),

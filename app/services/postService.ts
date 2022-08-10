@@ -33,6 +33,8 @@ const showAllPosts = (
   area?: number,
   isFurnished?: boolean,
   rooms?: number,
+  bathrooms?: number,
+  kitchens?: number,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -77,6 +79,12 @@ const showAllPosts = (
   }
   if (rooms) {
     url.searchParams.append('rooms', rooms.toString());
+  }
+  if (bathrooms) {
+    url.searchParams.append('bathrooms', bathrooms.toString());
+  }
+  if (kitchens) {
+    url.searchParams.append('kitchens', kitchens.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
