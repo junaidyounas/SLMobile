@@ -52,6 +52,7 @@ const AddPostSchema = Yup.object({
   landType: Yup.string().optional(),
   areaUnit: Yup.string().optional(),
   area: Yup.number().optional(),
+  isFurnished: Yup.boolean().optional(),
 });
 
 type Props = {};
@@ -175,6 +176,7 @@ const SellScreen = (props: Props) => {
               landType: '',
               areaUnit: '',
               area: undefined,
+              isFurnished: undefined,
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -194,6 +196,7 @@ const SellScreen = (props: Props) => {
                 type: values.type,
                 areaUnit: values.areaUnit,
                 area: Number(values.area) as any,
+                isFurnished: values.isFurnished as any,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -310,6 +313,8 @@ const SellScreen = (props: Props) => {
                   year={values.year}
                 />
                 <View pt={3} />
+
+                {/* Property Posts */}
                 <View px={3}>
                   <PropertyAddPost
                     subCategory={values.subCategory}
@@ -323,6 +328,10 @@ const SellScreen = (props: Props) => {
                     areaUnit={values.areaUnit}
                     area={values.area}
                     setArea={handleChange('area')}
+                    setIsFurnished={(value: boolean) =>
+                      setFieldValue('isFurnished', value)
+                    }
+                    isFurnished={values.isFurnished}
                   />
                 </View>
 

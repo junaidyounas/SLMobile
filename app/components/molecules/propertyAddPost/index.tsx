@@ -3,6 +3,7 @@ import {View} from 'native-base';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import InputTextView from '../inputText';
+import IsPropertyFurnished from '../isFurnished';
 import LandAreaUnit from '../landAreaUnit';
 import LandTypesTabs from '../landType';
 
@@ -15,6 +16,8 @@ type Props = {
   areaUnit: string;
   area: string;
   setArea: any;
+  setIsFurnished: any;
+  isFurnished: boolean;
 };
 
 const PropertyAddPost = (props: Props) => {
@@ -26,6 +29,8 @@ const PropertyAddPost = (props: Props) => {
     areaUnit,
     area,
     setArea,
+    setIsFurnished,
+    isFurnished,
   } = props;
   return (
     <>
@@ -46,6 +51,21 @@ const PropertyAddPost = (props: Props) => {
             label={'Area'}
             keyboardType="numeric"
           />
+        </>
+      ) : null}
+      {subCategory === 'Apartments or Flats' ||
+      subCategory === 'Portions' ||
+      subCategory === 'Rooms' ||
+      subCategory === 'Guest Houses' ||
+      subCategory === 'Vacation Rentals' ? (
+        <>
+          <LabelText label={'Furnished'} />
+          <IsPropertyFurnished
+            selectedTab={isFurnished}
+            onChange={setIsFurnished}
+          />
+
+          <View pt={2} />
         </>
       ) : null}
     </>
