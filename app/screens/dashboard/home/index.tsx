@@ -21,8 +21,6 @@ const HomeScreen = (props: Props) => {
   const [currentPage, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [selectedSubCat, setSelectedSubCat] = useState('');
 
   const searchLocation = useSelector(
     (state: IAppState) => state.app.searchLocation,
@@ -58,6 +56,10 @@ const HomeScreen = (props: Props) => {
         pricelt,
         searchBrand,
         appState.year,
+        '',
+        '',
+        undefined,
+        appState.isFurnished,
       )
       .then(res => {
         if (res.length > 0 && page > 1) {
@@ -86,6 +88,7 @@ const HomeScreen = (props: Props) => {
     pricelt,
     searchBrand,
     appState.year,
+    appState.isFurnished,
   ]);
 
   return (

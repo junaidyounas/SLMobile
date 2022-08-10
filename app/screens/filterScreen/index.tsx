@@ -24,6 +24,7 @@ import {
   addFilterLandType,
   addFilterAreaUnit,
   addFilterArea,
+  addFilterIsFurnished,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
@@ -117,6 +118,12 @@ const FilterScreen = (props: Props) => {
           }}
           landType={appState.landType}
           areaUnit={appState.areaUnit}
+          area={''}
+          setArea={undefined}
+          setIsFurnished={(value: boolean) => {
+            dispatch(addFilterIsFurnished(value));
+          }}
+          isFurnished={appState.isFurnished}
         />
         {appState.areaUnit ? (
           <InputTextView

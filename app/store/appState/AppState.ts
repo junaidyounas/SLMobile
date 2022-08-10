@@ -25,4 +25,5 @@ export const AppState: AppStateType = {
   landType: '',
   areaUnit: '',
   area: undefined as any,
+  isFurnished: undefined as any,
 };

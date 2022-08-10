@@ -31,6 +31,7 @@ const showAllPosts = (
   landType?: string,
   areaUnit?: string,
   area?: number,
+  isFurnished?: boolean,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -69,6 +70,9 @@ const showAllPosts = (
   }
   if (area) {
     url.searchParams.append('area', area.toString());
+  }
+  if (isFurnished == true || isFurnished == false) {
+    url.searchParams.append('isFurnished', isFurnished.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {

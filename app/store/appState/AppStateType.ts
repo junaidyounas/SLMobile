@@ -13,4 +13,5 @@ export interface AppStateType {
   landType: string;
   areaUnit: string;
   area: number;
+  isFurnished: boolean;
 }
