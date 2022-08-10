@@ -6,6 +6,7 @@ import InputTextView from '../inputText';
 import IsPropertyFurnished from '../isFurnished';
 import LandAreaUnit from '../landAreaUnit';
 import LandTypesTabs from '../landType';
+import RoomsCounter from '../roomCount';
 
 type Props = {
   subCategory: string;
@@ -18,6 +19,8 @@ type Props = {
   setArea: any;
   setIsFurnished: any;
   isFurnished: boolean;
+  rooms: number;
+  setRooms: any;
 };
 
 const PropertyAddPost = (props: Props) => {
@@ -31,6 +34,8 @@ const PropertyAddPost = (props: Props) => {
     setArea,
     setIsFurnished,
     isFurnished,
+    rooms,
+    setRooms,
   } = props;
   return (
     <>
@@ -64,7 +69,10 @@ const PropertyAddPost = (props: Props) => {
             selectedTab={isFurnished}
             onChange={setIsFurnished}
           />
-
+          <RoomsCounter
+            rooms={rooms}
+            onChange={(value: number) => setRooms(value)}
+          />
           <View pt={2} />
         </>
       ) : null}

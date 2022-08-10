@@ -25,6 +25,7 @@ import {
   addFilterAreaUnit,
   addFilterArea,
   addFilterIsFurnished,
+  addFilterRooms,
 } from 'store/appState/appSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
@@ -124,6 +125,10 @@ const FilterScreen = (props: Props) => {
             dispatch(addFilterIsFurnished(value));
           }}
           isFurnished={appState.isFurnished}
+          rooms={appState.rooms}
+          setRooms={(value: number) => {
+            dispatch(addFilterRooms(value));
+          }}
         />
         {appState.areaUnit ? (
           <InputTextView

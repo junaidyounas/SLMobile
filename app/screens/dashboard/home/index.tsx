@@ -60,6 +60,7 @@ const HomeScreen = (props: Props) => {
         '',
         undefined,
         appState.isFurnished,
+        appState.rooms,
       )
       .then(res => {
         if (res.length > 0 && page > 1) {
@@ -89,6 +90,7 @@ const HomeScreen = (props: Props) => {
     searchBrand,
     appState.year,
     appState.isFurnished,
+    appState.rooms,
   ]);
 
   return (

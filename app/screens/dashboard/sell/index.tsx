@@ -53,6 +53,7 @@ const AddPostSchema = Yup.object({
   areaUnit: Yup.string().optional(),
   area: Yup.number().optional(),
   isFurnished: Yup.boolean().optional(),
+  rooms: Yup.number().optional(),
 });
 
 type Props = {};
@@ -169,14 +170,15 @@ const SellScreen = (props: Props) => {
               price: '',
               category: '',
               subCategory: '',
-              brand: '',
-              make: '',
-              year: '',
-              type: '',
-              landType: '',
-              areaUnit: '',
+              brand: undefined,
+              make: undefined,
+              year: undefined,
+              type: undefined,
+              landType: undefined,
+              areaUnit: undefined,
               area: undefined,
               isFurnished: undefined,
+              rooms: undefined,
             }}
             onSubmit={values => {
               logMe('On Formik Submit sell');
@@ -189,14 +191,15 @@ const SellScreen = (props: Props) => {
                 category: values.category,
                 subCategory: values.subCategory,
                 images: imgsForServer.filter(img => img !== null),
-                brand: values.brand,
-                make: values.make,
-                year: values.year,
-                landType: values.landType,
-                type: values.type,
-                areaUnit: values.areaUnit,
-                area: Number(values.area) as any,
+                brand: values.brand as any,
+                make: values.make as any,
+                year: values.year as any,
+                landType: values.landType as any,
+                type: values.type as any,
+                areaUnit: values.areaUnit as any,
+                area: values.area as any,
                 isFurnished: values.isFurnished as any,
+                rooms: values.rooms as any,
               };
               logMe(obj);
               createNewAdToServer(obj);
@@ -332,6 +335,11 @@ const SellScreen = (props: Props) => {
                       setFieldValue('isFurnished', value)
                     }
                     isFurnished={values.isFurnished}
+                    rooms={values.rooms}
+                    setRooms={(value: number) => {
+                      logMe(value);
+                      setFieldValue('rooms', value);
+                    }}
                   />
                 </View>
 

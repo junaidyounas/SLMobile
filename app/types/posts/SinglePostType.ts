@@ -16,6 +16,7 @@ export interface SinglePostType {
   areaUnit: string;
   area: number;
   isFurnished: boolean;
+  rooms: number;
   landType: string;
   isVisible: string;
   isActive: string;

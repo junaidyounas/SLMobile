@@ -51,6 +51,9 @@ export const appSlice = createSlice({
     addFilterIsFurnished: (state, action: PayloadAction<boolean>) => {
       state.isFurnished = action.payload;
     },
+    addFilterRooms: (state, action: PayloadAction<number>) => {
+      state.rooms = action.payload;
+    },
     removeAllInCategory: state => {
       state.year = '';
       state.make = '';
@@ -58,6 +61,7 @@ export const appSlice = createSlice({
       state.searchCategory = {} as any;
       (state.landType = ''), (state.areaUnit = '');
       state.isFurnished = undefined as any;
+      state.rooms = undefined as any;
     },
   },
 });
@@ -78,6 +82,7 @@ export const {
   addFilterAreaUnit,
   addFilterArea,
   addFilterIsFurnished,
+  addFilterRooms,
 } = appSlice.actions;
 
 export default appSlice.reducer;

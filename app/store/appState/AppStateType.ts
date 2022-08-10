@@ -14,4 +14,5 @@ export interface AppStateType {
   areaUnit: string;
   area: number;
   isFurnished: boolean;
+  rooms: number;
 }

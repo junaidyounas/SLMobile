@@ -15,6 +15,7 @@ export interface CreatePostType {
   areaUnit: string;
   area: number;
   isFurnished: boolean;
+  rooms: number;
   landType: string;
   images: string[];
 }

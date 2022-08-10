@@ -32,6 +32,7 @@ const showAllPosts = (
   areaUnit?: string,
   area?: number,
   isFurnished?: boolean,
+  rooms?: number,
 ) => {
   const url = new URL(urls.posts);
   if (query) {
@@ -73,6 +74,9 @@ const showAllPosts = (
   }
   if (isFurnished == true || isFurnished == false) {
     url.searchParams.append('isFurnished', isFurnished.toString());
+  }
+  if (rooms) {
+    url.searchParams.append('rooms', rooms.toString());
   }
   logMe(url);
   return new Promise<Array<SinglePostType>>((resolve, reject) => {
