@@ -244,7 +244,8 @@ const SellScreen = (props: Props) => {
                   keyboardType="numeric"
                 />
 
-                {selectedCategoryName == 'Mobiles' ? (
+                {values.subCategory == 'Tablets' ||
+                values.subCategory == 'Mobile Phones' ? (
                   <>
                     <View pt={4} />
                     <LabelText marginLeft={3} label={'Condition'} />
@@ -320,19 +321,10 @@ const SellScreen = (props: Props) => {
                     }}
                     landType={values.landType}
                     areaUnit={values.areaUnit}
+                    area={values.area}
+                    setArea={handleChange('area')}
                   />
                 </View>
-
-                <InputTextView
-                  value={values.area}
-                  onChange={handleChange('area')}
-                  error={touched.area ? errors.area : ''}
-                  paddingHorizontal={3}
-                  onBlur={() => setFieldTouched('area')}
-                  placeholder="Area"
-                  label={'Area'}
-                  keyboardType="numeric"
-                />
 
                 <View style={{paddingTop: heightRatio(2)}} />
                 <ButtonComponent
