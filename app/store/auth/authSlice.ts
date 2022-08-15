@@ -15,7 +15,14 @@ export const authSlice = createSlice({
     logout: state => {
       storeToken('');
       state.token = '';
-      state.user = {_id: '', token: '', name: '', email: '', phone: ''};
+      state.user = {
+        _id: '',
+        token: '',
+        name: '',
+        email: '',
+        phone: '',
+        favourites: [],
+      };
     },
     addUser: (state, action: PayloadAction<LoginResponse>) => {
       state.user = action.payload;

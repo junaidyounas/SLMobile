@@ -22,6 +22,8 @@ const HomeScreen = (props: Props) => {
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
+  const user = useSelector((state: IAppState) => state.auth.user);
+
   const searchLocation = useSelector(
     (state: IAppState) => state.app.searchLocation,
   );
@@ -120,7 +122,9 @@ const HomeScreen = (props: Props) => {
           columnWrapperStyle={styles.row} // space them out evenly
           ListFooterComponent={() => <View pb={10} />}
           data={posts}
-          renderItem={SinglePostItem}
+          renderItem={({item}) => (
+            <SinglePostItem favourites={user.favourites} item={item} />
+          )}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }

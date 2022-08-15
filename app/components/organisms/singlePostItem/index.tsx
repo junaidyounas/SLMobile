@@ -1,5 +1,5 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import {Box, Image, Pressable, Text, View} from 'native-base';
@@ -12,14 +12,17 @@ import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import {AppConstants} from 'constants/appConstants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useSelector} from 'react-redux';
+import {IAppState} from 'store/IAppState';
 
 type Props = {
   item: SinglePostType;
+  favourites?: any;
 };
 
 const SinglePostItem = (props: Props) => {
-  const {item} = props;
-
+  const {item, favourites} = props;
+  const [isFav, setIsFav] = useState(favourites[item._id] == true);
   const {
     title = '',
     price = '',
@@ -41,8 +44,14 @@ const SinglePostItem = (props: Props) => {
           <Text noOfLines={1} style={styles.titleText}>
             {title}
           </Text>
-          <Pressable onPress={() => {}}>
-            <MaterialIcons name="favorite" size={textRatio(15)} />
+          <Pressable
+            onPress={() => {
+              setIsFav(!isFav);
+            }}>
+            <MaterialIcons
+              name={isFav ? 'favorite' : 'favorite-border'}
+              size={textRatio(15)}
+            />
           </Pressable>
         </View>
         <Text noOfLines={1} style={styles.priceText}>

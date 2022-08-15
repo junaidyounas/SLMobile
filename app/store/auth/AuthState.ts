@@ -8,5 +8,6 @@ export const AuthState: AuthStateType = {
     token: '',
     phone: '',
     email: '',
+    favourites: [],
   },
 };
