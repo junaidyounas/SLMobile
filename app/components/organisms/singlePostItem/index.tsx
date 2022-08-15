@@ -2,7 +2,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
-import {Box, Image, Text, View} from 'native-base';
+import {Box, Image, Pressable, Text, View} from 'native-base';
 import {images} from '../../../assets/images';
 import {textRatio} from 'utils/functions/textRatio';
 import {fonts} from 'theme/fonts';
@@ -11,6 +11,7 @@ import {SinglePostType} from 'types/posts/SinglePostType';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import {AppConstants} from 'constants/appConstants';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
   item: SinglePostType;
@@ -36,9 +37,14 @@ const SinglePostItem = (props: Props) => {
       style={styles.container}>
       <Box shadow={1} borderRadius={widthRatio(4)}>
         <Image alt=" " style={styles.image} source={{uri: image}} />
-        <Text noOfLines={1} style={styles.titleText}>
-          {title}
-        </Text>
+        <View style={styles.titleAndFav}>
+          <Text noOfLines={1} style={styles.titleText}>
+            {title}
+          </Text>
+          <Pressable onPress={() => {}}>
+            <MaterialIcons name="favorite" size={textRatio(15)} />
+          </Pressable>
+        </View>
         <Text noOfLines={1} style={styles.priceText}>
           {price}
         </Text>
@@ -56,7 +62,7 @@ export default SinglePostItem;
 const styles = StyleSheet.create({
   container: {
     flex: 0.48,
-    width: '48%',
+    width: widthRatio(48),
   },
   image: {
     width: '100%',
@@ -69,6 +75,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.poppins_medium,
     paddingHorizontal: widthRatio(2),
     paddingTop: heightRatio(0.5),
+    width: widthRatio(40),
   },
   priceText: {
     paddingHorizontal: widthRatio(2),
@@ -76,5 +83,12 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     paddingHorizontal: widthRatio(2),
+  },
+  titleAndFav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: widthRatio(2),
+    width: widthRatio(46),
   },
 });
