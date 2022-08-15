@@ -19,4 +19,8 @@ export const urls = {
   chat_session: '/chat/session',
   chat_messages: '/chat/messages',
   send_message: '/chat/send-message',
+
+  // favourites
+  favourites: '/posts/favourites',
+  favIds: 'auth/allFavIds',
 };

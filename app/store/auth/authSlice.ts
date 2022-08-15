@@ -27,10 +27,13 @@ export const authSlice = createSlice({
     addUser: (state, action: PayloadAction<LoginResponse>) => {
       state.user = action.payload;
     },
+    addFav: (state, action: any) => {
+      state.user.favourites = action.payload;
+    },
   },
 });
 
-export const {login, addUser, logout} = authSlice.actions;
+export const {login, addUser, logout, addFav} = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const token = (state: IAppState) => state.auth.token;

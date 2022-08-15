@@ -1,5 +1,6 @@
 import {Location} from 'types/Location';
 import {CreatePostType} from 'types/posts/CreatePostType';
+import {MakePostFavType} from 'types/posts/MakePostFavType';
 import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
 import {api} from './apiService';
@@ -142,10 +143,52 @@ const patchExistingPost = (post: CreatePostType, id: string) => {
   });
 };
 
+const makeFavPost = (postId: string, isFav: boolean) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`${urls.favourites}`, {postId, isFav})
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+const getAllFavPosts = () => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`${urls.favourites}/all`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+const getAllFavPostsIds = () => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`${urls.favIds}`)
+      .then((res: any) => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const postService = {
   createNewPost,
   showAllPosts,
   getAllMyPosts,
   getSinglePostById,
   patchExistingPost,
+  makeFavPost,
+  getAllFavPosts,
+  getAllFavPostsIds,
 };

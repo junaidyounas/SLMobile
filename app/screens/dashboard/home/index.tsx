@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import LocationWithIcon from 'components/atoms/locationWithIcon';
 import CategorySelector from 'components/organisms/categorySelector';
 import SearchBarWithMenuIcon from 'components/organisms/searchBarWithMenuIcon';
@@ -5,8 +6,9 @@ import SinglePostItem from 'components/organisms/singlePostItem';
 import {FlatList, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {RefreshControl, StyleSheet, TouchableOpacity} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {postService} from 'services/postService';
+import {addFav} from 'store/auth/authSlice';
 import {IAppState} from 'store/IAppState';
 import {fonts} from 'theme/fonts';
 import {SinglePostType} from 'types/posts/SinglePostType';
@@ -17,6 +19,8 @@ import {textRatio} from 'utils/functions/textRatio';
 type Props = {};
 
 const HomeScreen = (props: Props) => {
+  const dispatch = useDispatch();
+  const focused = useIsFocused();
   const [posts, setPosts] = useState<Array<SinglePostType>>([]);
   const [currentPage, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -46,7 +50,6 @@ const HomeScreen = (props: Props) => {
   }, []);
 
   function getAllPosts(page: number = 1) {
-    logMe(page);
     postService
       .showAllPosts(
         page,
@@ -80,6 +83,15 @@ const HomeScreen = (props: Props) => {
         logMe(err);
       });
   }
+
+  async function getAllPostIds() {
+    const data: any = await postService.getAllFavPostsIds();
+    await dispatch(addFav(data));
+  }
+
+  useEffect(() => {
+    getAllPostIds();
+  }, [focused]);
 
   useEffect(() => {
     getAllPosts(currentPage);

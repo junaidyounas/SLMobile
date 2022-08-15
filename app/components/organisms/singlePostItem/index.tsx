@@ -14,6 +14,7 @@ import {AppConstants} from 'constants/appConstants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
+import {postService} from 'services/postService';
 
 type Props = {
   item: SinglePostType;
@@ -22,6 +23,12 @@ type Props = {
 
 const SinglePostItem = (props: Props) => {
   const {item, favourites} = props;
+  // console.log(Object.entries(favourites));
+  // Object.entries(favourites).find(([key, value]) => {
+  //   if (key == item._id) {
+  //     return key == item._id;
+  //   }
+  // });
   const [isFav, setIsFav] = useState(favourites[item._id] == true);
   const {
     title = '',
@@ -34,6 +41,13 @@ const SinglePostItem = (props: Props) => {
     image: `${AppConstants.serverUrl}${item.images[0]}`,
     location: item?.location?.title,
   };
+
+  async function makePostFav() {
+    console.log({item: item._id, isFav: !isFav});
+    await postService.makeFavPost(item._id, !isFav).then(res => {
+      // console.log(res);
+    });
+  }
   return (
     <TouchableOpacity
       onPress={() => navigate(screens.SINGLEPOST, {itemId: item._id})}
@@ -47,6 +61,7 @@ const SinglePostItem = (props: Props) => {
           <Pressable
             onPress={() => {
               setIsFav(!isFav);
+              makePostFav();
             }}>
             <MaterialIcons
               name={isFav ? 'favorite' : 'favorite-border'}
