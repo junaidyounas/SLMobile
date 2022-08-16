@@ -1,6 +1,6 @@
 import {StyleSheet, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Box, FlatList, Image, ScrollView, View} from 'native-base';
+import {Box, FlatList, Image, Pressable, ScrollView, View} from 'native-base';
 import {globalstyles} from 'theme/globalStyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {colors} from 'theme/colors';
@@ -19,6 +19,7 @@ import {AppConstants} from 'constants/appConstants';
 import ConnectBar from 'components/organisms/connectBar';
 import {useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
   route?: any;
@@ -37,14 +38,18 @@ const ImageSingleItem = ({item}: {item: string}) => {
 const SinglePostScreen = (props: Props) => {
   const {itemId = ''} = props.route?.params;
 
+  const [post, setPost] = useState<SinglePostType>({} as any);
+  const user = useSelector((state: IAppState) => state.auth.user);
+  const [isFav, setIsFav] = useState(false);
+
   // states
-  const [post, setPost] = useState<Partial<SinglePostType>>({});
 
   function getSinglePostById(itemId: string) {
     postService
       .getSinglePostById(itemId)
       .then(res => {
         setPost(res);
+        setIsFav(user?.favourites[res._id] == true);
         logMe(res);
       })
       .finally(() => {});
@@ -53,6 +58,13 @@ const SinglePostScreen = (props: Props) => {
     logMe(itemId);
     getSinglePostById(itemId);
   }, [itemId]);
+
+  async function makePostFav() {
+    console.log({item: post._id, isFav: !isFav});
+    await postService.makeFavPost(post._id, !isFav).then(res => {
+      // console.log(res);
+    });
+  }
 
   return (
     <Box style={styles.container} bg={globalstyles.btnGradient}>
@@ -64,7 +76,20 @@ const SinglePostScreen = (props: Props) => {
           data={post.images}
           renderItem={ImageSingleItem}
         />
-        <PriceAndName name={post.title} price={post.price} />
+        <View style={styles.nameAndHeart}>
+          <PriceAndName name={post.title} price={post.price} />
+          <Pressable
+            onPress={() => {
+              setIsFav(!isFav);
+              makePostFav();
+            }}>
+            <MaterialIcons
+              name={isFav ? 'favorite' : 'favorite-border'}
+              size={textRatio(35)}
+              color={colors.white}
+            />
+          </Pressable>
+        </View>
         <View style={styles.content}>
           <LocationWithIcon
             color={colors.gray[100]}
@@ -144,5 +169,11 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: colors.gray[100],
     fontFamily: fonts.poppins_light,
+  },
+  nameAndHeart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: widthRatio(3),
   },
 });

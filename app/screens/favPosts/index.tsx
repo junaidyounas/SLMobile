@@ -63,7 +63,7 @@ const FavPosts = (props: Props) => {
   }, []);
   return (
     <>
-      <GradientTopBarWithBackBtn title={'My Ads'} isBack />
+      <GradientTopBarWithBackBtn title={'My Favourites'} isBack />
       {!user.token ? (
         <EmptyStateScreen text="Login to see your ads" />
       ) : (
