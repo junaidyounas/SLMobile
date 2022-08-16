@@ -17,4 +17,5 @@ export interface AppStateType {
   rooms: number;
   bathrooms: number;
   kitchens: number;
+  currentLikedPost: Map<string, boolean>;
 }

@@ -17,9 +17,10 @@ import {SinglePostType} from 'types/posts/SinglePostType';
 import {logMe} from 'utils/functions/logBinder';
 import {AppConstants} from 'constants/appConstants';
 import ConnectBar from 'components/organisms/connectBar';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {currentLikedPost} from 'store/appState/appSlice';
 
 type Props = {
   route?: any;
@@ -37,6 +38,7 @@ const ImageSingleItem = ({item}: {item: string}) => {
 
 const SinglePostScreen = (props: Props) => {
   const {itemId = ''} = props.route?.params;
+  const dispatch = useDispatch();
 
   const [post, setPost] = useState<SinglePostType>({} as any);
   const user = useSelector((state: IAppState) => state.auth.user);
@@ -60,7 +62,11 @@ const SinglePostScreen = (props: Props) => {
   }, [itemId]);
 
   async function makePostFav() {
+    // console.log('appStateLikedPost', appStateLikedPost);
     console.log({item: post._id, isFav: !isFav});
+    const p: any = {};
+    p[post._id] = !isFav;
+    await dispatch(currentLikedPost(p));
     await postService.makeFavPost(post._id, !isFav).then(res => {
       // console.log(res);
     });

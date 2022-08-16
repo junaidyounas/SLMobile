@@ -29,4 +29,5 @@ export const AppState: AppStateType = {
   rooms: undefined as any,
   bathrooms: undefined as any,
   kitchens: undefined as any,
+  currentLikedPost: {} as any,
 };

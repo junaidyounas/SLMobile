@@ -131,13 +131,7 @@ const BottomNavigator = (props: Props) => {
           borderTopRightRadius: widthRatio(4),
         },
       })}>
-      <Tab.Screen
-        options={{
-          unmountOnBlur: true,
-        }}
-        name={screens.HOME}
-        component={HomeScreen}
-      />
+      <Tab.Screen name={screens.HOME} component={HomeScreen} />
       <Tab.Screen
         options={{
           unmountOnBlur: true,

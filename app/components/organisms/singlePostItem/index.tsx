@@ -1,5 +1,5 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import {Box, Image, Pressable, Text, View} from 'native-base';
@@ -12,9 +12,10 @@ import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
 import {AppConstants} from 'constants/appConstants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from 'store/IAppState';
 import {postService} from 'services/postService';
+import {currentLikedPost} from 'store/appState/appSlice';
 
 type Props = {
   item: SinglePostType;
@@ -24,6 +25,12 @@ type Props = {
 
 const SinglePostItem = (props: Props) => {
   const {item, favourites, deleteOne} = props;
+  const dispatch = useDispatch();
+  const [isFav, setIsFav] = useState(favourites[item._id] == true);
+
+  const appStateLikedPost = useSelector(
+    (state: IAppState) => state.app.currentLikedPost,
+  );
   // console.log(Object.entries(favourites));
   // Object.entries(favourites).find(([key, value]) => {
   //   if (key == item._id) {
@@ -31,7 +38,13 @@ const SinglePostItem = (props: Props) => {
   //   }
   // });
 
-  const [isFav, setIsFav] = useState(favourites[item._id] == true);
+  useEffect(() => {
+    // console.log('keys', Object.keys(appStateLikedPost)[0]);
+    if (item._id == Object.keys(appStateLikedPost)[0]) {
+      setIsFav(appStateLikedPost[item._id] as any);
+    }
+  }, [appStateLikedPost]);
+
   const {
     title = '',
     price = '',
@@ -46,6 +59,9 @@ const SinglePostItem = (props: Props) => {
 
   async function makePostFav() {
     console.log({item: item._id, isFav: !isFav});
+    const p: any = {};
+    p[item._id] = !isFav;
+    await dispatch(currentLikedPost(p));
     await postService.makeFavPost(item._id, !isFav).then(res => {
       // console.log(res);
     });

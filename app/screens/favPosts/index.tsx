@@ -22,7 +22,6 @@ const FavPosts = (props: Props) => {
   const user = useSelector((state: IAppState) => state.auth.user);
   const [refreshing, setRefreshing] = useState(false);
   const [posts, setPosts] = useState<Array<SinglePostType>>([]);
-  const [deleteId, setDeleteId] = useState('');
 
   async function getAllPostIds() {
     const data: any = await postService.getAllFavPostsIds();
@@ -54,11 +53,6 @@ const FavPosts = (props: Props) => {
   }
 
   useEffect(() => {
-    const fitleredPosts = posts.filter(item => item?._id !== deleteId);
-    setPosts(fitleredPosts);
-  }, [deleteId]);
-
-  useEffect(() => {
     getAllPosts();
   }, []);
   return (
@@ -76,11 +70,7 @@ const FavPosts = (props: Props) => {
             ListFooterComponent={() => <View pb={10} />}
             data={posts}
             renderItem={({item}) => (
-              <SinglePostItem
-                deleteOne={(id: string) => setDeleteId(id)}
-                favourites={user.favourites}
-                item={item}
-              />
+              <SinglePostItem favourites={user.favourites} item={item} />
             )}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

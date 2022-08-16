@@ -99,7 +99,26 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     setPage(1);
     getAllPosts(1);
-  }, [searchCategory, searchLocation, pricegt, pricelt, searchBrand, appState]);
+  }, [
+    searchCategory,
+    searchLocation,
+    pricegt,
+    pricelt,
+    searchBrand,
+    appState.addPostLocation,
+    appState.area,
+    appState.areaUnit,
+    appState.bathrooms,
+    appState.isFurnished,
+    appState.landType,
+    appState.make,
+    appState.pricegt,
+    appState.pricelt,
+    appState.rooms,
+    appState.year,
+    appState.searchLocation,
+    appState.searchCategory,
+  ]);
 
   return (
     <>

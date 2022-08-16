@@ -71,6 +71,9 @@ export const appSlice = createSlice({
       state.bathrooms = undefined as any;
       state.kitchens = undefined as any;
     },
+    currentLikedPost: (state, action: PayloadAction<Map<string, boolean>>) => {
+      state.currentLikedPost = action.payload;
+    },
   },
 });
 
@@ -93,6 +96,7 @@ export const {
   addFilterRooms,
   addFilterBathRooms,
   addFilterKitchens,
+  currentLikedPost,
 } = appSlice.actions;
 
 export default appSlice.reducer;
