@@ -7,6 +7,7 @@ import RegisterScreen from 'screens/auth/register';
 import ChatSessions from 'screens/chat/sessions';
 import SingleChatScreen from 'screens/chat/singleChat';
 import EditPostScreen from 'screens/editPost';
+import FavPosts from 'screens/favPosts';
 import FilterScreen from 'screens/filterScreen';
 import LocationChooser from 'screens/locationChooser';
 import SinglePostScreen from 'screens/singlePost';
@@ -48,6 +49,7 @@ function MainNavigator() {
       />
 
       <Stack.Screen name={screens.FILTER_SCREEN} component={FilterScreen} />
+      <Stack.Screen name={screens.FAV_POSTS} component={FavPosts} />
     </Stack.Navigator>
   );
 }

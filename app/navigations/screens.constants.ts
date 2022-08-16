@@ -25,4 +25,7 @@ export const screens = {
 
   // Filter
   FILTER_SCREEN: 'FilterScreen',
+
+  // FAv
+  FAV_POSTS: 'FavPosts',
 };

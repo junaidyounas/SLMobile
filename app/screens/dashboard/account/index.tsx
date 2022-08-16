@@ -8,6 +8,8 @@ import ProfileContainer from 'components/organisms/profileContainer';
 import AccountOption from 'components/atoms/accountOption';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {textRatio} from 'utils/functions/textRatio';
+import {navigate} from 'navigations/navRef';
+import {screens} from 'navigations/screens.constants';
 
 type Props = {};
 
@@ -19,7 +21,9 @@ const AccountScreen = (props: Props) => {
         Icon={() => {
           return <MaterialIcons name="favorite" size={textRatio(26)} />;
         }}
-        onPress={undefined}
+        onPress={() => {
+          navigate(screens.FAV_POSTS);
+        }}
         title={'Favourite Posts'}
       />
     </>

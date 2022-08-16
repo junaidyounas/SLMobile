@@ -4,7 +4,7 @@ export type LoginResponse = {
   name: string;
   email: string;
   phone: string;
-  favourites: Map<string, boolean>[];
+  favourites: [];
 };
 
 export type User = {
@@ -13,5 +13,5 @@ export type User = {
   name: string;
   email: string;
   phone: string;
-  favourites: Map<string, boolean>[];
+  favourites: [];
 };

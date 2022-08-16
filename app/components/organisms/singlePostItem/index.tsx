@@ -19,16 +19,18 @@ import {postService} from 'services/postService';
 type Props = {
   item: SinglePostType;
   favourites?: any;
+  deleteOne?: any;
 };
 
 const SinglePostItem = (props: Props) => {
-  const {item, favourites} = props;
+  const {item, favourites, deleteOne} = props;
   // console.log(Object.entries(favourites));
   // Object.entries(favourites).find(([key, value]) => {
   //   if (key == item._id) {
   //     return key == item._id;
   //   }
   // });
+
   const [isFav, setIsFav] = useState(favourites[item._id] == true);
   const {
     title = '',
@@ -61,6 +63,7 @@ const SinglePostItem = (props: Props) => {
           <Pressable
             onPress={() => {
               setIsFav(!isFav);
+              deleteOne && !isFav == false ? deleteOne(item._id) : null;
               makePostFav();
             }}>
             <MaterialIcons
