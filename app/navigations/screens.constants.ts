@@ -28,4 +28,5 @@ export const screens = {
 
   // FAv
   FAV_POSTS: 'FavPosts',
+  PHONE_SETTINGS: 'PhoneSettings',
 };

@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   optionContainer: {
     paddingVertical: widthRatio(3),
     paddingHorizontal: widthRatio(3),
-    borderWidth: 0.2,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

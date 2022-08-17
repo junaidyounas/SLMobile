@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {Box, Button, Pressable, Text} from 'native-base';
 import {globalstyles} from 'theme/globalStyles';
-import {widthRatio} from 'utils/functions/pixelRatio';
+import {heightRatio, widthRatio} from 'utils/functions/pixelRatio';
 import {colors} from 'theme/colors';
 import {fonts} from 'theme/fonts';
 
@@ -12,13 +12,17 @@ type Props = {
   onPress: any;
   isLoading?: boolean;
   width?: number;
+  height?: number;
 };
 
 const ButtonComponent = (props: Props) => {
-  const {title, isDisabled, onPress, isLoading, width} = props;
+  const {title, isDisabled, onPress, isLoading, width, height} = props;
   let otherContainerStyles = [];
   if (width) {
     otherContainerStyles.push({width: widthRatio(width)});
+  }
+  if (height) {
+    otherContainerStyles.push({height: heightRatio(height)});
   }
   return (
     <Box
@@ -30,6 +34,7 @@ const ButtonComponent = (props: Props) => {
         _text={{
           color: colors.white,
           fontFamily: fonts.poppins_medium,
+          textAlign: 'center',
         }}
         isDisabled={isDisabled}
         onPress={onPress}
@@ -47,6 +52,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: widthRatio(3),
     borderRadius: widthRatio(2),
-    paddingVertical: widthRatio(1),
+    // paddingVertical: widthRatio(1),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

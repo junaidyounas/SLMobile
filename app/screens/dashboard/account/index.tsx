@@ -10,6 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {textRatio} from 'utils/functions/textRatio';
 import {navigate} from 'navigations/navRef';
 import {screens} from 'navigations/screens.constants';
+import Saperator from 'components/atoms/saperator';
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const AccountScreen = (props: Props) => {
   return (
     <>
       <ProfileContainer />
+      <Saperator isBorder={true} marginBottom={2} />
       <AccountOption
         Icon={() => {
           return <MaterialIcons name="favorite" size={textRatio(26)} />;
@@ -25,6 +27,15 @@ const AccountScreen = (props: Props) => {
           navigate(screens.FAV_POSTS);
         }}
         title={'Favourite Posts'}
+      />
+      <AccountOption
+        Icon={() => {
+          return <MaterialIcons name="phone" size={textRatio(26)} />;
+        }}
+        onPress={() => {
+          navigate(screens.PHONE_SETTINGS);
+        }}
+        title={'Phone Settings'}
       />
     </>
   );

@@ -7,11 +7,12 @@ import RegisterScreen from 'screens/auth/register';
 import ChatSessions from 'screens/chat/sessions';
 import SingleChatScreen from 'screens/chat/singleChat';
 import EditPostScreen from 'screens/editPost';
-import FavPosts from 'screens/favPosts';
+import FavPosts from 'screens/dashboard/account/favPosts';
 import FilterScreen from 'screens/filterScreen';
 import LocationChooser from 'screens/locationChooser';
 import SinglePostScreen from 'screens/singlePost';
 import BottomNavigator from './bottomNavigator';
+import PhoneSettings from 'screens/dashboard/account/phoneSettings';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,7 @@ function MainNavigator() {
 
       <Stack.Screen name={screens.FILTER_SCREEN} component={FilterScreen} />
       <Stack.Screen name={screens.FAV_POSTS} component={FavPosts} />
+      <Stack.Screen name={screens.PHONE_SETTINGS} component={PhoneSettings} />
     </Stack.Navigator>
   );
 }
